@@ -1,0 +1,42 @@
+# Local secrets and machine-specific configuration.
+.env
+.env.*
+!.env.example
+
+# Python caches and environments.
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.pyright/
+*.egg-info/
+.venv/
+venv/
+env/
+
+# IDE and operating-system files.
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+*.swp
+
+# Runtime state: private memories, imported knowledge, checkpoints, queues,
+# adapter events, progress ledgers, and generated logs must stay local.
+data/
+logs/
+
+# Generated databases and serialized runtime logs anywhere in the tree.
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+*.jsonl
+
+# Local archives and temporary exports.
+_archive/
+*.tmp
+*.bak

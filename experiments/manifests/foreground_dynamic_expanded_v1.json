@@ -1,0 +1,127 @@
+{
+  "version": "foreground-dynamic-expanded-v1",
+  "description": "15-question dynamic cold-recall set: 3 current core questions plus 12 Stage 14 questions with Stage 17 remapped evidence.",
+  "include_manifests": [
+    "foreground_benchmark_v1.json"
+  ],
+  "catalog_imports": [
+    {
+      "questions_path": "engine://validation/catalogs/stage14-questions.json",
+      "evidence_path": "engine://validation/catalogs/stage17-evidence-manifest-remapped.json",
+      "include_ids": [
+        "paragraph_gap_03",
+        "paragraph_gap_06",
+        "concept_bridge_01_catacomb_rumor_to_infiltration",
+        "concept_bridge_02_world_truth_assertion_and_rebuttal",
+        "concept_bridge_03_mika_betrayal_three_views",
+        "concept_bridge_04_hatred_political_chain",
+        "concept_bridge_05_paradise_proof_to_trust",
+        "concept_bridge_07_cathedral_repair_boundary_and_route",
+        "old_cathedral_symbol_infrastructure_and_limits",
+        "arius_two_patrons_and_control_boundaries",
+        "mika_motive_epistemic_four_layers",
+        "hifumi_azusa_identity_coalition_and_declaration"
+      ],
+      "group_alternative_additions": {
+        "concept_bridge_03_mika_betrayal_three_views": [
+          [],
+          [1870],
+          []
+        ]
+      },
+      "group_alternative_overrides": {
+        "mika_motive_epistemic_four_layers": [
+          [1430, 1433],
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "group_required_source_additions": {
+        "concept_bridge_03_mika_betrayal_three_views": [
+          [],
+          ["main/33170.json"],
+          []
+        ]
+      },
+      "group_labels": {
+        "paragraph_gap_03": [
+          "记者会结束时对伊甸条约作出的明确立场"
+        ],
+        "paragraph_gap_06": [
+          "渚说明签约对两校全面战争可能性的影响"
+        ],
+        "concept_bridge_01_catacomb_rumor_to_infiltration": [
+          "仪式前关于古圣堂地下墓穴规模的传闻",
+          "袭击后日向根据地下结构提出的潜入推测"
+        ],
+        "concept_bridge_02_world_truth_assertion_and_rebuttal": [
+          "阿里乌斯一方宣称的悲观世界真相",
+          "日富美对憎恨、徒劳和被强加观点的反驳"
+        ],
+        "concept_bridge_03_mika_betrayal_three_views": [
+          "未花预先认定格黑娜会背叛的理由",
+          "未花后来对自身背叛行为的评价",
+          "老师面对可能背叛时仍选择相信学生"
+        ],
+        "concept_bridge_04_hatred_political_chain": [
+          "憎恨在未花接近或利用阿里乌斯时的作用",
+          "纱织或阿里乌斯在袭击中的憎恨宣言",
+          "日富美对憎恨与徒劳叙事的反驳"
+        ],
+        "concept_bridge_05_paradise_proof_to_trust": [
+          "面对无法证明他人真心时仍选择相信的立场",
+          "圣娅关于乐园无法由外部观测证明的说明"
+        ],
+        "concept_bridge_07_cathedral_repair_boundary_and_route": [
+          "古圣堂只整修上层、地下仍是废墟的空间边界",
+          "袭击后利用地下结构解释阿里乌斯潜入的推测"
+        ],
+        "old_cathedral_symbol_infrastructure_and_limits": [
+          "伊甸条约旨在避免圣三一与格黑娜全面战争",
+          "古圣堂第一次公会议与戒律守护者的历史",
+          "签约会场整修只覆盖上层",
+          "地下废墟与巨大墓穴传闻",
+          "阿里乌斯小队的导弹与突入部署",
+          "爆炸后关于导弹和预埋炸药的现场猜测",
+          "大量阿里乌斯兵力经地下潜入的现场推测",
+          "古圣堂废墟上新伊甸条约机构的出现"
+        ],
+        "arius_two_patrons_and_control_boundaries": [
+          "未花与阿里乌斯结盟或暗中支援",
+          "未花利用阿里乌斯发动政变的政治目标",
+          "真琴利用茶会内乱与阿里乌斯建立合作",
+          "阿里乌斯向真琴一方提供援助",
+          "真琴从合作中预期获得的政治利益",
+          "阿里乌斯行动显示其并非完全受真琴控制",
+          "未花一方对阿里乌斯力量或威胁的判断",
+          "后续袭击体现的直接行动者与失控边界"
+        ],
+        "mika_motive_epistemic_four_layers": [
+          "老师关于相信学生与无法证明真心的立场",
+          "花子对未花最初计划和动机的分析",
+          "未花自己承认的行动或政治目标",
+          "圣娅遭遇后未花心理变化的他人分析",
+          "未花害怕失去渚等关系动机的分析",
+          "未花对他人解释作出的否认或修正",
+          "乐园悖论施加的认识论限制",
+          "未花关于政变、格黑娜和阿里乌斯的直接陈述"
+        ],
+        "hifumi_azusa_identity_coalition_and_declaration": [
+          "梓刚转学的角色档案",
+          "梓学习跟不上或被纳入补习部的表面信息",
+          "条约袭击现场揭露的阿里乌斯面具身份",
+          "日富美以浮士德或蒙面泳装团领袖身份自我呈现",
+          "到场支援日富美一方的援军",
+          "日富美对阿里乌斯世界真相的价值反驳",
+          "新伊甸条约机构的宣言内容",
+          "基于夏莱或发起人权限解释新机构成立"
+        ]
+      }
+    }
+  ]
+}

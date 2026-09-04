@@ -1,0 +1,5 @@
+-r requirements.txt
+-r requirements-adapters-western.txt
+-r requirements-adapters-asia.txt
+-r requirements-adapters-federated.txt
+-r requirements-adapters-webhooks.txt

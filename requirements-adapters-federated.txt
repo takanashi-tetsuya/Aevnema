@@ -1,0 +1,2 @@
+slixmpp>=1.17,<2
+matrix-nio>=0.26,<0.27

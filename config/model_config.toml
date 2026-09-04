@@ -1,0 +1,161 @@
+# 模型网关配置：全局默认 → 任务默认 → 单模型覆盖。
+# 单模型按书写顺序 fallback。用户 /model 设置仅覆盖 chat 请求，
+# 不允许修改 extract、memory_audit、memory_rewrite 等内部安全任务。
+
+[runtime]
+max_retries = 1
+retry_delay = 1.0
+
+[defaults]
+provider = "openai"
+base_url = "https://api.siliconflow.cn/v1"
+api_key_env = "SILICONFLOW_API_KEY"
+timeout_seconds = 300.0
+temperature = 0.7
+max_tokens = 1000
+
+[task_defaults.chat]
+temperature = 0.8
+max_tokens = 1600
+deadline_seconds = 20.0
+
+[task_defaults.chat_fast]
+temperature = 0.75
+max_tokens = 140
+timeout_seconds = 3.2
+deadline_seconds = 3.2
+
+[task_defaults.extract]
+temperature = 0.1
+max_tokens = 4000
+
+[task_defaults.summary]
+temperature = 0.2
+max_tokens = 5000
+
+[task_defaults.memory_audit]
+temperature = 0.0
+max_tokens = 420
+timeout_seconds = 15.0
+deadline_seconds = 6.0
+
+[task_defaults.memory_rewrite]
+temperature = 0.7
+max_tokens = 1200
+timeout_seconds = 15.0
+deadline_seconds = 10.0
+
+[task_defaults.memory_consolidation]
+temperature = 0.0
+max_tokens = 600
+deadline_seconds = 10.0
+
+[task_defaults.memory_intent]
+temperature = 0.0
+max_tokens = 360
+timeout_seconds = 6.0
+deadline_seconds = 6.0
+enable_thinking = false
+response_format = { type = "json_object" }
+
+[task_defaults.vision]
+temperature = 0.2
+max_tokens = 2000
+
+[engines]
+
+  # 主角色对话。thinking 未写时由模型决定；Qwen 显式关闭，避免短回答预算被推理耗尽。
+  [[engines.chat]]
+  model = "deepseek-ai/DeepSeek-V3.2"
+
+  [[engines.chat]]
+  model = "Qwen/Qwen3.5-35B-A3B"
+  enable_thinking = false
+
+  # 简单剧情问答与创造性日常对话：优先低延迟，失败后回退到主对话模型。
+  [[engines.chat_fast]]
+  model = "Qwen/Qwen3.5-35B-A3B"
+  enable_thinking = false
+
+  [[engines.chat_fast]]
+  model = "Qwen/Qwen3.5-9B"
+  enable_thinking = false
+
+  [[engines.chat_fast]]
+  model = "deepseek-ai/DeepSeek-V3.2"
+  enable_thinking = false
+
+  # Episode / Concept / Association 等结构化提取。
+  [[engines.extract]]
+  model = "deepseek-ai/DeepSeek-V3.2"
+
+  [[engines.extract]]
+  model = "Qwen/Qwen3.5-35B-A3B"
+  enable_thinking = false
+
+  [[engines.extract]]
+  model = "zai-org/GLM-4.5-Air"
+
+  [[engines.extract]]
+  model = "Qwen/Qwen3.5-9B"
+  enable_thinking = false
+
+  # 长期摘要整合。
+  [[engines.summary]]
+  model = "deepseek-ai/DeepSeek-V3.2"
+
+  [[engines.summary]]
+  model = "zai-org/GLM-4.5-Air"
+
+  # 私人事实审计：固定低温；普通用户不可覆盖。
+  [[engines.memory_audit]]
+  model = "Qwen/Qwen3.5-9B"
+  enable_thinking = false
+
+  [[engines.memory_audit]]
+  model = "deepseek-ai/DeepSeek-V3.2"
+  enable_thinking = false
+
+  # 审计不通过后的角色化重写；普通用户不可覆盖。
+  [[engines.memory_rewrite]]
+  model = "Qwen/Qwen3.5-9B"
+  enable_thinking = false
+
+  [[engines.memory_rewrite]]
+  model = "deepseek-ai/DeepSeek-V3.2"
+  enable_thinking = false
+
+  # 回答后命题分流：只产生候选，不直接写数据库。
+  [[engines.memory_consolidation]]
+  model = "Qwen/Qwen3.5-35B-A3B"
+  enable_thinking = false
+
+  [[engines.memory_consolidation]]
+  model = "deepseek-ai/DeepSeek-V3.2"
+  enable_thinking = false
+
+  [[engines.memory_consolidation]]
+  model = "Qwen/Qwen3.5-9B"
+  enable_thinking = false
+
+  # 请求级记忆意图规划：只输出小型 JSON，不承担回答任务。
+  [[engines.memory_intent]]
+  model = "Qwen/Qwen3.5-35B-A3B"
+  enable_thinking = false
+
+  [[engines.memory_intent]]
+  model = "Qwen/Qwen3.5-9B"
+  enable_thinking = false
+
+  [[engines.memory_intent]]
+  model = "deepseek-ai/DeepSeek-V3.2"
+  enable_thinking = false
+
+  [engines.embedding]
+  model = "Pro/BAAI/bge-m3"
+
+  [[engines.vision]]
+  model = "zai-org/GLM-4.5V"
+
+  [[engines.vision]]
+  model = "Qwen/Qwen2.5-VL-72B-Instruct"
