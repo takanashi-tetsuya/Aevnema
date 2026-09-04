@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import asyncio
+from contextlib import closing
 from datetime import datetime, timezone
 import hashlib
 import json
@@ -174,7 +175,10 @@ def _rollback_source_key_artifacts(
     }
     if not database_path.is_file():
         return counts
-    with sqlite3.connect(database_path) as connection:
+    # ``sqlite3.Connection``'s context manager only commits/rolls back; it
+    # does not close the handle.  Pair it with ``closing`` so Windows can
+    # remove a temporary candidate database immediately after rollback.
+    with closing(sqlite3.connect(database_path)) as connection, connection:
         connection.execute("PRAGMA foreign_keys = ON")
         tables = {
             str(row[0])

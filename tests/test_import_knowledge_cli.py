@@ -197,6 +197,10 @@ class ImportKnowledgeCliTests(unittest.TestCase):
                         (100, NULL), (200, NULL), (300, NULL);
                     """
                 )
+            # ``Connection`` context managers commit/rollback but do not
+            # close the object.  Windows cannot remove the temporary database
+            # while this test-local handle is still alive.
+            connection.close()
 
             counts = import_knowledge._rollback_source_key_artifacts(database, "a.txt")
 
@@ -220,6 +224,7 @@ class ImportKnowledgeCliTests(unittest.TestCase):
                     connection.execute("SELECT id FROM concept ORDER BY id").fetchall(),
                     [(100,), (200,), (300,)],
                 )
+            connection.close()
 
     def test_source_key_rollback_prunes_only_orphaned_candidate_concepts(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -268,6 +273,7 @@ class ImportKnowledgeCliTests(unittest.TestCase):
                         (3, 'episode', 20, 'concept', 200);
                     """
                 )
+            connection.close()
 
             counts = import_knowledge._rollback_source_key_artifacts(database, "a.txt")
 
@@ -280,6 +286,7 @@ class ImportKnowledgeCliTests(unittest.TestCase):
                     connection.execute("SELECT id FROM concept ORDER BY id").fetchall(),
                     [(100,), (200,), (300,)],
                 )
+            connection.close()
 
     def test_source_key_rollback_deletes_orphan_concept_dependents_first(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -325,6 +332,7 @@ class ImportKnowledgeCliTests(unittest.TestCase):
                         (2, 'episode', 20, 'concept', 200);
                     """
                 )
+            connection.close()
 
             counts = import_knowledge._rollback_source_key_artifacts(database, "a.txt")
 
@@ -341,6 +349,7 @@ class ImportKnowledgeCliTests(unittest.TestCase):
                     ).fetchall(),
                     [(200,)],
                 )
+            connection.close()
 
     def test_main_returns_nonzero_for_partial_import_by_default(self):
         args = argparse.Namespace(allow_partial=False)

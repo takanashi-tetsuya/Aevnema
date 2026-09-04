@@ -1,0 +1,69 @@
+{
+  "version": "previous-questions-current-kb-v1",
+  "notes": "固定验收题的当前人类可读剧情知识库证据清单；仅用于评测，不参与运行时规则。",
+  "questions": [
+    {
+      "id": "current_tutoring_club_surface_and_truth",
+      "question": "在主线文件中，老师被指派去负责补课部。虽然表面上这个社团是因为成员成绩不合格而成立的，但后续对话揭示了把她们聚集在一起的真正原因。请问真正原因是什么？这位茶会成员认为补课部里藏着什么身份的人？",
+      "evidence_groups": [
+        {
+          "id": "surface_exam_setup",
+          "description": "补课部以特别考试和补习为名，表面目标是避免成员退学",
+          "alternatives": [22, 257, 3110, 3113]
+        },
+        {
+          "id": "hidden_political_purpose",
+          "description": "渚因有人企图阻挠和平条约而把嫌疑人集中在补课部进行监视或排查",
+          "alternatives": [22, 257, 3131, 3133, 3181, 3332]
+        },
+        {
+          "id": "suspected_traitor_identity",
+          "description": "补课部中被怀疑藏有企图欺骗圣三一、阻止或破坏伊甸园条约的叛徒",
+          "alternatives": [3133, 3181, 3259, 3427, 3487]
+        }
+      ]
+    },
+    {
+      "id": "current_paradise_paradox_trust_crisis",
+      "question": "剧情中提到了无法在乐园之外观测到抵达乐园者的乐园悖论。请综合文本分析它如何映射圣三一的信任危机：渚为了防范所谓叛徒对补课部做了什么？另一位高层为了让渚下台并掌握茶会，承认自己暗中发动了什么性质的行动？",
+      "evidence_groups": [
+        {
+          "id": "paradise_paradox",
+          "description": "乐园悖论指出抵达乐园者无法从外部观测，因而乐园存在或他人的真心无法被外部证明",
+          "alternatives": [3245, 3549, 3573, 3575, 3751]
+        },
+        {
+          "id": "nagisa_suspicion_action",
+          "description": "渚因无法确认阻挠条约者的身份，将可能的嫌疑人集中进补课部并要求找出叛徒",
+          "alternatives": [3131, 3133, 3181, 3262, 3332, 3427]
+        },
+        {
+          "id": "mika_coup",
+          "description": "未花承认与阿里乌斯合作、以让渚失势和争夺茶会主导权为目标的政变",
+          "alternatives": [3519, 3520, 3521, 3522, 3924, 4002]
+        }
+      ]
+    },
+    {
+      "id": "current_cathedral_attack_causal_chain",
+      "question": "伊甸园条约签订仪式遭到袭击时，古圣堂的大爆炸明面上由哪个分校的势力直接执行？结合前文，他们能够渗透并发动袭击，是因为哪位茶会高层此前暗中向他们提供了协助？",
+      "evidence_groups": [
+        {
+          "id": "explosion_scene",
+          "description": "签约仪式所在的古圣堂遭到导弹或爆炸摧毁",
+          "alternatives": [3656, 3687, 3723, 3906]
+        },
+        {
+          "id": "arius_direct_execution",
+          "description": "阿里乌斯分校学生或阿里乌斯小队直接实施或承担这次袭击",
+          "alternatives": [3658, 3687, 3723, 3902, 3906]
+        },
+        {
+          "id": "mika_support",
+          "description": "未花曾亲自向阿里乌斯提供补给或寻求其支持，并因此形成暗中协助关系",
+          "alternatives": [3519, 3520, 3924, 4002, 4052]
+        }
+      ]
+    }
+  ]
+}
