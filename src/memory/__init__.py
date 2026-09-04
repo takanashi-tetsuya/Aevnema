@@ -21,7 +21,10 @@ from .identity import PlatformIdentity
 from .growth import BackgroundGrowthWorker, GrowthJob
 from .answer_consolidator import (
     AnswerMemoryConsolidator,
+    ContextualRecallCandidate,
     ConsolidationDecision,
+    derive_contextual_recall_candidates,
+    derive_contextual_utility_observations,
     inline_memory_prompt,
     split_inline_memory_response,
 )
@@ -42,7 +45,10 @@ __all__ = [
     "BackgroundGrowthWorker",
     "GrowthJob",
     "AnswerMemoryConsolidator",
+    "ContextualRecallCandidate",
     "ConsolidationDecision",
+    "derive_contextual_recall_candidates",
+    "derive_contextual_utility_observations",
     "inline_memory_prompt",
     "split_inline_memory_response",
     "format_memory_context",

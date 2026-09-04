@@ -130,6 +130,7 @@ class BackgroundGrowthWorker:
         self._fingerprints: set[str] = set()
         self._active_candidate_fingerprints: set[str] = set()
         self._completed_candidate_fingerprints: set[str] = set()
+        self._query_bundles: dict[str, Any] = {}
         self._task: asyncio.Task | None = None
         self._stop_after_current = False
         self._accepting = False
@@ -193,13 +194,41 @@ class BackgroundGrowthWorker:
                         "inference_type": inference_type,
                     }
                 )
+        for raw in decision.get("contextual_candidates", []):
+            if not isinstance(raw, dict):
+                continue
+            try:
+                anchor = (
+                    str(raw.get("anchor_type", "episode")),
+                    int(raw.get("anchor_id")),
+                )
+                target = int(raw.get("target_episode_id"))
+            except (TypeError, ValueError):
+                continue
+            context_id = " ".join(
+                str(raw.get("context_query_id", "")).casefold().split()
+            )
+            need_id = " ".join(
+                str(raw.get("need_query_id", "")).casefold().split()
+            )
+            if target > 0 and context_id and need_id:
+                rows.append(
+                    {
+                        "contextual": True,
+                        "anchor": anchor,
+                        "target": target,
+                        "context_query_id": context_id,
+                        "need_query_id": need_id,
+                    }
+                )
         if not rows:
             return ""
         rows.sort(
             key=lambda row: (
-                row["inference_type"],
-                row["premise_episode_ids"],
-                row["claim"],
+                bool(row.get("contextual")),
+                str(row.get("inference_type", "")),
+                str(row.get("premise_episode_ids", row.get("anchor", ""))),
+                str(row.get("claim", row.get("target", ""))),
             )
         )
         payload = json.dumps(
@@ -220,6 +249,10 @@ class BackgroundGrowthWorker:
         decision_supplied = consolidation_decision is not None
         decision = consolidation_decision or {}
         if decision.get("knowledge_candidates"):
+            return True
+        if decision.get("contextual_candidates") or decision.get(
+            "contextual_observations"
+        ):
             return True
         if str(decision.get("retrieval_growth_query", "")).strip():
             return True
@@ -438,6 +471,10 @@ class BackgroundGrowthWorker:
         path = self.root / f"{job_id}.pending.json"
         await asyncio.to_thread(self._write_json, path, asdict(job))
         self._fingerprints.add(fingerprint)
+        if memory is not None:
+            bundle = getattr(memory, "query_vector_bundle", None)
+            if bundle is not None:
+                self._query_bundles[fingerprint] = bundle
         if candidate_fingerprint:
             self._active_candidate_fingerprints.add(candidate_fingerprint)
         await self._queue.put(path)
@@ -514,7 +551,12 @@ class BackgroundGrowthWorker:
                     consolidation.get("retrieval_growth_query", "")
                 ).strip()
             knowledge_enabled = bool(
-                job.knowledge_write_policy != "none" and candidate_query
+                job.knowledge_write_policy != "none"
+                and (
+                    candidate_query
+                    or consolidation.get("contextual_candidates")
+                    or consolidation.get("contextual_observations")
+                )
             )
             knowledge_question = candidate_query or None
 
@@ -535,6 +577,18 @@ class BackgroundGrowthWorker:
         if self._accepts_keyword(self.grow, "knowledge_candidates"):
             kwargs["knowledge_candidates"] = list(
                 consolidation.get("knowledge_candidates") or []
+            )
+        if self._accepts_keyword(self.grow, "contextual_candidates"):
+            kwargs["contextual_candidates"] = list(
+                consolidation.get("contextual_candidates") or []
+            )
+        if self._accepts_keyword(self.grow, "contextual_observations"):
+            kwargs["contextual_observations"] = list(
+                consolidation.get("contextual_observations") or []
+            )
+        if self._accepts_keyword(self.grow, "query_vector_bundle"):
+            kwargs["query_vector_bundle"] = self._query_bundles.get(
+                job.fingerprint
             )
         result = await self.grow(
             job.identity, job.question, effective_route, **kwargs
@@ -596,6 +650,7 @@ class BackgroundGrowthWorker:
                     pass
             finally:
                 if job is not None:
+                    self._query_bundles.pop(job.fingerprint, None)
                     self._fingerprints.discard(job.fingerprint)
                     candidate_fingerprint = self._candidate_fingerprint(
                         job.consolidation_decision

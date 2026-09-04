@@ -1,0 +1,652 @@
+{
+  "cases": [
+    {
+      "name": "makeup_reason",
+      "seconds": 12.286,
+      "error": "",
+      "episode_ids": [
+        22,
+        257,
+        3328,
+        92,
+        121,
+        3110,
+        260,
+        65,
+        68,
+        66,
+        67,
+        124,
+        126,
+        50,
+        125,
+        11328
+      ],
+      "concept_ids": [
+        11456,
+        31,
+        36,
+        85,
+        86,
+        87,
+        88,
+        89,
+        90,
+        91
+      ],
+      "association_ids": [
+        105,
+        8882,
+        450,
+        319,
+        1053,
+        329,
+        334,
+        578
+      ],
+      "quality": {
+        "entity_coverage": 1.0,
+        "claim_slot_coverage": 0.333333,
+        "top_score": 0.23144706,
+        "score_margin": 0.04506994,
+        "source_diversity": 9,
+        "timeline_conflict": false,
+        "evidence_count": 16,
+        "entity_count": 0,
+        "claim_slot_count": 3,
+        "semantic_constraint_coverage": 1.0,
+        "semantic_constraint_count": 0,
+        "sufficient": false,
+        "reasons": [
+          "claim_slot_coverage_incomplete"
+        ]
+      },
+      "term_hits": {
+        "叛徒": false,
+        "内鬼": true,
+        "补课部": true
+      },
+      "evidence": [
+        {
+          "id": 22,
+          "source_key": "01_世界观与组织/03_组织与人物关系百科.txt",
+          "text": "常用称呼：补课部,补习部,补课小组,补習授業部,Make-Up Work Club。 所属或相关阵营：圣三一综合学园。 补课部由阿慈谷日富美、白洲梓、浦和花子和下江小春组成。桐藤渚以特别考试为名组建该部，表面目标是避免成员退学，也与寻找潜在内鬼有关。四人在老师指导下建立信任，并在伊甸园条约危机中共同采取行动；梓曾来自阿里乌斯，但这一经历不使补课部成为阿里乌斯组织。"
+        },
+        {
+          "id": 257,
+          "source_key": "03_主线剧情事实/01_第一部/03_Vol3_伊甸园条约篇.txt",
+          "text": "圣三一准备与格黑娜签署伊甸园条约。桐藤渚组建补课部，让日富美、梓、花子和小春参加特别考试。表面目标是避免成员退学，实际也与渚寻找潜在内鬼有关。"
+        },
+        {
+          "id": 3328,
+          "source_key": "04_主线原作台词/01_本地主线章节/主线剧情_第3篇_エデン条約編_第2章.txt",
+          "text": "ヒフミ（日富美 / Hifumi / 히후미）透露，如果她们在接下来的两次考试中都不合格，整个补习部将被退学，而不仅仅是留级。"
+        },
+        {
+          "id": 92,
+          "source_key": "02_角色百科/03_常用角色百科补充.txt",
+          "text": "常用称呼：桐藤渚,渚,桐藤ナギサ,ナギサ,Nagisa。 所属或相关阵营：圣三一,茶会。 桐藤渚是圣三一茶会的重要成员。Vol.3中，她组建补课部，表面上让成员参加特别考试，实际也与寻找潜在内鬼有关。她的选择与未花、圣娅以及条约危机相互关联，不能只以“补课部的考官”概括其角色。"
+        },
+        {
+          "id": 121,
+          "source_key": "02_角色百科/04_阿拜多斯_圣三一与百鬼夜行.txt",
+          "text": "常用称呼：桐藤渚,渚,桐藤ナギサ,ナギサ,Nagisa。 所属或相关阵营：圣三一,茶会。 渚以特别考试为名组建补课部，既有避免成员退学的表面目标，也与寻找潜在内鬼有关。谈论她时，应将这种谨慎与条约危机中的政治压力相联系，不能只将她简化为补课部的考官。"
+        },
+        {
+          "id": 3110,
+          "source_key": "04_主线原作台词/01_本地主线章节/主线剧情_第3篇_エデン条約編_第1章.txt",
+          "text": "ヒフミ（日富美 / Hifumi / 히후미） 宣布补课部成立，请求大家未来一段时间多多关照，目标是让全体成员在即将到来的三次特别学力考试中至少有一次能同时合格，以避免留级，并说明老师会协助安排日程和补习。"
+        },
+        {
+          "id": 260,
+          "source_key": "03_主线剧情事实/01_第一部/03_Vol3_伊甸园条约篇.txt",
+          "text": "补课部与多方学生在混乱中继续行动。日富美以对平凡青春和幸福结局的坚持反驳“一切皆虚无”的观念。老师与学生阻止条约袭击进一步扩大，但圣三一内部对未花的愤怒和阿里乌斯小队的处境仍未解决。"
+        },
+        {
+          "id": 65,
+          "source_key": "02_角色百科/02_核心角色百科与别名.txt",
+          "text": "常用称呼：阿慈谷日富美,日富美,阿慈谷ヒフミ,ヒフミ,Hifumi。 所属或相关阵营：圣三一,补课部。 阿慈谷日富美是补课部成员。她在Vol.3中的关键作用来自对平凡青春、同伴关系与幸福结局的坚持；这使她能够反驳把牺牲和虚无当作唯一答案的观念。她与梓、花子、小春共同构成补课部，不能把补课部的行动只归功于单一角色。"
+        }
+      ],
+      "timings": {
+        "version": "query-stage-timing-v1",
+        "phases_seconds": {
+          "intent_parse": 0.000402,
+          "initial_embedding": 1.217392,
+          "initial_retrieval": 7.190921,
+          "initial_graph_expansion": 0.07809,
+          "followup_planning": 2e-06,
+          "followup_embedding": 0.0,
+          "followup_retrieval": 0.0,
+          "followup_graph_expansion": 0.0,
+          "source_cohort": 0.134659,
+          "evidence_preparation": 0.123657,
+          "evidence_rerank": 1.12914,
+          "association_growth": 9e-06,
+          "final_selection": 0.249682,
+          "growth_utility": 0.063678,
+          "answer_generation": 1e-06
+        },
+        "measured_seconds": 10.187633,
+        "unattributed_seconds": 2.085514,
+        "total_seconds": 12.273147,
+        "deadline_seconds": 20.0
+      }
+    },
+    {
+      "name": "paradise_paradox",
+      "seconds": 12.353,
+      "error": "",
+      "episode_ids": [
+        3573,
+        116,
+        68,
+        117,
+        126,
+        22,
+        21,
+        257,
+        122,
+        92,
+        125,
+        64,
+        128,
+        121,
+        118,
+        93
+      ],
+      "concept_ids": [
+        31,
+        32,
+        78,
+        84
+      ],
+      "association_ids": [
+        448,
+        577,
+        455,
+        333,
+        97,
+        566,
+        100,
+        10109
+      ],
+      "quality": {
+        "entity_coverage": 1.0,
+        "claim_slot_coverage": 1.0,
+        "top_score": 0.92586416,
+        "score_margin": 0.75012046,
+        "source_diversity": 6,
+        "timeline_conflict": false,
+        "evidence_count": 16,
+        "entity_count": 0,
+        "claim_slot_count": 3,
+        "semantic_constraint_coverage": 1.0,
+        "semantic_constraint_count": 0,
+        "sufficient": true,
+        "reasons": []
+      },
+      "term_hits": {
+        "乐园悖论": false,
+        "圣亚": false,
+        "悖论": true
+      },
+      "evidence": [
+        {
+          "id": 3573,
+          "source_key": "04_主线原作台词/01_本地主线章节/主线剧情_第3篇_エデン条約編_第3章.txt",
+          "text": "ハナコ（花子 / Hanako / 하나코） 提出了关于“乐园”的悖论：抵达乐园者无法从外部被观测，因此乐园的存在无法被证明。"
+        },
+        {
+          "id": 116,
+          "source_key": "02_角色百科/04_阿拜多斯_圣三一与百鬼夜行.txt",
+          "text": "常用称呼：圣三一,圣三一综合学园,トリニティ,トリニティ総合学園,Trinity,Trinity General School。 所属或相关阵营：圣三一。 圣三一综合学园内部有茶会、正义实现委员会、补课部和救护骑士团等不同组织。Vol.3的伊甸园条约危机牵涉其内部政治选择、与格黑娜的关系及阿里乌斯的袭击；不能把圣三一视作立场绝对一致的单一行动者。"
+        },
+        {
+          "id": 68,
+          "source_key": "02_角色百科/02_核心角色百科与别名.txt",
+          "text": "常用称呼：下江小春,小春,下江コハル,コハル,Koharu。 所属或相关阵营：圣三一,补课部。 下江小春是补课部成员。她与日富美、梓、花子共同参加特别考试并在伊甸园条约危机中行动。知识库可依据主线讨论其与补课部的关系和参与事件，但未收录的好感剧情、告白或私人细节应明确为未收录，而不能补写。"
+        },
+        {
+          "id": 117,
+          "source_key": "02_角色百科/04_阿拜多斯_圣三一与百鬼夜行.txt",
+          "text": "常用称呼：茶会,圣三一茶会,ティーパーティー,Tea Party。 所属或相关阵营：圣三一综合学园。 茶会是圣三一的最高学生会组织，当前语料明确收录圣园未花、桐藤渚和百合园圣娅为关键成员。伊甸园条约危机显示茶会内部存在信任、偏见和政治判断的冲突，不能将所有危机简化为单一成员能够独自操纵。"
+        },
+        {
+          "id": 126,
+          "source_key": "02_角色百科/04_阿拜多斯_圣三一与百鬼夜行.txt",
+          "text": "常用称呼：下江小春,小春,下江コハル,コハル,Koharu。 所属或相关阵营：圣三一,补课部。 小春是补课部成员，与日富美、梓、花子共同参与特别考试并在伊甸园条约危机中行动。可依据主线讨论她与同伴的协作和参与事件；没有收录的好感剧情、告白或私人细节应说明为未收录。"
+        },
+        {
+          "id": 22,
+          "source_key": "01_世界观与组织/03_组织与人物关系百科.txt",
+          "text": "常用称呼：补课部,补习部,补课小组,补習授業部,Make-Up Work Club。 所属或相关阵营：圣三一综合学园。 补课部由阿慈谷日富美、白洲梓、浦和花子和下江小春组成。桐藤渚以特别考试为名组建该部，表面目标是避免成员退学，也与寻找潜在内鬼有关。四人在老师指导下建立信任，并在伊甸园条约危机中共同采取行动；梓曾来自阿里乌斯，但这一经历不使补课部成为阿里乌斯组织。"
+        },
+        {
+          "id": 21,
+          "source_key": "01_世界观与组织/03_组织与人物关系百科.txt",
+          "text": "常用称呼：茶会,圣三一茶会,ティーパーティー,Tea Party。 所属或相关阵营：圣三一综合学园。 茶会是圣三一综合学园的最高学生会组织。当前语料明确收录的核心成员为圣园未花、桐藤渚和百合园圣娅。伊甸园条约危机中，茶会内部政治选择与圣三一、格黑娜和阿里乌斯之间的冲突相互牵连；不能将茶会、正义实现委员会或补课部视为同一组织。"
+        },
+        {
+          "id": 257,
+          "source_key": "03_主线剧情事实/01_第一部/03_Vol3_伊甸园条约篇.txt",
+          "text": "圣三一准备与格黑娜签署伊甸园条约。桐藤渚组建补课部，让日富美、梓、花子和小春参加特别考试。表面目标是避免成员退学，实际也与渚寻找潜在内鬼有关。"
+        }
+      ],
+      "timings": {
+        "version": "query-stage-timing-v1",
+        "phases_seconds": {
+          "intent_parse": 6.7e-05,
+          "initial_embedding": 0.819082,
+          "initial_retrieval": 7.244232,
+          "initial_graph_expansion": 0.040026,
+          "followup_planning": 3e-06,
+          "followup_embedding": 0.0,
+          "followup_retrieval": 0.0,
+          "followup_graph_expansion": 0.0,
+          "source_cohort": 0.208521,
+          "evidence_preparation": 0.116707,
+          "evidence_rerank": 1.544463,
+          "association_growth": 8e-06,
+          "final_selection": 0.236037,
+          "growth_utility": 0.050074,
+          "answer_generation": 1e-06
+        },
+        "measured_seconds": 10.259221,
+        "unattributed_seconds": 2.083752,
+        "total_seconds": 12.342973,
+        "deadline_seconds": 20.0
+      }
+    },
+    {
+      "name": "mika_coup",
+      "seconds": 11.699,
+      "error": "",
+      "episode_ids": [
+        221,
+        297,
+        25,
+        119,
+        49,
+        3259,
+        64,
+        258,
+        3478,
+        120,
+        262,
+        260,
+        66,
+        295,
+        21,
+        261
+      ],
+      "concept_ids": [],
+      "association_ids": [
+        1245,
+        1061,
+        323,
+        1235,
+        141,
+        1077,
+        1247,
+        1250
+      ],
+      "quality": {
+        "entity_coverage": 1.0,
+        "claim_slot_coverage": 0.666667,
+        "top_score": 0.82992458,
+        "score_margin": 0.07469916,
+        "source_diversity": 9,
+        "timeline_conflict": false,
+        "evidence_count": 16,
+        "entity_count": 0,
+        "claim_slot_count": 3,
+        "semantic_constraint_coverage": 1.0,
+        "semantic_constraint_count": 0,
+        "sufficient": false,
+        "reasons": [
+          "claim_slot_coverage_incomplete"
+        ]
+      },
+      "term_hits": {
+        "阿里乌斯": true,
+        "政变": false,
+        "未花": true
+      },
+      "evidence": [
+        {
+          "id": 221,
+          "source_key": "02_角色百科/06_其他学园与常用角色.txt",
+          "text": "常用称呼：阿里乌斯,阿里乌斯自治区,アリウス自治区,Arius Autonomous District。 所属或相关阵营：阿里乌斯自治区。 阿里乌斯自治区曾长期受贝阿朵莉切统治与极端教育影响。伊甸园条约事件后，阿里乌斯小队、老师和外来救助者继续面对教育、物资、历史创伤与互信问题。阿里乌斯并未因此简单并入圣三一，学生也没有因危机结束立刻失去独立处境。"
+        },
+        {
+          "id": 297,
+          "source_key": "03_主线剧情事实/01_第一部/08_Vol6_過ぎ去りし刻のオラトリオ.txt",
+          "text": "救护骑士团以不突出圣三一身份的方式进入阿里乌斯开展救助。老师、阿里乌斯小队、梯昴、立木舞爱和当地学生围绕物资、教育与互信继续行动。救护骑士团的到来没有让历史敌意立刻消失，但实际救助使部分学生开始重新判断外界与圣三一。"
+        },
+        {
+          "id": 25,
+          "source_key": "01_世界观与组织/03_组织与人物关系百科.txt",
+          "text": "常用称呼：救护骑士团,救護騎士団,Hospitality Club。 所属或相关阵营：圣三一综合学园。 救护骑士团承担圣三一的救护职能。Vol.6中，她们以不突出圣三一身份的方式进入阿里乌斯开展救助，并与老师、阿里乌斯小队及当地学生围绕物资、教育和互信行动。救助推动部分学生重新判断外界与圣三一，但不代表阿里乌斯已经简单并入圣三一，或历史敌意已被消除。"
+        },
+        {
+          "id": 119,
+          "source_key": "02_角色百科/04_阿拜多斯_圣三一与百鬼夜行.txt",
+          "text": "常用称呼：救护骑士团,救护团,救護騎士団,Remedial Knights,Hospitality Club。 所属或相关阵营：圣三一综合学园。 救护骑士团承担圣三一的救护职能。Vol.6中，她们以不突出圣三一身份的方式进入阿里乌斯开展救助，并围绕物资、教育与互信协助当地学生；救助不表示阿里乌斯已简单并入圣三一，历史敌意也未因此消失。"
+        },
+        {
+          "id": 49,
+          "source_key": "02_角色百科/01_核心角色事实.txt",
+          "text": "圣园未花、桐藤渚和百合园圣娅是圣三一茶会的重要成员。Vol.3中，未花因偏见、孤立感和政治选择参与破坏伊甸园条约的计划，之后面对审判、绝望和赎罪。她并不是单纯的幕后恶人。"
+        },
+        {
+          "id": 3259,
+          "source_key": "04_主线原作台词/01_本地主线章节/主线剧情_第3篇_エデン条約編_第1章.txt",
+          "text": "ミカ（未花 / Mika / 미카） 向 先生（老师 / Sensei / 선생님） 提出一项交易：她将告知补习部中谁是“背叛者”。她透露，这个“背叛者”实际上并非从一开始就在圣三一，而是来自一个早已从圣三一分离出去的分支——“阿里乌斯分校”。"
+        },
+        {
+          "id": 64,
+          "source_key": "02_角色百科/02_核心角色百科与别名.txt",
+          "text": "常用称呼：圣园未花,未花,聖園ミカ,ミカ,Mika。 所属或相关阵营：圣三一,茶会。 圣园未花是圣三一茶会的重要成员。Vol.3中，她因偏见、孤立感与政治选择参与破坏伊甸园条约的计划，之后必须面对审判、他人的愤怒、绝望与赎罪。她不是单纯的幕后恶人，也不应被写成无需承担后果的受害者；剧情同时保留责任与重新选择的可能。"
+        },
+        {
+          "id": 258,
+          "source_key": "03_主线剧情事实/01_第一部/03_Vol3_伊甸园条约篇.txt",
+          "text": "四名成员在老师指导下学习并建立友谊。梓原本来自阿里乌斯，承担破坏任务，却逐渐不愿伤害新同伴。幕后政治冲突最终指向茶会成员圣园未花与阿里乌斯的合作。"
+        }
+      ],
+      "timings": {
+        "version": "query-stage-timing-v1",
+        "phases_seconds": {
+          "intent_parse": 4.1e-05,
+          "initial_embedding": 0.770896,
+          "initial_retrieval": 7.168872,
+          "initial_graph_expansion": 0.043245,
+          "followup_planning": 2e-06,
+          "followup_embedding": 0.0,
+          "followup_retrieval": 0.0,
+          "followup_graph_expansion": 0.0,
+          "source_cohort": 0.128068,
+          "evidence_preparation": 0.087124,
+          "evidence_rerank": 1.181329,
+          "association_growth": 7e-06,
+          "final_selection": 0.2104,
+          "growth_utility": 0.05112,
+          "answer_generation": 1e-06
+        },
+        "measured_seconds": 9.641105,
+        "unattributed_seconds": 2.048032,
+        "total_seconds": 11.689137,
+        "deadline_seconds": 20.0
+      }
+    },
+    {
+      "name": "cathedral_attack",
+      "seconds": 12.278,
+      "error": "",
+      "episode_ids": [
+        259,
+        224,
+        4092,
+        3571,
+        3687,
+        134,
+        3689,
+        260,
+        66,
+        3547,
+        3480,
+        129,
+        23,
+        3479,
+        116,
+        261
+      ],
+      "concept_ids": [
+        4,
+        94,
+        195,
+        365,
+        371,
+        372,
+        16,
+        20,
+        104,
+        257,
+        2171
+      ],
+      "association_ids": [
+        1064,
+        1080,
+        10360,
+        10352,
+        884,
+        594,
+        324,
+        9826
+      ],
+      "quality": {
+        "entity_coverage": 1.0,
+        "claim_slot_coverage": 0.666667,
+        "top_score": 0.71544981,
+        "score_margin": 0.55820794,
+        "source_diversity": 8,
+        "timeline_conflict": false,
+        "evidence_count": 16,
+        "entity_count": 0,
+        "claim_slot_count": 3,
+        "semantic_constraint_coverage": 1.0,
+        "semantic_constraint_count": 0,
+        "sufficient": false,
+        "reasons": [
+          "claim_slot_coverage_incomplete"
+        ]
+      },
+      "term_hits": {
+        "巡航导弹": true,
+        "阿里乌斯": true,
+        "未花": true
+      },
+      "evidence": [
+        {
+          "id": 259,
+          "source_key": "03_主线剧情事实/01_第一部/03_Vol3_伊甸园条约篇.txt",
+          "text": "伊甸园条约签署仪式遭到阿里乌斯袭击。老师被纱织开枪击伤，日奈等人也在战斗中受伤。阿里乌斯使用针对光环的爆炸物，但该行动不能表述为同时暗杀剑先鹤城与日奈；把“剑先弦生”写成角色名也是错误的。"
+        },
+        {
+          "id": 224,
+          "source_key": "02_角色百科/06_其他学园与常用角色.txt",
+          "text": "常用称呼：贝阿朵莉切,贝阿特丽切,ベアトリーチェ,Beatrice。 所属或相关阵营：数秘会,阿里乌斯相关。 贝阿朵莉切是数秘会成员之一，曾控制阿里乌斯并利用学生执行伊甸园条约破坏计划。她试图利用亚津子完成仪式，最终未能得逞。她与黑服同属数秘会，但成员目标并不完全一致，不能把数秘会写成意志绝对统一的组织。"
+        },
+        {
+          "id": 4092,
+          "source_key": "04_主线原作台词/01_本地主线章节/主线剧情_第3篇_エデン条約編_第4章.txt",
+          "text": "ヒヨリ（日和 / Hiyori / 히요리）推断他们袭击伊甸条约会场是为了确保复制能力，并利用获得的圣徒会兵力占领崔尼蒂和格黑娜，但随后被“沙勒”击败而逃亡；她听到疑似“安布罗修斯”的悲鸣，意识到复制只需成功一次，而占领任务可能并非核心。"
+        },
+        {
+          "id": 3571,
+          "source_key": "04_主线原作台词/01_本地主线章节/主线剧情_第3篇_エデン条約編_第3章.txt",
+          "text": "ハナコ（花子 / Hanako / 하나코） 向老师（先生（老师 / Sensei / 선생님））陈述事件全貌，确认袭击由圣园ミカ指示、阿里乌斯小队执行、白洲アズサ最终引爆房间，指出各方目的不同导致连锁反应与误解，并承认自己因情绪激动对ミカ进行了恶作剧般的试探。"
+        },
+        {
+          "id": 3687,
+          "source_key": "04_主线原作台词/01_本地主线章节/主线剧情_第3篇_エデン条約編_第3章.txt",
+          "text": "サオリ（纱织 / Saori / 사오리）说明他们夺取了“伊甸条约”，通过向签约式会场发射巡航导弹清除碍事者，并扭曲了条约内容。"
+        },
+        {
+          "id": 134,
+          "source_key": "02_角色百科/04_阿拜多斯_圣三一与百鬼夜行.txt",
+          "text": "常用称呼：槌永日和,日和,槌永ヒヨリ,ヒヨリ,Hiyori。 所属或相关阵营：阿里乌斯,阿里乌斯小队。 槌永日和是阿里乌斯小队成员。她与纱织、亚津子、美咲共同经历受控训练、条约袭击与脱离贝阿朵莉切控制后的生活选择；不应将未收录的私人互动扩展成确认的恋爱或固定口头禅。"
+        },
+        {
+          "id": 3689,
+          "source_key": "04_主线原作台词/01_本地主线章节/主线剧情_第3篇_エデン条約編_第3章.txt",
+          "text": "アズサ（梓 / Azusa / 아즈사）理解了袭击的目的是改写条约以获得那支不可思议的兵力。"
+        },
+        {
+          "id": 260,
+          "source_key": "03_主线剧情事实/01_第一部/03_Vol3_伊甸园条约篇.txt",
+          "text": "补课部与多方学生在混乱中继续行动。日富美以对平凡青春和幸福结局的坚持反驳“一切皆虚无”的观念。老师与学生阻止条约袭击进一步扩大，但圣三一内部对未花的愤怒和阿里乌斯小队的处境仍未解决。"
+        }
+      ],
+      "timings": {
+        "version": "query-stage-timing-v1",
+        "phases_seconds": {
+          "intent_parse": 4.5e-05,
+          "initial_embedding": 0.974819,
+          "initial_retrieval": 7.171082,
+          "initial_graph_expansion": 0.043229,
+          "followup_planning": 2e-06,
+          "followup_embedding": 0.0,
+          "followup_retrieval": 0.0,
+          "followup_graph_expansion": 0.0,
+          "source_cohort": 0.217407,
+          "evidence_preparation": 0.116815,
+          "evidence_rerank": 1.444614,
+          "association_growth": 7e-06,
+          "final_selection": 0.252153,
+          "growth_utility": 0.04898,
+          "answer_generation": 1e-06
+        },
+        "measured_seconds": 10.269154,
+        "unattributed_seconds": 1.999041,
+        "total_seconds": 12.268195,
+        "deadline_seconds": 20.0
+      }
+    },
+    {
+      "name": "aru_faust",
+      "seconds": 11.619,
+      "error": "",
+      "episode_ids": [
+        10788,
+        15195,
+        12754,
+        11911,
+        10418,
+        8051,
+        11916,
+        10569,
+        177,
+        200,
+        14299,
+        164,
+        178,
+        15418,
+        15413
+      ],
+      "concept_ids": [
+        4,
+        1096,
+        7470,
+        1085,
+        7178,
+        8526,
+        8527,
+        1286,
+        4778,
+        11528,
+        11529,
+        945
+      ],
+      "association_ids": [
+        32309,
+        38578,
+        35847,
+        35825,
+        46555,
+        43562,
+        32307,
+        32308
+      ],
+      "quality": {
+        "entity_coverage": 1.0,
+        "claim_slot_coverage": 0.666667,
+        "top_score": 0.23552835,
+        "score_margin": 0.04864256,
+        "source_diversity": 11,
+        "timeline_conflict": false,
+        "evidence_count": 15,
+        "entity_count": 0,
+        "claim_slot_count": 3,
+        "semantic_constraint_coverage": 1.0,
+        "semantic_constraint_count": 0,
+        "sufficient": false,
+        "reasons": [
+          "claim_slot_coverage_incomplete"
+        ]
+      },
+      "term_hits": {
+        "情侣专用菜单": true,
+        "阿鲁": false,
+        "浮士德": false
+      },
+      "evidence": [
+        {
+          "id": 10788,
+          "source_key": "06_好感原作台词/01_常规角色/好感剧情_アル.txt",
+          "text": "老师询问经营顾问是什么，爱露没有解释，而是接受了挑战，开始吃芭菲。她随后发现这是情侣专用菜单，内心慌乱，但表面故作镇定，担心被老师看出来。"
+        },
+        {
+          "id": 15195,
+          "source_key": "06_好感原作台词/01_常规角色/好感剧情_ワカモ.txt",
+          "text": "若藻提议改去一家她通过指南书找到的、提供“情侣限定菜单”的咖啡馆。然而，店员告知该菜单已于去年停止供应，并暗自惊讶现在还有人用指南书规划约会。"
+        },
+        {
+          "id": 12754,
+          "source_key": "06_好感原作台词/01_常规角色/好感剧情_チナツ.txt",
+          "text": "经理确认了千夏的预订，并提到旅馆目前为情侣客人提供免费的包场露天浴池。千夏对“情侣”一词感到惊讶。经理解释因为预订的是情侣专用套餐。"
+        },
+        {
+          "id": 11911,
+          "source_key": "06_好感原作台词/01_常规角色/好感剧情_サヤ.txt",
+          "text": "纱绫独自来到餐厅，声称自己是孤独的美食家。她试图点一份情侣专属特大蓝纹芝士蛋糕，但店员告知该菜品仅供情侣点单，单人无法下单。"
+        },
+        {
+          "id": 10418,
+          "source_key": "06_好感原作台词/01_常规角色/好感剧情_アカネ.txt",
+          "text": "她最后以代号零三室笠茜再次问候，并询问今日任务内容。"
+        },
+        {
+          "id": 8051,
+          "source_key": "05_活动原作台词/01_常规活动/活动剧情_event_816.txt",
+          "text": "爱理宣布她们的社团从今天起改名为“放学后甜点部”，并叫了和纱的名字。"
+        },
+        {
+          "id": 11916,
+          "source_key": "06_好感原作台词/01_常规角色/好感剧情_サヤ.txt",
+          "text": "老师询问是否自己应该离开，纱绫急忙挽留，要求老师至少留到蛋糕送来。随后，店员送来了“情侣专用特大蓝纹奶酪蛋糕”。纱绫非常兴奋，表示这款使用了整块蓝纹奶酪的蛋糕是别处尝不到的，她一直想试试，并赞叹其美味。"
+        },
+        {
+          "id": 10569,
+          "source_key": "06_好感原作台词/01_常规角色/好感剧情_アズサ.txt",
+          "text": "梓请老师帮忙，老师答应了。梓说下次联络时用代号“企鹅”和“鸭子”，没有理由。"
+        }
+      ],
+      "timings": {
+        "version": "query-stage-timing-v1",
+        "phases_seconds": {
+          "intent_parse": 5.8e-05,
+          "initial_embedding": 1.024282,
+          "initial_retrieval": 7.12937,
+          "initial_graph_expansion": 0.043443,
+          "followup_planning": 4e-06,
+          "followup_embedding": 0.0,
+          "followup_retrieval": 0.0,
+          "followup_graph_expansion": 0.0,
+          "source_cohort": 0.092417,
+          "evidence_preparation": 0.124772,
+          "evidence_rerank": 0.851792,
+          "association_growth": 7e-06,
+          "final_selection": 0.238859,
+          "growth_utility": 0.048997,
+          "answer_generation": 1e-06
+        },
+        "measured_seconds": 9.554002,
+        "unattributed_seconds": 2.055332,
+        "total_seconds": 11.609334,
+        "deadline_seconds": 20.0
+      }
+    }
+  ]
+}

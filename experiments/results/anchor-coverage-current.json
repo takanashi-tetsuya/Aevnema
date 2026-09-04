@@ -1,0 +1,1275 @@
+{
+  "乐园悖论": {
+    "episode_count": 0,
+    "episodes": [],
+    "edges": []
+  },
+  "圣亚": {
+    "episode_count": 2,
+    "episodes": [
+      {
+        "id": 3544,
+        "source_key": "04_主线原作台词/01_本地主线章节/主线剧情_第3篇_エデン条約編_第3章.txt",
+        "text": "サクラコ（樱子 / Sakurako / 사쿠라코） 向 先生（老师 / Sensei / 선생님） 说明百合园圣亚房间于凌晨 3 点左右被炸毁，但随后指出“圣亚遗体”信息为假，实际是救护骑士团团长米内将圣亚藏匿于安全处以躲避“光环被破坏”的假消息，目前两人仍身处无人知晓的隐蔽地点，且圣亚因爆炸伤虽愈却持续昏迷，原因不明。",
+        "extraction_run_id": 45
+      },
+      {
+        "id": 3547,
+        "source_key": "04_主线原作台词/01_本地主线章节/主线剧情_第3篇_エデン条約編_第3章.txt",
+        "text": "ハナコ（花子 / Hanako / 하나코） 向 サクラコ（樱子 / Sakurako / 사쿠라코） 和 先生（老师 / Sensei / 선생님） 指出百合园圣亚袭击事件的实际执行者是梓，并补充说明虽然爆炸发生在凌晨 3 点，但梓实际于凌晨 2 点进入房间，两人共同在房间内度过了约 1 小时的空白时间，随后 ヒフミ（日富美 / Hifumi / 히후미） 保持沉默。",
+        "extraction_run_id": 45
+      }
+    ],
+    "edges": [
+      {
+        "id": 9988,
+        "from_type": "episode",
+        "from_id": 3544,
+        "to_type": "concept",
+        "to_id": 2399,
+        "relation_text": "该 Episode 涉及概念“百合园圣亚房间”",
+        "generation": 0,
+        "audit_status": "not_required"
+      },
+      {
+        "id": 9989,
+        "from_type": "episode",
+        "from_id": 3544,
+        "to_type": "concept",
+        "to_id": 2400,
+        "relation_text": "该 Episode 涉及概念“圣亚”",
+        "generation": 0,
+        "audit_status": "not_required"
+      },
+      {
+        "id": 10007,
+        "from_type": "episode",
+        "from_id": 3547,
+        "to_type": "concept",
+        "to_id": 2405,
+        "relation_text": "该 Episode 涉及概念“百合园圣亚袭击事件”",
+        "generation": 0,
+        "audit_status": "not_required"
+      }
+    ]
+  },
+  "花子": {
+    "episode_count": 359,
+    "episodes": [
+      {
+        "id": 22,
+        "source_key": "01_世界观与组织/03_组织与人物关系百科.txt",
+        "text": "常用称呼：补课部,补习部,补课小组,补習授業部,Make-Up Work Club。\n所属或相关阵营：圣三一综合学园。\n补课部由阿慈谷日富美、白洲梓、浦和花子和下江小春组成。桐藤渚以特别考试为名组建该部，表面目标是避免成员退学，也与寻找潜在内鬼有关。四人在老师指导下建立信任，并在伊甸园条约危机中共同采取行动；梓曾来自阿里乌斯，但这一经历不使补课部成为阿里乌斯组织。",
+        "extraction_run_id": 3
+      },
+      {
+        "id": 50,
+        "source_key": "02_角色百科/01_核心角色事实.txt",
+        "text": "阿慈谷日富美、白洲梓、浦和花子和下江小春组成补课部。日富美在Vol.3的重要作用来自她对平凡青春和幸福结局的坚持；梓则需要在阿里乌斯灌输的价值观与新建立的友谊之间作出选择。",
+        "extraction_run_id": 4
+      },
+      {
+        "id": 65,
+        "source_key": "02_角色百科/02_核心角色百科与别名.txt",
+        "text": "常用称呼：阿慈谷日富美,日富美,阿慈谷ヒフミ,ヒフミ,Hifumi。\n所属或相关阵营：圣三一,补课部。\n阿慈谷日富美是补课部成员。她在Vol.3中的关键作用来自对平凡青春、同伴关系与幸福结局的坚持；这使她能够反驳把牺牲和虚无当作唯一答案的观念。她与梓、花子、小春共同构成补课部，不能把补课部的行动只归功于单一角色。",
+        "extraction_run_id": 5
+      },
+      {
+        "id": 67,
+        "source_key": "02_角色百科/02_核心角色百科与别名.txt",
+        "text": "常用称呼：浦和花子,花子,浦和ハナコ,ハナコ,Hanako。\n所属或相关阵营：圣三一,补课部。\n浦和花子是补课部成员，与日富美、梓和小春一同经历特别考试、条约危机与后续行动。她属于补课部共同建立信任的过程，不能把她的角色定位简化为社区中的单一玩笑或将未收录的私人互动当作主线事实。",
+        "extraction_run_id": 5
+      },
+      {
+        "id": 68,
+        "source_key": "02_角色百科/02_核心角色百科与别名.txt",
+        "text": "常用称呼：下江小春,小春,下江コハル,コハル,Koharu。\n所属或相关阵营：圣三一,补课部。\n下江小春是补课部成员。她与日富美、梓、花子共同参加特别考试并在伊甸园条约危机中行动。知识库可依据主线讨论其与补课部的关系和参与事件，但未收录的好感剧情、告白或私人细节应明确为未收录，而不能补写。",
+        "extraction_run_id": 5
+      },
+      {
+        "id": 125,
+        "source_key": "02_角色百科/04_阿拜多斯_圣三一与百鬼夜行.txt",
+        "text": "常用称呼：浦和花子,花子,浦和ハナコ,ハナコ,Hanako。\n所属或相关阵营：圣三一,补课部。\n花子与日富美、梓、小春共同经历特别考试、条约危机和后续行动。她的角色应放在补课部共同建立信任的过程里理解；社区玩笑、未收录的私人互动或恋爱解释不能替代主线事实。",
+        "extraction_run_id": 8
+      },
+      {
+        "id": 126,
+        "source_key": "02_角色百科/04_阿拜多斯_圣三一与百鬼夜行.txt",
+        "text": "常用称呼：下江小春,小春,下江コハル,コハル,Koharu。\n所属或相关阵营：圣三一,补课部。\n小春是补课部成员，与日富美、梓、花子共同参与特别考试并在伊甸园条约危机中行动。可依据主线讨论她与同伴的协作和参与事件；没有收录的好感剧情、告白或私人细节应说明为未收录。",
+        "extraction_run_id": 8
+      },
+      {
+        "id": 257,
+        "source_key": "03_主线剧情事实/01_第一部/03_Vol3_伊甸园条约篇.txt",
+        "text": "圣三一准备与格黑娜签署伊甸园条约。桐藤渚组建补课部，让日富美、梓、花子和小春参加特别考试。表面目标是避免成员退学，实际也与渚寻找潜在内鬼有关。",
+        "extraction_run_id": 15
+      },
+      {
+        "id": 840,
+        "source_key": "04_主线原作台词/01_本地主线章节/主线剧情_最終編_第1章.txt",
+        "text": "与此同时，一群学生对听证会的判决不满，正在集会抗议，要求撤回判决并严惩背叛者。ハナコ（花子 / Hanako / 하나코） 评论说，这背后是各方势力试图利用帕特尔派代表空缺后的政治混乱，以及瞄准茶会地位的政治家，她认为圣三一是一个毒蛇巢穴。",
+        "extraction_run_id": 30
+      },
+      {
+        "id": 842,
+        "source_key": "04_主线原作台词/01_本地主线章节/主线剧情_最終編_第1章.txt",
+        "text": "イチカ（一花 / Ichika / 이치카）は発砲禁止を呼びかけ、ヒフミ（日富美 / Hifumi / 히후미）花子はこの状況を観察し、ハナコ（花子 / Hanako / 하나코）はトリニティが政治的混乱と権力争いの場であると評した。",
+        "extraction_run_id": 30
+      },
+      {
+        "id": 843,
+        "source_key": "04_主线原作台词/01_本地主线章节/主线剧情_最終編_第1章.txt",
+        "text": "ハナコ（花子 / Hanako / 하나코）はミカの前途の険しさを指摘し、アズサ（梓 / Azusa / 아즈사）（アズサ）に気遣うが、アズサ（梓 / Azusa / 아즈사）はミカが先生と共にアツコを助けたと聞いており、デモの集団攻撃を嫌っている。",
+        "extraction_run_id": 30
+      },
+      {
+        "id": 845,
+        "source_key": "04_主线原作台词/01_本地主线章节/主线剧情_最終編_第1章.txt",
+        "text": "ハナコ（花子 / Hanako / 하나코）梓は「赦しと慈悲」や「努力」について語り、ハナコ（花子 / Hanako / 하나코）梓（コハル）がアズサの言葉を覚えていることをからかう。ハナコ（花子 / Hanako / 하나코）はコハルともっと親しくなりたいと言い、一緒梓を動揺させる。",
+        "extraction_run_id": 30
+      }
+    ],
+    "edges": [
+      {
+        "id": 113,
+        "from_type": "episode",
+        "from_id": 22,
+        "to_type": "concept",
+        "to_id": 91,
+        "relation_text": "该 Episode 涉及概念“浦和花子”",
+        "generation": 0,
+        "audit_status": "not_required"
+      },
+      {
+        "id": 268,
+        "from_type": "episode",
+        "from_id": 50,
+        "to_type": "concept",
+        "to_id": 91,
+        "relation_text": "该 Episode 涉及概念“浦和花子”",
+        "generation": 0,
+        "audit_status": "not_required"
+      },
+      {
+        "id": 327,
+        "from_type": "episode",
+        "from_id": 67,
+        "to_type": "concept",
+        "to_id": 91,
+        "relation_text": "该 Episode 涉及概念“浦和花子”",
+        "generation": 0,
+        "audit_status": "not_required"
+      },
+      {
+        "id": 575,
+        "from_type": "episode",
+        "from_id": 125,
+        "to_type": "concept",
+        "to_id": 91,
+        "relation_text": "该 Episode 涉及概念“浦和花子”",
+        "generation": 0,
+        "audit_status": "not_required"
+      },
+      {
+        "id": 581,
+        "from_type": "episode",
+        "from_id": 126,
+        "to_type": "concept",
+        "to_id": 258,
+        "relation_text": "该 Episode 涉及概念“花子”",
+        "generation": 0,
+        "audit_status": "not_required"
+      },
+      {
+        "id": 1056,
+        "from_type": "episode",
+        "from_id": 257,
+        "to_type": "concept",
+        "to_id": 258,
+        "relation_text": "该 Episode 涉及概念“花子”",
+        "generation": 0,
+        "audit_status": "not_required"
+      },
+      {
+        "id": 9642,
+        "from_type": "episode",
+        "from_id": 3432,
+        "to_type": "concept",
+        "to_id": 258,
+        "relation_text": "该 Episode 涉及概念“花子”",
+        "generation": 0,
+        "audit_status": "not_required"
+      },
+      {
+        "id": 9965,
+        "from_type": "episode",
+        "from_id": 3533,
+        "to_type": "concept",
+        "to_id": 258,
+        "relation_text": "该 Episode 涉及概念“花子”",
+        "generation": 0,
+        "audit_status": "not_required"
+      },
+      {
+        "id": 20843,
+        "from_type": "episode",
+        "from_id": 7344,
+        "to_type": "concept",
+        "to_id": 258,
+        "relation_text": "该 Episode 涉及概念“花子”",
+        "generation": 0,
+        "audit_status": "not_required"
+      },
+      {
+        "id": 21704,
+        "from_type": "episode",
+        "from_id": 7607,
+        "to_type": "concept",
+        "to_id": 258,
+        "relation_text": "该 Episode 涉及概念“花子”",
+        "generation": 0,
+        "audit_status": "not_required"
+      },
+      {
+        "id": 27231,
+        "from_type": "episode",
+        "from_id": 9163,
+        "to_type": "concept",
+        "to_id": 258,
+        "relation_text": "该 Episode 涉及概念“花子”",
+        "generation": 0,
+        "audit_status": "not_required"
+      },
+      {
+        "id": 27237,
+        "from_type": "episode",
+        "from_id": 9164,
+        "to_type": "concept",
+        "to_id": 258,
+        "relation_text": "该 Episode 涉及概念“花子”",
+        "generation": 0,
+        "audit_status": "not_required"
+      }
+    ]
+  },
+  "政变": {
+    "episode_count": 33,
+    "episodes": [
+      {
+        "id": 16,
+        "source_key": "01_世界观与组织/02_学院与势力事实.txt",
+        "text": "SRT特殊学园直属联邦学生会长，负责高风险治安行动。会长失踪后SRT被关闭。RABBIT小队拒绝接受处置并在公园抗议，FOX小队则在Vol.4第二章中与不知火花耶的政变有关。",
+        "extraction_run_id": 2
+      },
+      {
+        "id": 18,
+        "source_key": "01_世界观与组织/02_学院与势力事实.txt",
+        "text": "高地人铁道学园管理铁路系统。朝雾素羽是该学园管理监督部门的成员，不是联邦学生会防卫室长。不知火花耶才是曾发动政变的联邦学生会防卫室长。",
+        "extraction_run_id": 2
+      },
+      {
+        "id": 34,
+        "source_key": "01_世界观与组织/03_组织与人物关系百科.txt",
+        "text": "常用称呼：SRT,SRT特殊学园,エスアールティー特殊学園,SRT Special Academy。\n所属或相关阵营：联邦学生会直属。\nSRT特殊学园原本直属联邦学生会长，负责高风险治安行动。会长失踪后，SRT被决定关闭；RABBIT小队拒绝接受处置并在公园抗议，FOX小队则在之后的花耶政变中站到相对一方。RABBIT与FOX均与SRT理念有关，但在政变期间的立场和选择不同，不能视为同一行动单位。",
+        "extraction_run_id": 3
+      },
+      {
+        "id": 35,
+        "source_key": "01_世界观与组织/03_组织与人物关系百科.txt",
+        "text": "常用称呼：RABBIT,RABBIT小队,兔子小队,ラビット小隊,RABBIT Squad。\n所属或相关阵营：SRT特殊学园。\nRABBIT小队是SRT特殊学园的队伍，当前语料明确收录月雪宫子为成员。SRT关闭后，小队在公园扎营抗议，最初不信任老师，也拒绝被并入瓦尔基里的未来。她们在老师协助下处理食物、居住与治安问题，并在花耶政变中反对FOX小队和政变方；政变结束后仍保留对SRT理念的认同。",
+        "extraction_run_id": 3
+      },
+      {
+        "id": 36,
+        "source_key": "01_世界观与组织/03_组织与人物关系百科.txt",
+        "text": "常用称呼：FOX,FOX小队,狐小队,フォックス小隊,FOX Squad。\n所属或相关阵营：SRT特殊学园。\nFOX小队由队长七度ユキノ、吉野ニコ、高倉クルミ和天神山オトギ组成，对应FOX1至FOX4呼号。SRT解散后，她们参与不知火花耶政变并承担相应责任，政变失败后受到拘押。第二部中，FOX小队在受限条件下执行Lore调查；其专业能力仍在，保护市民的SRT价值成为队伍重新选择方向的基础。",
+        "extraction_run_id": 3
+      },
+      {
+        "id": 94,
+        "source_key": "02_角色百科/03_常用角色百科补充.txt",
+        "text": "常用称呼：不知火花耶,花耶,不知火カヤ,カヤ,Kaya。\n所属或相关阵营：联邦学生会,SRT相关。\n不知火花耶是联邦学生会防卫室长，不是高地人铁道学园的朝雾素羽。Vol.4第二章中，她与凯撒集团合作发动政变，并借助FOX小队控制联邦学生会；政变失败后受到拘押。她对高效秩序的追求不能被写成已经成功解决基沃托斯复杂问题。",
+        "extraction_run_id": 6
+      },
+      {
+        "id": 97,
+        "source_key": "02_角色百科/03_常用角色百科补充.txt",
+        "text": "常用称呼：风仓萌绘,萌绘,風倉モエ,モエ,Moe。\n所属或相关阵营：SRT,RABBIT小队。\n风仓萌绘是SRT特殊学园RABBIT小队成员。她与宫子、咲、美游共同经历SRT关闭后在公园抗议、与老师建立合作并反对花耶政变的过程。RABBIT小队的身份矛盾在政变失败后也没有被一次性消除。",
+        "extraction_run_id": 6
+      },
+      {
+        "id": 99,
+        "source_key": "02_角色百科/03_常用角色百科补充.txt",
+        "text": "常用称呼：吉野妮可,吉野ニコ,ニコ,Nico,FOX2。\n所属或相关阵营：SRT,FOX小队。\n吉野ニコ是FOX小队成员，使用FOX2呼号并担任副队长。FOX小队在花耶政变后的法律责任与第二部的Lore调查同时构成其剧情背景；不能把她们直接写成已被完全洗白或已经回到旧SRT编制。",
+        "extraction_run_id": 6
+      },
+      {
+        "id": 191,
+        "source_key": "02_角色百科/06_其他学园与常用角色.txt",
+        "text": "常用称呼：连河切里诺,切里诺,連河チェリノ,チェリノ,Cherino。\n所属或相关阵营：红冬,赤冬事务局。\n连河切里诺是红冬联邦学园的学生会长，也是赤冬事务局的中心人物。她以强烈的领导欲和对权威象征的重视处理校务，并常在校园革命的风波中被卷入去留变化。其身份应以红冬学生会长为准，不把活动中的喜剧性政变解释为跨学园的正式政治权力。",
+        "extraction_run_id": 10
+      },
+      {
+        "id": 218,
+        "source_key": "02_角色百科/06_其他学园与常用角色.txt",
+        "text": "常用称呼：朝雾素羽,素羽,朝霧スオウ,スオウ,Suou。\n所属或相关阵营：高地人,中央管制中心。\n朝雾素羽是高地人铁道学园体系的学生，与阿拜多斯第三章的横贯沙漠铁路和梦前辈留下的记录有关。她不是联邦学生会防卫室长；曾发动政变的防卫室长是不知火花耶。",
+        "extraction_run_id": 10
+      },
+      {
+        "id": 230,
+        "source_key": "02_角色百科/07_第二部角色与势力.txt",
+        "text": "FOX小队由队长七度ユキノ、吉野ニコ、高倉クルミ和天神山オトギ组成，分别使用FOX1至FOX4呼号。SRT解散后，她们曾参与花耶政变并承担相应责任。第二部中，她们在受限条件下执行Lore调查，专业能力仍在，保护市民的SRT价值也成为队伍重新选择方向的基础。",
+        "extraction_run_id": 11
+      },
+      {
+        "id": 265,
+        "source_key": "03_主线剧情事实/01_第一部/04_Vol4_卡班诺的兔子篇.txt",
+        "text": "最终篇后，联邦学生会防卫室长不知火花耶与凯撒集团合作发动政变，并借助FOX小队控制联邦学生会。花耶试图建立由自己定义的高效秩序，却缺乏面对实际责任和复杂问题的能力。",
+        "extraction_run_id": 16
+      }
+    ],
+    "edges": [
+      {
+        "id": 69,
+        "from_type": "episode",
+        "from_id": 16,
+        "to_type": "concept",
+        "to_id": 65,
+        "relation_text": "该 Episode 涉及概念“政变”",
+        "generation": 0,
+        "audit_status": "not_required"
+      },
+      {
+        "id": 197,
+        "from_type": "episode",
+        "from_id": 34,
+        "to_type": "concept",
+        "to_id": 139,
+        "relation_text": "该 Episode 涉及概念“花耶政变”",
+        "generation": 0,
+        "audit_status": "not_required"
+      },
+      {
+        "id": 201,
+        "from_type": "episode",
+        "from_id": 35,
+        "to_type": "concept",
+        "to_id": 139,
+        "relation_text": "该 Episode 涉及概念“花耶政变”",
+        "generation": 0,
+        "audit_status": "not_required"
+      },
+      {
+        "id": 208,
+        "from_type": "episode",
+        "from_id": 36,
+        "to_type": "concept",
+        "to_id": 139,
+        "relation_text": "该 Episode 涉及概念“花耶政变”",
+        "generation": 0,
+        "audit_status": "not_required"
+      },
+      {
+        "id": 909,
+        "from_type": "episode",
+        "from_id": 230,
+        "to_type": "concept",
+        "to_id": 139,
+        "relation_text": "该 Episode 涉及概念“花耶政变”",
+        "generation": 0,
+        "audit_status": "not_required"
+      },
+      {
+        "id": 1318,
+        "from_type": "episode",
+        "from_id": 309,
+        "to_type": "concept",
+        "to_id": 139,
+        "relation_text": "该 Episode 涉及概念“花耶政变”",
+        "generation": 0,
+        "audit_status": "not_required"
+      },
+      {
+        "id": 12684,
+        "from_type": "episode",
+        "from_id": 4569,
+        "to_type": "concept",
+        "to_id": 2901,
+        "relation_text": "该 Episode 涉及概念“政变计划”",
+        "generation": 0,
+        "audit_status": "not_required"
+      },
+      {
+        "id": 13271,
+        "from_type": "episode",
+        "from_id": 4774,
+        "to_type": "concept",
+        "to_id": 65,
+        "relation_text": "该 Episode 涉及概念“政变”",
+        "generation": 0,
+        "audit_status": "not_required"
+      },
+      {
+        "id": 13274,
+        "from_type": "episode",
+        "from_id": 4775,
+        "to_type": "concept",
+        "to_id": 65,
+        "relation_text": "该 Episode 涉及概念“政变”",
+        "generation": 0,
+        "audit_status": "not_required"
+      },
+      {
+        "id": 16300,
+        "from_type": "episode",
+        "from_id": 5967,
+        "to_type": "concept",
+        "to_id": 65,
+        "relation_text": "该 Episode 涉及概念“政变”",
+        "generation": 0,
+        "audit_status": "not_required"
+      },
+      {
+        "id": 16370,
+        "from_type": "episode",
+        "from_id": 6002,
+        "to_type": "concept",
+        "to_id": 65,
+        "relation_text": "该 Episode 涉及概念“政变”",
+        "generation": 0,
+        "audit_status": "not_required"
+      },
+      {
+        "id": 16374,
+        "from_type": "episode",
+        "from_id": 6003,
+        "to_type": "concept",
+        "to_id": 65,
+        "relation_text": "该 Episode 涉及概念“政变”",
+        "generation": 0,
+        "audit_status": "not_required"
+      }
+    ]
+  },
+  "浮士德": {
+    "episode_count": 2,
+    "episodes": [
+      {
+        "id": 3814,
+        "source_key": "04_主线原作台词/01_本地主线章节/主线剧情_第3篇_エデン条約編_第3章.txt",
+        "text": "ヒフミ（日富美 / Hifumi / 히후미） 向 アズサ（梓 / Azusa / 아즈사） 表明自己就是“覆面水着団”的领袖浮士德，并反驳了 アズサ（梓 / Azusa / 아즈사） 关于两人身处不同世界的说法，坚持要留在 アズサ（梓 / Azusa / 아즈사） 身边。",
+        "extraction_run_id": 45
+      },
+      {
+        "id": 3815,
+        "source_key": "04_主线原作台词/01_本地主线章节/主线剧情_第3篇_エデン条約編_第3章.txt",
+        "text": "自称“覆面水着団”的成员们（ホシノ（星野 / Hoshino / 호시노）、シロコ（白子 / Shiroko / 시로코）、セリカ（芹香 / Serika / 세리카）、アヤネ（绫音 / Ayane / 아야네）、ノノミ（野宫 / Nonomi / 노노미））出现，并围绕领袖浮士德（ヒフミ（日富美 / Hifumi / 히후미））进行了一番夸张的吹嘘。",
+        "extraction_run_id": 45
+      }
+    ],
+    "edges": [
+      {
+        "id": 10705,
+        "from_type": "episode",
+        "from_id": 3814,
+        "to_type": "concept",
+        "to_id": 2502,
+        "relation_text": "该 Episode 涉及概念“浮士德”",
+        "generation": 0,
+        "audit_status": "not_required"
+      },
+      {
+        "id": 10712,
+        "from_type": "episode",
+        "from_id": 3815,
+        "to_type": "concept",
+        "to_id": 2502,
+        "relation_text": "该 Episode 涉及概念“浮士德”",
+        "generation": 0,
+        "audit_status": "not_required"
+      }
+    ]
+  },
+  "Faust": {
+    "episode_count": 0,
+    "episodes": [],
+    "edges": []
+  },
+  "情侣专用菜单": {
+    "episode_count": 1,
+    "episodes": [
+      {
+        "id": 10788,
+        "source_key": "06_好感原作台词/01_常规角色/好感剧情_アル.txt",
+        "text": "老师询问经营顾问是什么，爱露没有解释，而是接受了挑战，开始吃芭菲。她随后发现这是情侣专用菜单，内心慌乱，但表面故作镇定，担心被老师看出来。",
+        "extraction_run_id": 104
+      }
+    ],
+    "edges": [
+      {
+        "id": 32309,
+        "from_type": "episode",
+        "from_id": 10788,
+        "to_type": "concept",
+        "to_id": 7470,
+        "relation_text": "该 Episode 涉及概念“情侣专用菜单”",
+        "generation": 0,
+        "audit_status": "not_required"
+      }
+    ]
+  },
+  "阿鲁": {
+    "episode_count": 0,
+    "episodes": [],
+    "edges": []
+  },
+  "爱露": {
+    "episode_count": 118,
+    "episodes": [
+      {
+        "id": 1038,
+        "source_key": "04_主线原作台词/01_本地主线章节/主线剧情_最終編_第2章.txt",
+        "text": "アル（爱露 / Aru / 아루） 和便利屋68小队主动承担了最危险的“诱饵”任务，计划利用并最终破坏一辆失控列车。",
+        "extraction_run_id": 31
+      },
+      {
+        "id": 1127,
+        "source_key": "04_主线原作台词/01_本地主线章节/主线剧情_最終編_第2章.txt",
+        "text": "ホシノ（星野 / Hoshino / 호시노）、セリカ（芹香 / Serika / 세리카）、カヨコ（佳代子 / Kayoko / 카요코）、アル（爱露 / Aru / 아루）、ハルカ（春香 / Haruka / 하루카） 回应并准备行动。",
+        "extraction_run_id": 31
+      },
+      {
+        "id": 1129,
+        "source_key": "04_主线原作台词/01_本地主线章节/主线剧情_最終編_第2章.txt",
+        "text": "ムツキ（睦月 / Mutsuki / 무츠키） 和 アル（爱露 / Aru / 아루） 对袭击表示不屑，并准备强硬应对。",
+        "extraction_run_id": 31
+      },
+      {
+        "id": 1388,
+        "source_key": "04_主线原作台词/01_本地主线章节/主线剧情_最終編_第3章.txt",
+        "text": "アヤネ（绫音 / Ayane / 아야네） 担忧作战成功率低，此时便利屋的 SPERKER_006、SPERKER_007、SPERKER_008、アル（爱露 / Aru / 아루） 和 SPERKER_010 出现。",
+        "extraction_run_id": 33
+      },
+      {
+        "id": 1389,
+        "source_key": "04_主线原作台词/01_本地主线章节/主线剧情_最終編_第3章.txt",
+        "text": "アル（爱露 / Aru / 아루） 批评 SPERKER_003 在作战开始前就谈论失败，并建议说安全归来后大家一起去吃拉面。",
+        "extraction_run_id": 33
+      },
+      {
+        "id": 1771,
+        "source_key": "04_主线原作台词/01_本地主线章节/主线剧情_第1篇_対策委員会編_第1章.txt",
+        "text": "アル（爱露 / Aru / 아루） 嫌弃这个地方肮脏有怪味，并宣布要解放 ヘルメット団A 等人，即解雇他们，由自己一方接管阿比多斯。",
+        "extraction_run_id": 37
+      },
+      {
+        "id": 1796,
+        "source_key": "04_主线原作台词/01_本地主线章节/主线剧情_第1篇_対策委員会編_第1章.txt",
+        "text": "ハルカ（春香 / Haruka / 하루카）、ムツキ（睦月 / Mutsuki / 무츠키）、アル（爱露 / Aru / 아루） 和 カヨコ（佳代子 / Kayoko / 카요코） 进入拉面店，只点了一碗最便宜的拉面，并打算四人分食，这让 セリカ（芹香 / Serika / 세리카） 感到惊讶。",
+        "extraction_run_id": 37
+      },
+      {
+        "id": 1798,
+        "source_key": "04_主线原作台词/01_本地主线章节/主线剧情_第1篇_対策委員会編_第1章.txt",
+        "text": "カヨコ（佳代子 / Kayoko / 카요코） 透露，为了雇佣袭击任务的人员，他们几乎花光了所有钱，アル（爱露 / Aru / 아루） 声称这都在她的预料之内。",
+        "extraction_run_id": 37
+      },
+      {
+        "id": 1799,
+        "source_key": "04_主线原作台词/01_本地主线章节/主线剧情_第1篇_対策委員会編_第1章.txt",
+        "text": "アル（爱露 / Aru / 아루） 承诺任务成功后请大家吃寿喜烧以鼓舞士气，ハルカ（春香 / Haruka / 하루카） 对此感到既敬畏又惶恐。",
+        "extraction_run_id": 37
+      },
+      {
+        "id": 1802,
+        "source_key": "04_主线原作台词/01_本地主线章节/主线剧情_第1篇_対策委員会編_第1章.txt",
+        "text": "アル（爱露 / Aru / 아루） 声称作为一家了不起公司的员工，理应享受这样的奢侈，并纠正了 ムツキ（睦月 / Mutsuki / 무츠키） 对其“阿尔酱”的称呼，坚持要被称为“社长”。",
+        "extraction_run_id": 37
+      },
+      {
+        "id": 1804,
+        "source_key": "04_主线原作台词/01_本地主线章节/主线剧情_第1篇_対策委員会編_第1章.txt",
+        "text": "ムツキ（睦月 / Mutsuki / 무츠키） 和 アル（爱露 / Aru / 아루） 决定接受这份意外之喜并开始享用，ムツキ（睦月 / Mutsuki / 무츠키） 称赞了拉面的品质。",
+        "extraction_run_id": 37
+      },
+      {
+        "id": 1807,
+        "source_key": "04_主线原作台词/01_本地主线章节/主线剧情_第1篇_対策委員会編_第1章.txt",
+        "text": "カヨコ（佳代子 / Kayoko / 카요코） 和 ムツキ（睦月 / Mutsuki / 무츠키） 私下注意到了邻桌学生的制服，ムツキ（睦月 / Mutsuki / 무츠키） 觉得有趣并决定暂时不告诉似乎未察觉的 アル（爱露 / Aru / 아루）。",
+        "extraction_run_id": 37
+      }
+    ],
+    "edges": [
+      {
+        "id": 19760,
+        "from_type": "episode",
+        "from_id": 7063,
+        "to_type": "concept",
+        "to_id": 1096,
+        "relation_text": "该 Episode 涉及概念“爱露”",
+        "generation": 0,
+        "audit_status": "not_required"
+      },
+      {
+        "id": 19957,
+        "from_type": "episode",
+        "from_id": 7128,
+        "to_type": "concept",
+        "to_id": 1096,
+        "relation_text": "该 Episode 涉及概念“爱露”",
+        "generation": 0,
+        "audit_status": "not_required"
+      },
+      {
+        "id": 19974,
+        "from_type": "episode",
+        "from_id": 7131,
+        "to_type": "concept",
+        "to_id": 1096,
+        "relation_text": "该 Episode 涉及概念“爱露”",
+        "generation": 0,
+        "audit_status": "not_required"
+      },
+      {
+        "id": 19980,
+        "from_type": "episode",
+        "from_id": 7132,
+        "to_type": "concept",
+        "to_id": 1096,
+        "relation_text": "该 Episode 涉及概念“爱露”",
+        "generation": 0,
+        "audit_status": "not_required"
+      },
+      {
+        "id": 20038,
+        "from_type": "episode",
+        "from_id": 7147,
+        "to_type": "concept",
+        "to_id": 1096,
+        "relation_text": "该 Episode 涉及概念“爱露”",
+        "generation": 0,
+        "audit_status": "not_required"
+      },
+      {
+        "id": 20046,
+        "from_type": "episode",
+        "from_id": 7148,
+        "to_type": "concept",
+        "to_id": 1096,
+        "relation_text": "该 Episode 涉及概念“爱露”",
+        "generation": 0,
+        "audit_status": "not_required"
+      },
+      {
+        "id": 32259,
+        "from_type": "episode",
+        "from_id": 10778,
+        "to_type": "concept",
+        "to_id": 1096,
+        "relation_text": "该 Episode 涉及概念“爱露”",
+        "generation": 0,
+        "audit_status": "not_required"
+      },
+      {
+        "id": 32273,
+        "from_type": "episode",
+        "from_id": 10781,
+        "to_type": "concept",
+        "to_id": 1096,
+        "relation_text": "该 Episode 涉及概念“爱露”",
+        "generation": 0,
+        "audit_status": "not_required"
+      },
+      {
+        "id": 32284,
+        "from_type": "episode",
+        "from_id": 10783,
+        "to_type": "concept",
+        "to_id": 1096,
+        "relation_text": "该 Episode 涉及概念“爱露”",
+        "generation": 0,
+        "audit_status": "not_required"
+      },
+      {
+        "id": 32399,
+        "from_type": "episode",
+        "from_id": 10814,
+        "to_type": "concept",
+        "to_id": 1096,
+        "relation_text": "该 Episode 涉及概念“爱露”",
+        "generation": 0,
+        "audit_status": "not_required"
+      },
+      {
+        "id": 32401,
+        "from_type": "episode",
+        "from_id": 10815,
+        "to_type": "concept",
+        "to_id": 1096,
+        "relation_text": "该 Episode 涉及概念“爱露”",
+        "generation": 0,
+        "audit_status": "not_required"
+      },
+      {
+        "id": 32405,
+        "from_type": "episode",
+        "from_id": 10816,
+        "to_type": "concept",
+        "to_id": 1096,
+        "relation_text": "该 Episode 涉及概念“爱露”",
+        "generation": 0,
+        "audit_status": "not_required"
+      }
+    ]
+  },
+  "凯撒": {
+    "episode_count": 113,
+    "episodes": [
+      {
+        "id": 17,
+        "source_key": "01_世界观与组织/02_学院与势力事实.txt",
+        "text": "瓦尔基里警察学校承担联邦直辖区的常规警务，但组织能力和装备受到现实限制。凯撒集团是横跨金融、军工与安保领域的大型企业集团，多次利用债务、武装力量和政治勾结干涉学园事务。",
+        "extraction_run_id": 2
+      },
+      {
+        "id": 20,
+        "source_key": "01_世界观与组织/03_组织与人物关系百科.txt",
+        "text": "常用称呼：对策委员会,阿拜多斯对策委员会,対策委員会,Abydos Countermeasures Council。\n所属或相关阵营：阿拜多斯高中。\n对策委员会是阿拜多斯高中现存学生共同维持学校的核心组织。已收录成员为小鸟游星野、砂狼白子、黑见芹香、十六夜野宫和奥空绫音。她们共同面对学校债务、沙漠化、土地与凯撒集团相关危机；不能把阿拜多斯的存续或决策归结为任何一名成员单独完成。",
+        "extraction_run_id": 3
+      },
+      {
+        "id": 32,
+        "source_key": "01_世界观与组织/03_组织与人物关系百科.txt",
+        "text": "常用称呼：特异现象搜查部,特异现象调查部,特殊现象搜查部,特異現象特務部,特異現象捜査部,Special Phenomenon Investigation Department。\n所属或相关阵营：千年科学学园。\n特异现象搜查部负责调查异常现象。当前语料明确收录明星日鞠与和泉元艾米所属该部；她们从凯撒集团在阿拜多斯沙漠的活动、千年废墟与各地先知战斗记录调查德卡格拉马顿。该部与游戏开发部、研讨会和C&C在不同危机中协作，但德卡格拉马顿及其先知不是数秘会成员。",
+        "extraction_run_id": 3
+      },
+      {
+        "id": 62,
+        "source_key": "02_角色百科/02_核心角色百科与别名.txt",
+        "text": "常用称呼：十六夜野宫,野宫,十六夜ノノミ,ノノミ,Nonomi。\n所属或相关阵营：阿拜多斯,对策委员会。\n十六夜野宫是阿拜多斯对策委员会成员之一，在学校债务、土地与凯撒集团相关危机中与同伴共同行动。她属于维持五人共同体的重要成员；阿拜多斯的解决方式不是让某一人独自牺牲，而是五名成员继续共同面对债务与学校未来。",
+        "extraction_run_id": 5
+      },
+      {
+        "id": 63,
+        "source_key": "02_角色百科/02_核心角色百科与别名.txt",
+        "text": "常用称呼：奥空绫音,绫音,奥空アヤネ,アヤネ,Ayane。\n所属或相关阵营：阿拜多斯,对策委员会。\n奥空绫音是阿拜多斯对策委员会成员，最初向老师发出求助并参与维系学校的行动。她与其他四名成员共同面对债务、沙漠化与凯撒集团的威胁。回答阿拜多斯主线时，应把她视作对策委员会共同决策的一员，而非仅作为传递任务的配角。",
+        "extraction_run_id": 5
+      },
+      {
+        "id": 94,
+        "source_key": "02_角色百科/03_常用角色百科补充.txt",
+        "text": "常用称呼：不知火花耶,花耶,不知火カヤ,カヤ,Kaya。\n所属或相关阵营：联邦学生会,SRT相关。\n不知火花耶是联邦学生会防卫室长，不是高地人铁道学园的朝雾素羽。Vol.4第二章中，她与凯撒集团合作发动政变，并借助FOX小队控制联邦学生会；政变失败后受到拘押。她对高效秩序的追求不能被写成已经成功解决基沃托斯复杂问题。",
+        "extraction_run_id": 6
+      },
+      {
+        "id": 95,
+        "source_key": "02_角色百科/03_常用角色百科补充.txt",
+        "text": "常用称呼：空井咲,咲,空井サキ,サキ,Saki。\n所属或相关阵营：SRT,RABBIT小队。\n空井咲是SRT特殊学园RABBIT小队成员。SRT被关闭后，她与宫子、美游、萌绘共同拒绝接受处置并在公园抗议，随后在老师协助下处理生存、治安与凯撒相关问题。RABBIT小队仍保留对SRT理念的认同。",
+        "extraction_run_id": 6
+      },
+      {
+        "id": 110,
+        "source_key": "02_角色百科/04_阿拜多斯_圣三一与百鬼夜行.txt",
+        "text": "常用称呼：十六夜野宫,野宫,十六夜ノノミ,ノノミ,Nonomi。\n所属或相关阵营：阿拜多斯,对策委员会。\n野宫是对策委员会五人共同体的一员，在债务、土地和凯撒集团相关危机中与同伴行动。回答她与阿拜多斯的关系时，应强调五人共同维持学校，而不是把解决学校存续的问题归因于单一成员。",
+        "extraction_run_id": 8
+      },
+      {
+        "id": 114,
+        "source_key": "02_角色百科/04_阿拜多斯_圣三一与百鬼夜行.txt",
+        "text": "常用称呼：凯撒集团,凯撒,カイザーコーポレーション,カイザー,Kaiser Corporation,Kaiser。\n所属或相关阵营：企业势力,阿拜多斯相关。\n凯撒集团与针对阿拜多斯的资金、土地和武装行动相关。对策委员会通过追查资金流向与地下银行资料确认其介入；黑服也借凯撒集团的力量推进对阿拜多斯和星野的研究。凯撒集团并不等同于数秘会。",
+        "extraction_run_id": 8
+      },
+      {
+        "id": 115,
+        "source_key": "02_角色百科/04_阿拜多斯_圣三一与百鬼夜行.txt",
+        "text": "常用称呼：地下生活者,地下人,アンダーグラウンド・ドウェラー,Underground Dweller。\n所属或相关阵营：阿拜多斯相关异常势力。\n地下生活者在Vol.1第三章试图将阿拜多斯相关冲突变成受其规则控制的游戏，并利用星野对梦前辈的创伤和责任感推动她走向恐怖反转。它不是阿拜多斯学生，也不能与黑服、凯撒集团或白子Terror混为同一实体。",
+        "extraction_run_id": 8
+      },
+      {
+        "id": 247,
+        "source_key": "03_主线剧情事实/01_第一部/01_Vol1_对策委员会篇.txt",
+        "text": "对策委员会追查资金流向并袭击地下银行，从资料中确认凯撒集团与针对阿拜多斯的行动有关。黑服通过凯撒集团的力量推进自己对阿拜多斯和星野的研究。",
+        "extraction_run_id": 13
+      },
+      {
+        "id": 264,
+        "source_key": "03_主线剧情事实/01_第一部/04_Vol4_卡班诺的兔子篇.txt",
+        "text": "老师帮助RABBIT小队解决食物、居住和治安问题，并在行动中逐渐取得小队信任。调查揭示瓦尔基里内部人员与凯撒集团合作，利用治安名义推进不当行动。RABBIT小队坚持自己的正义观，阻止相关计划。",
+        "extraction_run_id": 16
+      }
+    ],
+    "edges": [
+      {
+        "id": 71,
+        "from_type": "episode",
+        "from_id": 17,
+        "to_type": "concept",
+        "to_id": 67,
+        "relation_text": "该 Episode 涉及概念“凯撒集团”",
+        "generation": 0,
+        "audit_status": "not_required"
+      },
+      {
+        "id": 95,
+        "from_type": "episode",
+        "from_id": 20,
+        "to_type": "concept",
+        "to_id": 67,
+        "relation_text": "该 Episode 涉及概念“凯撒集团”",
+        "generation": 0,
+        "audit_status": "not_required"
+      },
+      {
+        "id": 462,
+        "from_type": "episode",
+        "from_id": 94,
+        "to_type": "concept",
+        "to_id": 67,
+        "relation_text": "该 Episode 涉及概念“凯撒集团”",
+        "generation": 0,
+        "audit_status": "not_required"
+      },
+      {
+        "id": 540,
+        "from_type": "episode",
+        "from_id": 110,
+        "to_type": "concept",
+        "to_id": 67,
+        "relation_text": "该 Episode 涉及概念“凯撒集团”",
+        "generation": 0,
+        "audit_status": "not_required"
+      },
+      {
+        "id": 554,
+        "from_type": "episode",
+        "from_id": 114,
+        "to_type": "concept",
+        "to_id": 67,
+        "relation_text": "该 Episode 涉及概念“凯撒集团”",
+        "generation": 0,
+        "audit_status": "not_required"
+      },
+      {
+        "id": 989,
+        "from_type": "episode",
+        "from_id": 247,
+        "to_type": "concept",
+        "to_id": 67,
+        "relation_text": "该 Episode 涉及概念“凯撒集团”",
+        "generation": 0,
+        "audit_status": "not_required"
+      },
+      {
+        "id": 1097,
+        "from_type": "episode",
+        "from_id": 264,
+        "to_type": "concept",
+        "to_id": 67,
+        "relation_text": "该 Episode 涉及概念“凯撒集团”",
+        "generation": 0,
+        "audit_status": "not_required"
+      },
+      {
+        "id": 1100,
+        "from_type": "episode",
+        "from_id": 265,
+        "to_type": "concept",
+        "to_id": 67,
+        "relation_text": "该 Episode 涉及概念“凯撒集团”",
+        "generation": 0,
+        "audit_status": "not_required"
+      },
+      {
+        "id": 1110,
+        "from_type": "episode",
+        "from_id": 267,
+        "to_type": "concept",
+        "to_id": 67,
+        "relation_text": "该 Episode 涉及概念“凯撒集团”",
+        "generation": 0,
+        "audit_status": "not_required"
+      },
+      {
+        "id": 1186,
+        "from_type": "episode",
+        "from_id": 283,
+        "to_type": "concept",
+        "to_id": 67,
+        "relation_text": "该 Episode 涉及概念“凯撒集团”",
+        "generation": 0,
+        "audit_status": "not_required"
+      },
+      {
+        "id": 2756,
+        "from_type": "episode",
+        "from_id": 819,
+        "to_type": "concept",
+        "to_id": 903,
+        "relation_text": "该 Episode 涉及概念“凯撒PMC”",
+        "generation": 0,
+        "audit_status": "not_required"
+      },
+      {
+        "id": 2763,
+        "from_type": "episode",
+        "from_id": 821,
+        "to_type": "concept",
+        "to_id": 904,
+        "relation_text": "该 Episode 涉及概念“凯撒的土地”",
+        "generation": 0,
+        "audit_status": "not_required"
+      }
+    ]
+  },
+  "巡航导弹": {
+    "episode_count": 5,
+    "episodes": [
+      {
+        "id": 3687,
+        "source_key": "04_主线原作台词/01_本地主线章节/主线剧情_第3篇_エデン条約編_第3章.txt",
+        "text": "サオリ（纱织 / Saori / 사오리）说明他们夺取了“伊甸条约”，通过向签约式会场发射巡航导弹清除碍事者，并扭曲了条约内容。",
+        "extraction_run_id": 45
+      },
+      {
+        "id": 3760,
+        "source_key": "04_主线原作台词/01_本地主线章节/主线剧情_第3篇_エデン条約編_第3章.txt",
+        "text": "ティーパーティー傘下の幹部 在 ハナコ（花子 / Hanako / 하나코） 试图以校规阻止宣战布告时，揭露其已掌握“尤斯蒂娜圣徒会”与西斯特胡德的关系及巡航导弹发射位置，随即下令逮捕 ハナコ（花子 / Hanako / 하나코），并宣布已拘束反对派分派，准备释放被囚禁者以发动全面战争。",
+        "extraction_run_id": 45
+      },
+      {
+        "id": 3899,
+        "source_key": "04_主线原作台词/01_本地主线章节/主线剧情_第3篇_エデン条約編_第4章.txt",
+        "text": "ミネ（峰 / Mine / 미네） 询问使三一防护系统失效的巡航导弹的分析进展，ナギサ（渚 / Nagisa / 나기사） 表示来源和结构不明，且非基沃托斯现有技术。",
+        "extraction_run_id": 46
+      },
+      {
+        "id": 3906,
+        "source_key": "04_主线原作台词/01_本地主线章节/主线剧情_第3篇_エデン条約編_第4章.txt",
+        "text": "サクラコ（樱子 / Sakurako / 사쿠라코） 指出，通过这次事件获得了一些线索，发现阿里乌斯学生的潜入路线都与地下墓穴有关，并且巡航导弹是从崔尼蒂内的遗迹地区发射的。",
+        "extraction_run_id": 46
+      },
+      {
+        "id": 4091,
+        "source_key": "04_主线原作台词/01_本地主线章节/主线剧情_第3篇_エデン条約編_第4章.txt",
+        "text": "ミサキ（美咲 / Misaki / 미사키）、ヒヨリ（日和 / Hiyori / 히요리）和サオリ（纱织 / Saori / 사오리）在探索时发现城市异常安静且充满陌生事物，ヒヨリ（日和 / Hiyori / 히요리）回忆起自治区逐渐增加的巡航导弹、神秘武器和未被质疑的“复制（Mimesis）”能力。",
+        "extraction_run_id": 46
+      }
+    ],
+    "edges": [
+      {
+        "id": 10353,
+        "from_type": "episode",
+        "from_id": 3687,
+        "to_type": "concept",
+        "to_id": 2450,
+        "relation_text": "该 Episode 涉及概念“巡航导弹”",
+        "generation": 0,
+        "audit_status": "not_required"
+      },
+      {
+        "id": 10920,
+        "from_type": "episode",
+        "from_id": 3899,
+        "to_type": "concept",
+        "to_id": 2450,
+        "relation_text": "该 Episode 涉及概念“巡航导弹”",
+        "generation": 0,
+        "audit_status": "not_required"
+      },
+      {
+        "id": 10940,
+        "from_type": "episode",
+        "from_id": 3906,
+        "to_type": "concept",
+        "to_id": 2450,
+        "relation_text": "该 Episode 涉及概念“巡航导弹”",
+        "generation": 0,
+        "audit_status": "not_required"
+      },
+      {
+        "id": 11467,
+        "from_type": "episode",
+        "from_id": 4091,
+        "to_type": "concept",
+        "to_id": 2450,
+        "relation_text": "该 Episode 涉及概念“巡航导弹”",
+        "generation": 0,
+        "audit_status": "not_required"
+      }
+    ]
+  },
+  "补课部": {
+    "episode_count": 28,
+    "episodes": [
+      {
+        "id": 11,
+        "source_key": "01_世界观与组织/02_学院与势力事实.txt",
+        "text": "圣三一综合学园由多个派系联合形成，茶会是其最高学生会组织。正义实现委员会负责治安，修女会与救护骑士团承担宗教、情报和救护等职能。补课部是Vol.3的重要核心团体。",
+        "extraction_run_id": 2
+      },
+      {
+        "id": 21,
+        "source_key": "01_世界观与组织/03_组织与人物关系百科.txt",
+        "text": "常用称呼：茶会,圣三一茶会,ティーパーティー,Tea Party。\n所属或相关阵营：圣三一综合学园。\n茶会是圣三一综合学园的最高学生会组织。当前语料明确收录的核心成员为圣园未花、桐藤渚和百合园圣娅。伊甸园条约危机中，茶会内部政治选择与圣三一、格黑娜和阿里乌斯之间的冲突相互牵连；不能将茶会、正义实现委员会或补课部视为同一组织。",
+        "extraction_run_id": 3
+      },
+      {
+        "id": 22,
+        "source_key": "01_世界观与组织/03_组织与人物关系百科.txt",
+        "text": "常用称呼：补课部,补习部,补课小组,补習授業部,Make-Up Work Club。\n所属或相关阵营：圣三一综合学园。\n补课部由阿慈谷日富美、白洲梓、浦和花子和下江小春组成。桐藤渚以特别考试为名组建该部，表面目标是避免成员退学，也与寻找潜在内鬼有关。四人在老师指导下建立信任，并在伊甸园条约危机中共同采取行动；梓曾来自阿里乌斯，但这一经历不使补课部成为阿里乌斯组织。",
+        "extraction_run_id": 3
+      },
+      {
+        "id": 50,
+        "source_key": "02_角色百科/01_核心角色事实.txt",
+        "text": "阿慈谷日富美、白洲梓、浦和花子和下江小春组成补课部。日富美在Vol.3的重要作用来自她对平凡青春和幸福结局的坚持；梓则需要在阿里乌斯灌输的价值观与新建立的友谊之间作出选择。",
+        "extraction_run_id": 4
+      },
+      {
+        "id": 65,
+        "source_key": "02_角色百科/02_核心角色百科与别名.txt",
+        "text": "常用称呼：阿慈谷日富美,日富美,阿慈谷ヒフミ,ヒフミ,Hifumi。\n所属或相关阵营：圣三一,补课部。\n阿慈谷日富美是补课部成员。她在Vol.3中的关键作用来自对平凡青春、同伴关系与幸福结局的坚持；这使她能够反驳把牺牲和虚无当作唯一答案的观念。她与梓、花子、小春共同构成补课部，不能把补课部的行动只归功于单一角色。",
+        "extraction_run_id": 5
+      },
+      {
+        "id": 66,
+        "source_key": "02_角色百科/02_核心角色百科与别名.txt",
+        "text": "常用称呼：白洲梓,梓,白洲アズサ,アズサ,Azusa。\n所属或相关阵营：圣三一,补课部,阿里乌斯。\n白洲梓原本来自阿里乌斯，曾承担破坏伊甸园条约的任务。与补课部相处后，她在阿里乌斯灌输的价值观与新建立的友谊之间作出选择。讨论梓时，应同时保留她曾执行过伤害性任务、受到极端教育影响，以及后来主动拒绝继续伤害同伴这三个层面。",
+        "extraction_run_id": 5
+      },
+      {
+        "id": 67,
+        "source_key": "02_角色百科/02_核心角色百科与别名.txt",
+        "text": "常用称呼：浦和花子,花子,浦和ハナコ,ハナコ,Hanako。\n所属或相关阵营：圣三一,补课部。\n浦和花子是补课部成员，与日富美、梓和小春一同经历特别考试、条约危机与后续行动。她属于补课部共同建立信任的过程，不能把她的角色定位简化为社区中的单一玩笑或将未收录的私人互动当作主线事实。",
+        "extraction_run_id": 5
+      },
+      {
+        "id": 68,
+        "source_key": "02_角色百科/02_核心角色百科与别名.txt",
+        "text": "常用称呼：下江小春,小春,下江コハル,コハル,Koharu。\n所属或相关阵营：圣三一,补课部。\n下江小春是补课部成员。她与日富美、梓、花子共同参加特别考试并在伊甸园条约危机中行动。知识库可依据主线讨论其与补课部的关系和参与事件，但未收录的好感剧情、告白或私人细节应明确为未收录，而不能补写。",
+        "extraction_run_id": 5
+      },
+      {
+        "id": 92,
+        "source_key": "02_角色百科/03_常用角色百科补充.txt",
+        "text": "常用称呼：桐藤渚,渚,桐藤ナギサ,ナギサ,Nagisa。\n所属或相关阵营：圣三一,茶会。\n桐藤渚是圣三一茶会的重要成员。Vol.3中，她组建补课部，表面上让成员参加特别考试，实际也与寻找潜在内鬼有关。她的选择与未花、圣娅以及条约危机相互关联，不能只以“补课部的考官”概括其角色。",
+        "extraction_run_id": 6
+      },
+      {
+        "id": 116,
+        "source_key": "02_角色百科/04_阿拜多斯_圣三一与百鬼夜行.txt",
+        "text": "常用称呼：圣三一,圣三一综合学园,トリニティ,トリニティ総合学園,Trinity,Trinity General School。\n所属或相关阵营：圣三一。\n圣三一综合学园内部有茶会、正义实现委员会、补课部和救护骑士团等不同组织。Vol.3的伊甸园条约危机牵涉其内部政治选择、与格黑娜的关系及阿里乌斯的袭击；不能把圣三一视作立场绝对一致的单一行动者。",
+        "extraction_run_id": 8
+      },
+      {
+        "id": 118,
+        "source_key": "02_角色百科/04_阿拜多斯_圣三一与百鬼夜行.txt",
+        "text": "常用称呼：正义实现委员会,正实,正義実現委員会,Justice Task Force。\n所属或相关阵营：圣三一综合学园。\n正义实现委员会是圣三一负责治安的组织，与负责最高学生会事务的茶会职能不同。伊甸园条约遭袭时，圣三一学生需要在混乱中共同应对安全威胁；不能把正义实现委员会、茶会和补课部当作同一个组织。",
+        "extraction_run_id": 8
+      },
+      {
+        "id": 121,
+        "source_key": "02_角色百科/04_阿拜多斯_圣三一与百鬼夜行.txt",
+        "text": "常用称呼：桐藤渚,渚,桐藤ナギサ,ナギサ,Nagisa。\n所属或相关阵营：圣三一,茶会。\n渚以特别考试为名组建补课部，既有避免成员退学的表面目标，也与寻找潜在内鬼有关。谈论她时，应将这种谨慎与条约危机中的政治压力相联系，不能只将她简化为补课部的考官。",
+        "extraction_run_id": 8
+      }
+    ],
+    "edges": [
+      {
+        "id": 39,
+        "from_type": "episode",
+        "from_id": 11,
+        "to_type": "concept",
+        "to_id": 36,
+        "relation_text": "该 Episode 涉及概念“补课部”",
+        "generation": 0,
+        "audit_status": "not_required"
+      },
+      {
+        "id": 105,
+        "from_type": "episode",
+        "from_id": 22,
+        "to_type": "concept",
+        "to_id": 36,
+        "relation_text": "该 Episode 涉及概念“补课部”",
+        "generation": 0,
+        "audit_status": "not_required"
+      },
+      {
+        "id": 270,
+        "from_type": "episode",
+        "from_id": 50,
+        "to_type": "concept",
+        "to_id": 36,
+        "relation_text": "该 Episode 涉及概念“补课部”",
+        "generation": 0,
+        "audit_status": "not_required"
+      },
+      {
+        "id": 319,
+        "from_type": "episode",
+        "from_id": 65,
+        "to_type": "concept",
+        "to_id": 36,
+        "relation_text": "该 Episode 涉及概念“补课部”",
+        "generation": 0,
+        "audit_status": "not_required"
+      },
+      {
+        "id": 322,
+        "from_type": "episode",
+        "from_id": 66,
+        "to_type": "concept",
+        "to_id": 36,
+        "relation_text": "该 Episode 涉及概念“补课部”",
+        "generation": 0,
+        "audit_status": "not_required"
+      },
+      {
+        "id": 329,
+        "from_type": "episode",
+        "from_id": 67,
+        "to_type": "concept",
+        "to_id": 36,
+        "relation_text": "该 Episode 涉及概念“补课部”",
+        "generation": 0,
+        "audit_status": "not_required"
+      },
+      {
+        "id": 334,
+        "from_type": "episode",
+        "from_id": 68,
+        "to_type": "concept",
+        "to_id": 36,
+        "relation_text": "该 Episode 涉及概念“补课部”",
+        "generation": 0,
+        "audit_status": "not_required"
+      },
+      {
+        "id": 450,
+        "from_type": "episode",
+        "from_id": 92,
+        "to_type": "concept",
+        "to_id": 36,
+        "relation_text": "该 Episode 涉及概念“补课部”",
+        "generation": 0,
+        "audit_status": "not_required"
+      },
+      {
+        "id": 578,
+        "from_type": "episode",
+        "from_id": 126,
+        "to_type": "concept",
+        "to_id": 36,
+        "relation_text": "该 Episode 涉及概念“补课部”",
+        "generation": 0,
+        "audit_status": "not_required"
+      },
+      {
+        "id": 1053,
+        "from_type": "episode",
+        "from_id": 257,
+        "to_type": "concept",
+        "to_id": 36,
+        "relation_text": "该 Episode 涉及概念“补课部”",
+        "generation": 0,
+        "audit_status": "not_required"
+      },
+      {
+        "id": 1070,
+        "from_type": "episode",
+        "from_id": 260,
+        "to_type": "concept",
+        "to_id": 36,
+        "relation_text": "该 Episode 涉及概念“补课部”",
+        "generation": 0,
+        "audit_status": "not_required"
+      },
+      {
+        "id": 8882,
+        "from_type": "episode",
+        "from_id": 3110,
+        "to_type": "concept",
+        "to_id": 36,
+        "relation_text": "该 Episode 涉及概念“补课部”",
+        "generation": 0,
+        "audit_status": "not_required"
+      }
+    ]
+  },
+  "叛徒": {
+    "episode_count": 3,
+    "episodes": [
+      {
+        "id": 3427,
+        "source_key": "04_主线原作台词/01_本地主线章节/主线剧情_第3篇_エデン条約編_第2章.txt",
+        "text": "ナギサ（渚 / Nagisa / 나기사） 向 先生（老师 / Sensei / 선생님） 询问合宿期间是否有发现关于“三位一体叛徒”的线索，并直接询问其认为谁是叛徒。",
+        "extraction_run_id": 44
+      },
+      {
+        "id": 3487,
+        "source_key": "04_主线原作台词/01_本地主线章节/主线剧情_第3篇_エデン条約編_第2章.txt",
+        "text": "ナギサ（渚 / Nagisa / 나기사） 意识到 ハナコ（花子 / Hanako / 하나코） 和 アズサ（梓 / Azusa / 아즈사） 都是叛徒，但 ハナコ（花子 / Hanako / 하나코） 声称她们只是棋子，另有指挥官。",
+        "extraction_run_id": 44
+      },
+      {
+        "id": 3492,
+        "source_key": "04_主线原作台词/01_本地主线章节/主线剧情_第3篇_エデン条約編_第2章.txt",
+        "text": "ハナコ（花子 / Hanako / 하나코） 请 アズサ（梓 / Azusa / 아즈사） 负责诱导敌人，以便向“真正的叛徒”传递虚假信息，从而促使“阿里乌斯”加快袭击。",
+        "extraction_run_id": 44
+      }
+    ],
+    "edges": [
+      {
+        "id": 9623,
+        "from_type": "episode",
+        "from_id": 3427,
+        "to_type": "concept",
+        "to_id": 2310,
+        "relation_text": "该 Episode 涉及概念“三位一体叛徒”",
+        "generation": 0,
+        "audit_status": "not_required"
+      },
+      {
+        "id": 9854,
+        "from_type": "episode",
+        "from_id": 3487,
+        "to_type": "concept",
+        "to_id": 2365,
+        "relation_text": "该 Episode 涉及概念“叛徒”",
+        "generation": 0,
+        "audit_status": "not_required"
+      }
+    ]
+  },
+  "内鬼": {
+    "episode_count": 4,
+    "episodes": [
+      {
+        "id": 22,
+        "source_key": "01_世界观与组织/03_组织与人物关系百科.txt",
+        "text": "常用称呼：补课部,补习部,补课小组,补習授業部,Make-Up Work Club。\n所属或相关阵营：圣三一综合学园。\n补课部由阿慈谷日富美、白洲梓、浦和花子和下江小春组成。桐藤渚以特别考试为名组建该部，表面目标是避免成员退学，也与寻找潜在内鬼有关。四人在老师指导下建立信任，并在伊甸园条约危机中共同采取行动；梓曾来自阿里乌斯，但这一经历不使补课部成为阿里乌斯组织。",
+        "extraction_run_id": 3
+      },
+      {
+        "id": 92,
+        "source_key": "02_角色百科/03_常用角色百科补充.txt",
+        "text": "常用称呼：桐藤渚,渚,桐藤ナギサ,ナギサ,Nagisa。\n所属或相关阵营：圣三一,茶会。\n桐藤渚是圣三一茶会的重要成员。Vol.3中，她组建补课部，表面上让成员参加特别考试，实际也与寻找潜在内鬼有关。她的选择与未花、圣娅以及条约危机相互关联，不能只以“补课部的考官”概括其角色。",
+        "extraction_run_id": 6
+      },
+      {
+        "id": 121,
+        "source_key": "02_角色百科/04_阿拜多斯_圣三一与百鬼夜行.txt",
+        "text": "常用称呼：桐藤渚,渚,桐藤ナギサ,ナギサ,Nagisa。\n所属或相关阵营：圣三一,茶会。\n渚以特别考试为名组建补课部，既有避免成员退学的表面目标，也与寻找潜在内鬼有关。谈论她时，应将这种谨慎与条约危机中的政治压力相联系，不能只将她简化为补课部的考官。",
+        "extraction_run_id": 8
+      },
+      {
+        "id": 257,
+        "source_key": "03_主线剧情事实/01_第一部/03_Vol3_伊甸园条约篇.txt",
+        "text": "圣三一准备与格黑娜签署伊甸园条约。桐藤渚组建补课部，让日富美、梓、花子和小春参加特别考试。表面目标是避免成员退学，实际也与渚寻找潜在内鬼有关。",
+        "extraction_run_id": 15
+      }
+    ],
+    "edges": []
+  }
+}

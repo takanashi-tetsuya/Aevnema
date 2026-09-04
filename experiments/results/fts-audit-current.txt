@@ -1,0 +1,8 @@
+integrity ok
+episode_fts 13764
+paragraph_fts missing no such table: paragraph_fts
+concept_fts missing no such table: concept_fts
+association_fts missing no such table: association_fts
+delta episode 0
+delta err no such table: paragraph_fts
+delta err no such table: concept_fts

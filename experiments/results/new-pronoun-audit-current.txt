@@ -1,0 +1,244 @@
+new_empty_participants 137
+new_leading_pronoun 43
+[
+  {
+    "id": 12518,
+    "source_key": "06_好感原作台词/01_常规角色/好感剧情_セリカ.txt",
+    "segment_index": 21,
+    "text": "她随即慌乱地骂自己笨蛋。",
+    "participants_json": "[]",
+    "extraction_run_id": 141
+  },
+  {
+    "id": 12567,
+    "source_key": "06_好感原作台词/01_常规角色/好感剧情_セリナ.txt",
+    "segment_index": 9,
+    "text": "她准备更换膏药，承认触摸老师身体感到害羞，希望老师再次入睡。她提议通过抚摸帮助入睡，并提醒老师之前称赞过她手法温柔，因此不能拒绝。她引导老师放松，从额头到颈部轻轻抚摸。",
+    "participants_json": "[]",
+    "extraction_run_id": 142
+  },
+  {
+    "id": 12579,
+    "source_key": "06_好感原作台词/01_常规角色/好感剧情_セリナ.txt",
+    "segment_index": 15,
+    "text": "她立刻转移话题，否认自己在回避问题，并再次强调今后一有情况就要立刻叫她，要求老师绝对要遵守这个约定。治疗结束后，她准备离开。",
+    "participants_json": "[]",
+    "extraction_run_id": 142
+  },
+  {
+    "id": 12918,
+    "source_key": "06_好感原作台词/01_常规角色/好感剧情_ツルギ.txt",
+    "segment_index": 33,
+    "text": "她感叹老师很厉害，表示自己清爽多了，回想起来每件事都非常快乐，在这里有很多只有这里才能做的事情。",
+    "participants_json": "[]",
+    "extraction_run_id": 149
+  },
+  {
+    "id": 12938,
+    "source_key": "06_好感原作台词/01_常规角色/好感剧情_ツルギ.txt",
+    "segment_index": 45,
+    "text": "她开始介绍另一件物品时，注意到老师似乎走神了。",
+    "participants_json": "[]",
+    "extraction_run_id": 149
+  },
+  {
+    "id": 13058,
+    "source_key": "06_好感原作台词/01_常规角色/好感剧情_トモエ.txt",
+    "segment_index": 14,
+    "text": "她首先介绍这里是学园事务局，会长的一天从这里开始，会长到校后会先享用果酱红茶。",
+    "participants_json": "[]",
+    "extraction_run_id": 151
+  },
+  {
+    "id": 13108,
+    "source_key": "06_好感原作台词/01_常规角色/好感剧情_ナツ.txt",
+    "segment_index": 13,
+    "text": "她提议悠闲地度过时间，并提到有很多派和牛奶，邀请对方享用。",
+    "participants_json": "[]",
+    "extraction_run_id": 153
+  },
+  {
+    "id": 13155,
+    "source_key": "06_好感原作台词/01_常规角色/好感剧情_ネル.txt",
+    "segment_index": 23,
+    "text": "她最后表示，如果理由更有趣些就好了。",
+    "participants_json": "[]",
+    "extraction_run_id": 154
+  },
+  {
+    "id": 13211,
+    "source_key": "06_好感原作台词/01_常规角色/好感剧情_ノドカ.txt",
+    "segment_index": 11,
+    "text": "她本来想对着流星许愿，因为听说那样愿望一定会实现。她说，也许愿望正是因为不会实现才叫愿望。",
+    "participants_json": "[]",
+    "extraction_run_id": 156
+  },
+  {
+    "id": 13281,
+    "source_key": "06_好感原作台词/01_常规角色/好感剧情_ハスミ.txt",
+    "segment_index": 12,
+    "text": "她笑着说，到时候还请多多关照。",
+    "participants_json": "[]",
+    "extraction_run_id": 158
+  },
+  {
+    "id": 13291,
+    "source_key": "06_好感原作台词/01_常规角色/好感剧情_ハスミ.txt",
+    "segment_index": 19,
+    "text": "她最终同意尝一点点。品尝后，她惊呼因为一直吃减肥餐，突然的甜味让她很吃惊，感觉久违了。她表示无法再忍耐，并感叹仿佛重获新生，觉得非常美味。",
+    "participants_json": "[]",
+    "extraction_run_id": 158
+  },
+  {
+    "id": 13302,
+    "source_key": "06_好感原作台词/01_常规角色/好感剧情_ハスミ.txt",
+    "segment_index": 24,
+    "text": "她可以示范或纠正姿势，并希望老师将其视为一起运动的延伸，而非教练指导。她担心这是否是多管闲事。",
+    "participants_json": "[]",
+    "extraction_run_id": 158
+  },
+  {
+    "id": 13307,
+    "source_key": "06_好感原作台词/01_常规角色/好感剧情_ハスミ.txt",
+    "segment_index": 26,
+    "text": "她随即道歉，表示自己并非有约在先却不由自主地说了出来。当被问及是否原本就计划如此时，她有些支吾，随后笑着表示同意，并为此感谢老师。",
+    "participants_json": "[]",
+    "extraction_run_id": 158
+  },
+  {
+    "id": 13403,
+    "source_key": "06_好感原作台词/01_常规角色/好感剧情_ハナコ.txt",
+    "segment_index": 33,
+    "text": "她问老师，如果老师愿意，是否可以偶尔陪她进行这种无意义的谈话。",
+    "participants_json": "[]",
+    "extraction_run_id": 160
+  },
+  {
+    "id": 13406,
+    "source_key": "06_好感原作台词/01_常规角色/好感剧情_ハナコ.txt",
+    "segment_index": 33,
+    "text": "她问老师，如果老师愿意，是否可以偶尔陪她进行这种无意义的谈话。",
+    "participants_json": "[]",
+    "extraction_run_id": 160
+  },
+  {
+    "id": 13474,
+    "source_key": "06_好感原作台词/01_常规角色/好感剧情_ハルナ.txt",
+    "segment_index": 0,
+    "text": "她指出大家的应急处理已暂时完成。",
+    "participants_json": "[]",
+    "extraction_run_id": 162
+  },
+  {
+    "id": 13561,
+    "source_key": "06_好感原作台词/01_常规角色/好感剧情_ハレ.txt",
+    "segment_index": 10,
+    "text": "她坚称自己没有要求发送，并指责雅典娜3号未经允许做对方可能讨厌的事情是违反规则的。她命令紧急停止，并决定必须从头开始进行大修。",
+    "participants_json": "[]",
+    "extraction_run_id": 163
+  },
+  {
+    "id": 13722,
+    "source_key": "06_好感原作台词/01_常规角色/好感剧情_ヒビキ.txt",
+    "segment_index": 9,
+    "text": "她提到刚才的爆炸是试错的一部分。她今天想展示的是另一种全新的烟花概念——不是化学的，而是科学的，能够生成烟花，彻底颠覆传统烟花常识的机器，即全息投影仪。",
+    "participants_json": "[]",
+    "extraction_run_id": 166
+  },
+  {
+    "id": 13744,
+    "source_key": "06_好感原作台词/01_常规角色/好感剧情_ヒビキ.txt",
+    "segment_index": 20,
+    "text": "她总结说，对于睡不好的人，夜晚是痛苦难熬的时间。因此，她准备了两个试作品，第一个名为“气绝机器”。",
+    "participants_json": "[]",
+    "extraction_run_id": 166
+  },
+  {
+    "id": 13795,
+    "source_key": "06_好感原作台词/01_常规角色/好感剧情_ヒフミ.txt",
+    "segment_index": 11,
+    "text": "她提到因为自己看起来无忧无虑，所以常有朋友向她倾诉。今天也听了一位朋友的烦恼，但觉得自己除了倾听和附和之外无能为力。她为此一整天都心情低落，并感叹如果自己不是这么平凡、有能力解决问题就好了。",
+    "participants_json": "[]",
+    "extraction_run_id": 167
+  },
+  {
+    "id": 13858,
+    "source_key": "06_好感原作台词/01_常规角色/好感剧情_ヒヨリ.txt",
+    "segment_index": 0,
+    "text": "她根据杂志信息，来确认电杆送电箱里是否有插座。",
+    "participants_json": "[]",
+    "extraction_run_id": 169
+  },
+  {
+    "id": 13906,
+    "source_key": "06_好感原作台词/01_常规角色/好感剧情_フィーナ.txt",
+    "segment_index": 8,
+    "text": "她再次道歉，承诺以后不会再邀请老师看电影，并开始抽泣。",
+    "participants_json": "[]",
+    "extraction_run_id": 170
+  },
+  {
+    "id": 13942,
+    "source_key": "06_好感原作台词/01_常规角色/好感剧情_フウカ.txt",
+    "segment_index": 10,
+    "text": "她突然惊讶地反问“新妻”。",
+    "participants_json": "[]",
+    "extraction_run_id": 171
+  },
+  {
+    "id": 14012,
+    "source_key": "06_好感原作台词/01_常规角色/好感剧情_ホシノ.txt",
+    "segment_index": 9,
+    "text": "她感到有点害羞，将其归因于“夏天的魔力”或“无人岛的魔力”，并请求老师不要告诉别人，强调这是约定。",
+    "participants_json": "[]",
+    "extraction_run_id": 173
+  },
+  {
+    "id": 14050,
+    "source_key": "06_好感原作台词/01_常规角色/好感剧情_ホシノ.txt",
+    "segment_index": 28,
+    "text": "他买了很多纪念品，并且玩得很累，感觉回家能睡上24小时。",
+    "participants_json": "[]",
+    "extraction_run_id": 173
+  },
+  {
+    "id": 14130,
+    "source_key": "06_好感原作台词/01_常规角色/好感剧情_マリナ.txt",
+    "segment_index": 5,
+    "text": "她根据现场痕迹推断，间谍是从窗户潜入的，并且从脚印判断，间谍身高不足一米，体型非常矮小，很可能采用四肢行走的方式。",
+    "participants_json": "[]",
+    "extraction_run_id": 176
+  },
+  {
+    "id": 14144,
+    "source_key": "06_好感原作台词/01_常规角色/好感剧情_マリナ.txt",
+    "segment_index": 9,
+    "text": "她表达了对进一步肃清的恐惧。",
+    "participants_json": "[]",
+    "extraction_run_id": 176
+  },
+  {
+    "id": 14149,
+    "source_key": "06_好感原作台词/01_常规角色/好感剧情_マリナ.txt",
+    "segment_index": 11,
+    "text": "她随后质问对方，并强调自己是以红冬联邦学园下任学生会长为目标的人，不会安于平凡的职位。她承认打扫的时间很愉快，觉得兼任保安委员长和清扫部部长或许不错。但她指出，目前“清扫部部长”一职由切里诺会长兼任，她要想成为清扫部部长，可能又得发动一次政变。",
+    "participants_json": "[]",
+    "extraction_run_id": 176
+  },
+  {
+    "id": 14184,
+    "source_key": "06_好感原作台词/01_常规角色/好感剧情_マリー.txt",
+    "segment_index": 15,
+    "text": "她对此深表感谢，并希望未来有机会再次参加，相信届时自己的身手会更加敏捷。",
+    "participants_json": "[]",
+    "extraction_run_id": 177
+  },
+  {
+    "id": 14726,
+    "source_key": "06_好感原作台词/01_常规角色/好感剧情_メグ.txt",
+    "segment_index": 12,
+    "text": "她笑得太厉害，感觉又饿了。于是，她决定在饱腹的时候去建造温泉。她解释说，自己虽然因为想吃拉面当晚餐而溜出来，但其实工作还没完成。",
+    "participants_json": "[]",
+    "extraction_run_id": 189
+  }
+]

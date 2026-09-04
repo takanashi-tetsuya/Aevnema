@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+import hashlib
 import inspect
 import re
 from time import perf_counter
@@ -24,6 +25,8 @@ from src.memory.identity import PlatformIdentity
 from src.memory.growth import BackgroundGrowthWorker
 from src.memory.answer_consolidator import (
     derive_evidence_bridge_candidate,
+    derive_contextual_recall_candidates,
+    derive_contextual_utility_observations,
     inline_memory_prompt,
     split_inline_memory_response,
 )
@@ -634,6 +637,31 @@ class ConversationCoordinator:
                     ],
                     "knowledge_query": "",
                 }
+        # Contextual candidates are derived only after the visible answer has
+        # survived the guard.  They contain IDs and query references, never
+        # model-written claims; creative turns and guard rewrites therefore
+        # cannot contaminate shared lore.
+        if (
+            route.knowledge
+            and route.knowledge_write_policy != "none"
+            and not route.creative
+            and not guard_data.get("rewritten")
+            and not guard_data.get("emergency_fallback")
+        ):
+            contextual_candidates = derive_contextual_recall_candidates(
+                query,
+                memory.raw_result,
+            )
+            contextual_observations = derive_contextual_utility_observations(
+                memory.raw_result,
+                query_hash=hashlib.sha256(
+                    " ".join(query.casefold().split()).encode("utf-8")
+                ).hexdigest(),
+            )
+            if contextual_candidates:
+                consolidation["contextual_candidates"] = contextual_candidates
+            if contextual_observations:
+                consolidation["contextual_observations"] = contextual_observations
         guard_finished = perf_counter()
         generated_at = perf_counter()
         chat_reply: ChatReply

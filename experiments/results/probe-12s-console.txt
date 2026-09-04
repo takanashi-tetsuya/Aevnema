@@ -1,0 +1,12 @@
+{'recall_at_20': 0.0, 'mean_seconds': 6.672363545454545, 'max_seconds': 7.019888}
+shiroko_profile 6.800301 False [7725, 12223, 108, 12247, 12249] None
+shiroko_terror_difference 6.875834 False [7725, 60, 272, 48, 12247] None
+hoshino_yume_guilt 6.782598 False [250, 112, 115, 106, 107] None
+nagisa_makeup_club 6.871064 False [13070, 22, 121, 65, 13069] None
+kaiser_abydos 6.890062 False [114, 247, 115, 110, 106] None
+missing_shiroko_encounter 7.019888 None [12238, 12960, 12262, 12194, 13466] None
+private_password 6.716949 None [11309, 12960, 9215, 2695, 13466] None
+private_preference 6.789812 None [12042, 14134, 11000, 12016, 12009] None
+public_convention 6.661852 None [8712, 7195, 4306, 2569, 13441] None
+casual_greeting 5.943395 None [12943, 10621, 1441, 7488, 3421] None
+creative_messages 6.044244 None [12998, 12746, 13650, 8124, 13860] None

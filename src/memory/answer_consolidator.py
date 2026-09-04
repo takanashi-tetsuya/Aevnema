@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import asdict, dataclass, field
+import hashlib
 import json
 import re
 import unicodedata
@@ -65,6 +66,23 @@ class KnowledgeCandidate:
     confidence: float
     reason: str
     inference_type: str
+
+
+@dataclass(slots=True, frozen=True)
+class ContextualRecallCandidate:
+    """A local retrieval hint, never a factual or semantic claim."""
+
+    anchor_type: str
+    anchor_id: int
+    target_episode_id: int
+    context_query_id: str
+    need_query_id: str
+    slot_id: str = ""
+    source_request_hash: str = ""
+    reason: str = "recovered_missing_evidence"
+
+    def as_dict(self) -> dict[str, Any]:
+        return asdict(self)
 
 
 @dataclass(slots=True, frozen=True)
@@ -286,6 +304,206 @@ def derive_evidence_bridge_candidate(
         "reason": selection_reason,
         "inference_type": "evidence_bridge",
     }
+
+
+def _knowledge_trace(raw_result: dict[str, Any] | None) -> dict[str, Any]:
+    raw = raw_result if isinstance(raw_result, dict) else {}
+    domains = raw.get("domains") or {}
+    knowledge = domains.get("knowledge") if isinstance(domains, dict) else None
+    return knowledge if isinstance(knowledge, dict) else {}
+
+
+def _trace_slot_rows(knowledge: dict[str, Any]) -> list[dict[str, Any]]:
+    trace = knowledge.get("evidence_slot_trace") or {}
+    rows: list[dict[str, Any]] = []
+    if not isinstance(trace, dict):
+        return rows
+    deterministic = trace.get("deterministic") or {}
+    if isinstance(deterministic, dict):
+        for key in ("constraint_slots", "atomic_slots"):
+            values = deterministic.get(key) or []
+            if isinstance(values, list):
+                rows.extend(item for item in values if isinstance(item, dict))
+    values = trace.get("coverage_slots") or []
+    if isinstance(values, list):
+        rows.extend(item for item in values if isinstance(item, dict))
+    return rows
+
+
+def _slot_episode_ids(slot: dict[str, Any]) -> set[int]:
+    values: set[int] = set()
+    for raw in slot.get("episode_ids", []) if isinstance(slot, dict) else []:
+        try:
+            values.add(int(raw))
+        except (TypeError, ValueError):
+            continue
+    return values
+
+
+def _int_set(values: Any) -> set[int]:
+    """Best-effort conversion for retrieval receipts from older/partial runs.
+
+    Retrieval metadata is deliberately treated as untrusted input.  A malformed
+    row should reduce the set of usable candidates, not abort answer handling or
+    the background consolidation job.
+    """
+
+    if not isinstance(values, (list, tuple, set)):
+        return set()
+    result: set[int] = set()
+    for value in values:
+        try:
+            result.add(int(value))
+        except (TypeError, ValueError):
+            continue
+    return result
+
+
+def _int_list(values: Any) -> list[int]:
+    """Best-effort ordered conversion for paired receipt arrays."""
+
+    if not isinstance(values, (list, tuple, set)):
+        return []
+    result: list[int] = []
+    for value in values:
+        try:
+            result.append(int(value))
+        except (TypeError, ValueError):
+            continue
+    return result
+
+
+def derive_contextual_recall_candidates(
+    question: str,
+    raw_result: dict[str, Any] | None,
+    *,
+    max_candidates: int = 8,
+) -> list[dict[str, Any]]:
+    """Derive local double-key candidates from a finished evidence trace.
+
+    The function deliberately consumes only serializable retrieval metadata:
+    an independently retrieved base Episode, a newly selected direct Episode,
+    and a query/slot mapping.  It never reads the answer prose and never asks
+    a model to invent a relation.
+    """
+
+    knowledge = _knowledge_trace(raw_result)
+    contextual = knowledge.get("contextual_association") or {}
+    if not isinstance(contextual, dict) or not contextual.get("enabled"):
+        return []
+    base_ids = _int_set(contextual.get("base_episode_ids", []))
+    contextual_ids = _int_set(contextual.get("contextual_episode_ids", []))
+    if not base_ids:
+        return []
+    rows = [row for row in knowledge.get("evidence_episodes", []) if isinstance(row, dict)]
+    direct_ids: set[int] = set()
+    for row in rows:
+        try:
+            row_id = int(row["id"])
+            generation = int(row.get("generation", 0) or 0)
+        except (KeyError, TypeError, ValueError):
+            continue
+        if (
+            generation == 0
+            and str(row.get("evidence_origin", "")).casefold()
+            in {"source", "direct", "imported"}
+        ):
+            direct_ids.add(row_id)
+    target_ids = [value for value in direct_ids if value not in base_ids | contextual_ids]
+    if not target_ids:
+        return []
+    metadata = [item for item in contextual.get("query_vectors", []) if isinstance(item, dict)]
+    query_by_text = {
+        " ".join(str(item.get("text", "")).casefold().split()): item
+        for item in metadata
+        if str(item.get("text", "")).strip()
+    }
+    whole_id = str(contextual.get("context_query_id", ""))
+    if not whole_id:
+        return []
+    fallback_need = next(
+        (item for item in metadata if str(item.get("role", "")) != "whole"),
+        None,
+    )
+    candidates: list[ContextualRecallCandidate] = []
+    for target_id in target_ids:
+        matching_slot: dict[str, Any] | None = None
+        for slot in _trace_slot_rows(knowledge):
+            episode_ids = _slot_episode_ids(slot)
+            if target_id in episode_ids:
+                matching_slot = slot
+                break
+        slot_text = " ".join(str((matching_slot or {}).get("query", "")).split())
+        need = query_by_text.get(slot_text.casefold()) if slot_text else None
+        need = need or fallback_need
+        if not need or not str(need.get("query_id", "")).strip():
+            continue
+        anchor_id = next((value for value in sorted(base_ids) if value != target_id), None)
+        if anchor_id is None:
+            continue
+        candidates.append(
+            ContextualRecallCandidate(
+                anchor_type="episode",
+                anchor_id=anchor_id,
+                target_episode_id=target_id,
+                context_query_id=whole_id,
+                need_query_id=str(need["query_id"]),
+                slot_id=slot_text[:180],
+                source_request_hash=hashlib.sha256(
+                    " ".join(str(question).split()).encode("utf-8")
+                ).hexdigest(),
+            )
+        )
+        if len(candidates) >= max(0, int(max_candidates)):
+            break
+    return [item.as_dict() for item in candidates]
+
+
+def derive_contextual_utility_observations(
+    raw_result: dict[str, Any] | None,
+    *,
+    query_hash: str,
+) -> list[dict[str, Any]]:
+    """Produce a conservative local Treatment/Masked observation receipt."""
+
+    knowledge = _knowledge_trace(raw_result)
+    contextual = knowledge.get("contextual_association") or {}
+    if not isinstance(contextual, dict) or not contextual.get("enabled"):
+        return []
+    edges = _int_list(contextual.get("attached_edges", []))
+    targets = _int_list(contextual.get("attached_episode_ids", []))
+    selected = _int_set(knowledge.get("episode_ids", []))
+    base = _int_set(contextual.get("base_episode_ids", []))
+    slots = _trace_slot_rows(knowledge)
+    observations: list[dict[str, Any]] = []
+    for edge_id, target_id in zip(edges, targets):
+        treatment_slots = [
+            str(slot.get("query", ""))[:180]
+            for slot in slots
+            if target_id in _slot_episode_ids(slot)
+        ]
+        # A target not selected cannot have provided an answer-slot gain.  A
+        # selected target that introduces a slot is sufficient; otherwise the
+        # conservative outcome is redundant/no-op, never a success.
+        base_slot_count = sum(
+            1
+            for slot in slots
+            if base.intersection(_slot_episode_ids(slot))
+        )
+        outcome = "no_op"
+        if target_id in selected and treatment_slots:
+            outcome = "sufficient" if len(treatment_slots) > base_slot_count else "redundant"
+        observations.append(
+            {
+                "association_id": edge_id,
+                "query_hash": str(query_hash),
+                "outcome": outcome,
+                "delta_slots": len(treatment_slots),
+                "treatment_episode_ids": [target_id],
+                "masked_episode_ids": sorted(base),
+            }
+        )
+    return observations
 
 
 def _knowledge_candidate_rejection_reason(

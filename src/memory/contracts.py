@@ -16,6 +16,9 @@ class RetrievedMemory:
     # Request-local normalized embedding used only by the semantic plan cache.
     # Keeping it outside ``raw_result`` avoids logs and prompt serialization.
     semantic_vector: Any | None = None
+    # Request-local whole/atomic vectors shared by contextual retrieval.  This
+    # field is intentionally excluded from raw_result/prompt serialization.
+    query_vector_bundle: Any | None = None
 
     @property
     def available(self) -> bool:
@@ -129,6 +132,10 @@ class RetrievalQuality:
     semantic_constraint_count: int
     sufficient: bool
     reasons: tuple[str, ...] = ()
+    contextual_candidate_count: int = 0
+    contextual_selected_count: int = 0
+    contextual_new_slot_count: int = 0
+    contextual_harm_count: int = 0
 
     def to_dict(self) -> dict[str, Any]:
         value = asdict(self)
@@ -329,6 +336,18 @@ def assess_retrieval_quality(
         semantic_constraint_count=len(semantic_constraints),
         sufficient=not reasons,
         reasons=tuple(reasons),
+        contextual_candidate_count=int(
+            (result.get("contextual_association") or {}).get("candidate_count", 0)
+        ),
+        contextual_selected_count=int(
+            (result.get("contextual_association") or {}).get("selected_count", 0)
+        ),
+        contextual_new_slot_count=int(
+            (result.get("contextual_association") or {}).get("new_slot_count", 0)
+        ),
+        contextual_harm_count=int(
+            (result.get("contextual_association") or {}).get("harm_count", 0)
+        ),
     )
 
 
@@ -347,6 +366,9 @@ def build_lore_fact_contract(
         item
         for item in (result.get("association_paths") or [])
         if isinstance(item, dict)
+        and str(item.get("association_mode", "")) != "contextual_recall"
+        and str(item.get("claim_level", "")) != "retrieval_only"
+        and str(item.get("relation_key", "")) != "contextual_recall"
     ]
     return {
         "version": "lore-fact-contract-v1",

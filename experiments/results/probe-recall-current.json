@@ -1,0 +1,170 @@
+{
+  "experiment": "probe-recall-v1",
+  "summary": {
+    "recall_at_20": 0.0,
+    "mean_seconds": 3.007287818181818,
+    "max_seconds": 3.010537
+  },
+  "cases": [
+    {
+      "name": "shiroko_profile",
+      "question": "那你记得白子的哪些事情呢？",
+      "expected": [
+        26,
+        38,
+        63,
+        150,
+        381
+      ],
+      "seconds": 3.007093,
+      "episode_ids": [],
+      "hit_at_20": false,
+      "matched": [],
+      "quality": {},
+      "timings": {},
+      "top_evidence": []
+    },
+    {
+      "name": "shiroko_terror_difference",
+      "question": "你还记得白子Terror和现在的白子有什么不同吗？",
+      "expected": [
+        80
+      ],
+      "seconds": 3.009517,
+      "episode_ids": [],
+      "hit_at_20": false,
+      "matched": [],
+      "quality": {},
+      "timings": {},
+      "top_evidence": []
+    },
+    {
+      "name": "hoshino_yume_guilt",
+      "question": "你还记得星野为什么一直对梦前辈的事情自责吗？",
+      "expected": [
+        25,
+        37,
+        154,
+        198
+      ],
+      "seconds": 3.005995,
+      "episode_ids": [],
+      "hit_at_20": false,
+      "matched": [],
+      "quality": {},
+      "timings": {},
+      "top_evidence": []
+    },
+    {
+      "name": "nagisa_makeup_club",
+      "question": "你记得渚为什么要组织补课部吗？",
+      "expected": [
+        101,
+        134,
+        163,
+        310
+      ],
+      "seconds": 3.010537,
+      "episode_ids": [],
+      "hit_at_20": false,
+      "matched": [],
+      "quality": {},
+      "timings": {},
+      "top_evidence": []
+    },
+    {
+      "name": "kaiser_abydos",
+      "question": "你还记得凯撒集团和阿拜多斯有什么纠葛吗？",
+      "expected": [
+        156,
+        195,
+        286
+      ],
+      "seconds": 3.004377,
+      "episode_ids": [],
+      "hit_at_20": false,
+      "matched": [],
+      "quality": {},
+      "timings": {},
+      "top_evidence": []
+    },
+    {
+      "name": "missing_shiroko_encounter",
+      "question": "你还记得为师当时怎么和白子相遇的吗？",
+      "expected": [],
+      "expected_missing": true,
+      "seconds": 3.002262,
+      "episode_ids": [],
+      "hit_at_20": null,
+      "matched": [],
+      "quality": {},
+      "timings": {},
+      "top_evidence": []
+    },
+    {
+      "name": "private_password",
+      "question": "你还记得我们的暗号吗？",
+      "expected": [],
+      "non_knowledge": true,
+      "seconds": 3.00787,
+      "episode_ids": [],
+      "hit_at_20": null,
+      "matched": [],
+      "quality": {},
+      "timings": {},
+      "top_evidence": []
+    },
+    {
+      "name": "private_preference",
+      "question": "我以前说过自己喜欢什么饮料？",
+      "expected": [],
+      "non_knowledge": true,
+      "seconds": 3.009672,
+      "episode_ids": [],
+      "hit_at_20": null,
+      "matched": [],
+      "quality": {},
+      "timings": {},
+      "top_evidence": []
+    },
+    {
+      "name": "public_convention",
+      "question": "所有用户都通用的安全约定是什么？",
+      "expected": [],
+      "non_knowledge": true,
+      "seconds": 3.008581,
+      "episode_ids": [],
+      "hit_at_20": null,
+      "matched": [],
+      "quality": {},
+      "timings": {},
+      "top_evidence": []
+    },
+    {
+      "name": "casual_greeting",
+      "question": "早上好。",
+      "expected": [],
+      "non_knowledge": true,
+      "seconds": 3.010097,
+      "episode_ids": [],
+      "hit_at_20": null,
+      "matched": [],
+      "quality": {},
+      "timings": {},
+      "top_evidence": []
+    },
+    {
+      "name": "creative_messages",
+      "question": "有哪些学生刚刚给为师发消息了？",
+      "expected": [],
+      "creative": true,
+      "seconds": 3.004165,
+      "episode_ids": [],
+      "hit_at_20": null,
+      "matched": [],
+      "quality": {},
+      "timings": {},
+      "top_evidence": []
+    }
+  ]
+}

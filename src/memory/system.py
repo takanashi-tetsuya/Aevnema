@@ -110,6 +110,7 @@ class MemorySystem:
         *,
         domain_requests: dict[str, DomainRecallRequest] | None = None,
         query_embeddings_override: dict[str, Any] | None = None,
+        query_vector_bundle: Any | None = None,
     ) -> RetrievedMemory:
         selected = route or route_memory_query(question)
         requests = domain_requests or {}
@@ -119,6 +120,24 @@ class MemorySystem:
         private_question = private_request.query if private_request else question
         public_question = public_request.query if public_request else question
         knowledge_question = knowledge_request.query if knowledge_request else question
+        if (
+            query_vector_bundle is None
+            and getattr(getattr(self, "config", None), "contextual_association_enabled", False)
+        ):
+            try:
+                query_vector_bundle = await self.knowledge.embed_query_bundle(
+                    [
+                        ("whole", question),
+                        ("atomic", private_question),
+                        ("atomic", public_question),
+                        ("atomic", knowledge_question),
+                    ]
+                )
+            except Exception:
+                # Contextual association is an optional local lane.  A failed
+                # batch must degrade to ordinary retrieval without retries per
+                # edge or turning a good answer into a service error.
+                query_vector_bundle = None
         calls: list[tuple[str, Any]] = []
         if selected.user:
             calls.append(
@@ -130,6 +149,7 @@ class MemorySystem:
                         retrieval_intensity=selected.intensity,
                         auto_escalate=False,
                         query_embeddings_override=query_embeddings_override,
+                        query_vector_bundle=query_vector_bundle,
                     ),
                 )
             )
@@ -143,6 +163,7 @@ class MemorySystem:
                         retrieval_intensity=selected.intensity,
                         auto_escalate=False,
                         query_embeddings_override=query_embeddings_override,
+                        query_vector_bundle=query_vector_bundle,
                     ),
                 )
             )
@@ -156,6 +177,7 @@ class MemorySystem:
                         retrieval_intensity=selected.intensity,
                         auto_escalate=False,
                         query_embeddings_override=query_embeddings_override,
+                        query_vector_bundle=query_vector_bundle,
                     ),
                 )
             )
@@ -258,6 +280,7 @@ class MemorySystem:
                             context=deep_value.context,
                             raw_result=deep_raw,
                             domains=deep_value.domains,
+                            query_vector_bundle=deep_value.query_vector_bundle,
                         )
                     else:
                         fallback_raw = deepcopy(initial_raw)
@@ -267,6 +290,7 @@ class MemorySystem:
                             raw_result=fallback_raw,
                             error=initial_value.error,
                             domains=initial_value.domains,
+                            query_vector_bundle=initial_value.query_vector_bundle,
                         )
         contexts: list[str] = []
         errors: list[str] = []
@@ -321,6 +345,7 @@ class MemorySystem:
             error="; ".join(errors),
             domains=tuple(used_domains),
             semantic_vector=semantic_vector,
+            query_vector_bundle=query_vector_bundle,
         )
 
     async def grow(
@@ -332,6 +357,9 @@ class MemorySystem:
         user_question: str | None = None,
         knowledge_question: str | None = None,
         knowledge_candidates: list[dict[str, Any]] | None = None,
+        contextual_candidates: list[dict[str, Any]] | None = None,
+        contextual_observations: list[dict[str, Any]] | None = None,
+        query_vector_bundle: Any | None = None,
     ) -> dict[str, Any]:
         """Run expensive query-time Association growth outside the reply path.
 
@@ -375,10 +403,33 @@ class MemorySystem:
                             if knowledge_question is not None
                             else None
                         ),
+                        query_vector_bundle=query_vector_bundle,
                     ),
                 )
             )
-        if not calls:
+        # Contextual plasticity is a local, retrieval-only lane.  It may run
+        # even when no semantic knowledge candidate was authorized; it never
+        # calls the consolidator and never receives the assistant prose.
+        contextual_result: dict[str, Any] | None = None
+        contextual_utility: dict[str, Any] | None = None
+        if (
+            knowledge_writable
+            and self.config.contextual_association_enabled
+            and (
+                contextual_candidates
+                or contextual_observations
+            )
+        ):
+            if contextual_candidates:
+                contextual_result = await self.knowledge.apply_contextual_plasticity(
+                    contextual_candidates,
+                    query_vector_bundle,
+                )
+            if contextual_observations:
+                contextual_utility = await self.knowledge.record_contextual_utility(
+                    contextual_observations
+                )
+        if not calls and contextual_result is None and contextual_utility is None:
             return {
                 "question": question,
                 "domains": {},
@@ -398,6 +449,24 @@ class MemorySystem:
             },
             "domains": {},
         }
+        if contextual_result is not None or contextual_utility is not None:
+            result["contextual_plasticity"] = {
+                "candidates": contextual_result or {
+                    "enabled": True,
+                    "created": [],
+                    "rejected": [],
+                    "external_calls": 0,
+                },
+                "utility": contextual_utility or {
+                    "enabled": True,
+                    "updated": 0,
+                    "external_calls": 0,
+                },
+            }
+            if (contextual_result or {}).get("created") or (
+                contextual_utility or {}
+            ).get("updated"):
+                await self.knowledge.refresh_graph_state()
         for (domain, _call), recalled in zip(calls, values, strict=True):
             raw = recalled.raw_result or {}
             result["domains"][domain] = {

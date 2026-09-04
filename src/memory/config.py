@@ -189,6 +189,24 @@ class MemoryServiceConfig:
     association_cue_fast_path_enabled: bool = False
     association_cue_fast_path_min_similarity: float = 0.62
     association_cue_fast_path_min_margin: float = 0.08
+    contextual_association_enabled: bool = False
+    contextual_association_shadow: bool = True
+    contextual_context_top_k: int = 8
+    contextual_need_top_k: int = 8
+    contextual_edge_top_k: int = 16
+    contextual_context_threshold: float = 0.55
+    contextual_need_threshold: float = 0.55
+    contextual_combine_mode: str = "product"
+    contextual_endpoint_limit_light: int = 1
+    contextual_endpoint_limit_standard: int = 2
+    contextual_endpoint_limit_deep: int = 4
+    contextual_max_candidates_per_turn: int = 8
+    contextual_probation_limit: int = 10_000
+    contextual_probation_ttl: int = 2_592_000
+    contextual_min_distinct_successes: int = 2
+    contextual_noop_decay: float = 0.98
+    contextual_harm_multiplier: float = 0.5
+    contextual_association_allow_network: bool = False
     association_cue_fast_path_min_confidence: float = 0.72
     recall_cache_size: int = 0
     query_embedding_cache_size: int = 512
@@ -298,6 +316,61 @@ class MemoryServiceConfig:
                     ),
                 ),
             ),
+            contextual_association_enabled=_env_bool(
+                "MEMORY_CONTEXTUAL_ASSOCIATION_ENABLED", False
+            ),
+            contextual_association_shadow=_env_bool(
+                "MEMORY_CONTEXTUAL_ASSOCIATION_SHADOW", True
+            ),
+            contextual_context_top_k=max(
+                1, int(os.getenv("MEMORY_CONTEXTUAL_ASSOCIATION_CONTEXT_TOP_K", "8"))
+            ),
+            contextual_need_top_k=max(
+                1, int(os.getenv("MEMORY_CONTEXTUAL_ASSOCIATION_NEED_TOP_K", "8"))
+            ),
+            contextual_edge_top_k=max(
+                1, int(os.getenv("MEMORY_CONTEXTUAL_ASSOCIATION_EDGE_TOP_K", "16"))
+            ),
+            contextual_context_threshold=float(
+                os.getenv("MEMORY_CONTEXTUAL_ASSOCIATION_CONTEXT_THRESHOLD", "0.55")
+            ),
+            contextual_need_threshold=float(
+                os.getenv("MEMORY_CONTEXTUAL_ASSOCIATION_NEED_THRESHOLD", "0.55")
+            ),
+            contextual_combine_mode=os.getenv(
+                "MEMORY_CONTEXTUAL_ASSOCIATION_COMBINE_MODE", "product"
+            ).strip().casefold(),
+            contextual_endpoint_limit_light=max(
+                1,
+                int(os.getenv("MEMORY_CONTEXTUAL_ASSOCIATION_ENDPOINT_LIMIT_LIGHT", "1")),
+            ),
+            contextual_endpoint_limit_standard=max(
+                1, int(os.getenv("MEMORY_CONTEXTUAL_ASSOCIATION_ENDPOINT_LIMIT_STANDARD", "2"))
+            ),
+            contextual_endpoint_limit_deep=max(
+                1, int(os.getenv("MEMORY_CONTEXTUAL_ASSOCIATION_ENDPOINT_LIMIT_DEEP", "4"))
+            ),
+            contextual_max_candidates_per_turn=max(
+                1, int(os.getenv("MEMORY_CONTEXTUAL_ASSOCIATION_MAX_CANDIDATES_PER_TURN", "8"))
+            ),
+            contextual_probation_limit=max(
+                0, int(os.getenv("MEMORY_CONTEXTUAL_ASSOCIATION_PROBATION_LIMIT", "10000"))
+            ),
+            contextual_probation_ttl=max(
+                0, int(os.getenv("MEMORY_CONTEXTUAL_ASSOCIATION_PROBATION_TTL", "2592000"))
+            ),
+            contextual_min_distinct_successes=max(
+                1, int(os.getenv("MEMORY_CONTEXTUAL_ASSOCIATION_MIN_DISTINCT_SUCCESSES", "2"))
+            ),
+            contextual_noop_decay=float(
+                os.getenv("MEMORY_CONTEXTUAL_ASSOCIATION_NOOP_DECAY", "0.98")
+            ),
+            contextual_harm_multiplier=float(
+                os.getenv("MEMORY_CONTEXTUAL_ASSOCIATION_HARM_MULTIPLIER", "0.5")
+            ),
+            contextual_association_allow_network=_env_bool(
+                "MEMORY_CONTEXTUAL_ASSOCIATION_ALLOW_NETWORK", False
+            ),
             recall_cache_size=max(0, int(os.getenv("MEMORY_RECALL_CACHE_SIZE", "0"))),
             query_embedding_cache_size=max(
                 0, int(os.getenv("MEMORY_QUERY_EMBEDDING_CACHE_SIZE", "512"))
@@ -336,6 +409,24 @@ class MemoryServiceConfig:
         ):
             raise ValueError(
                 "reranker_model is required when cross_encoder rerank is enabled"
+            )
+        if self.contextual_combine_mode not in {"product", "minimum", "geomean"}:
+            raise ValueError(
+                "contextual_combine_mode must be product, minimum, or geomean"
+            )
+        for value_name in (
+            "contextual_context_threshold",
+            "contextual_need_threshold",
+            "contextual_noop_decay",
+            "contextual_harm_multiplier",
+        ):
+            value = float(getattr(self, value_name))
+            if not 0.0 <= value <= 1.0:
+                raise ValueError(f"{value_name} must be between 0 and 1")
+        if self.contextual_association_allow_network:
+            raise ValueError(
+                "contextual association is local-only; "
+                "MEMORY_CONTEXTUAL_ASSOCIATION_ALLOW_NETWORK must be 0"
             )
 
 
@@ -381,6 +472,24 @@ class MemorySystemConfig:
     knowledge_growth_enabled: bool = True
     public_growth_enabled: bool = True
     user_growth_enabled: bool = True
+    contextual_association_enabled: bool = False
+    contextual_association_shadow: bool = True
+    contextual_context_top_k: int = 8
+    contextual_need_top_k: int = 8
+    contextual_edge_top_k: int = 16
+    contextual_context_threshold: float = 0.55
+    contextual_need_threshold: float = 0.55
+    contextual_combine_mode: str = "product"
+    contextual_endpoint_limit_light: int = 1
+    contextual_endpoint_limit_standard: int = 2
+    contextual_endpoint_limit_deep: int = 4
+    contextual_max_candidates_per_turn: int = 8
+    contextual_probation_limit: int = 10_000
+    contextual_probation_ttl: int = 2_592_000
+    contextual_min_distinct_successes: int = 2
+    contextual_noop_decay: float = 0.98
+    contextual_harm_multiplier: float = 0.5
+    contextual_association_allow_network: bool = False
 
     @classmethod
     def from_env(cls, project_root: str | Path) -> "MemorySystemConfig":
@@ -495,6 +604,61 @@ class MemorySystemConfig:
             knowledge_growth_enabled=_env_bool("KNOWLEDGE_MEMORY_GROWTH_ENABLED", True),
             public_growth_enabled=_env_bool("PUBLIC_MEMORY_GROWTH_ENABLED", True),
             user_growth_enabled=_env_bool("USER_MEMORY_GROWTH_ENABLED", True),
+            contextual_association_enabled=_env_bool(
+                "MEMORY_CONTEXTUAL_ASSOCIATION_ENABLED", False
+            ),
+            contextual_association_shadow=_env_bool(
+                "MEMORY_CONTEXTUAL_ASSOCIATION_SHADOW", True
+            ),
+            contextual_context_top_k=max(
+                1, int(os.getenv("MEMORY_CONTEXTUAL_ASSOCIATION_CONTEXT_TOP_K", "8"))
+            ),
+            contextual_need_top_k=max(
+                1, int(os.getenv("MEMORY_CONTEXTUAL_ASSOCIATION_NEED_TOP_K", "8"))
+            ),
+            contextual_edge_top_k=max(
+                1, int(os.getenv("MEMORY_CONTEXTUAL_ASSOCIATION_EDGE_TOP_K", "16"))
+            ),
+            contextual_context_threshold=float(
+                os.getenv("MEMORY_CONTEXTUAL_ASSOCIATION_CONTEXT_THRESHOLD", "0.55")
+            ),
+            contextual_need_threshold=float(
+                os.getenv("MEMORY_CONTEXTUAL_ASSOCIATION_NEED_THRESHOLD", "0.55")
+            ),
+            contextual_combine_mode=os.getenv(
+                "MEMORY_CONTEXTUAL_ASSOCIATION_COMBINE_MODE", "product"
+            ).strip().casefold(),
+            contextual_endpoint_limit_light=max(
+                1,
+                int(os.getenv("MEMORY_CONTEXTUAL_ASSOCIATION_ENDPOINT_LIMIT_LIGHT", "1")),
+            ),
+            contextual_endpoint_limit_standard=max(
+                1, int(os.getenv("MEMORY_CONTEXTUAL_ASSOCIATION_ENDPOINT_LIMIT_STANDARD", "2"))
+            ),
+            contextual_endpoint_limit_deep=max(
+                1, int(os.getenv("MEMORY_CONTEXTUAL_ASSOCIATION_ENDPOINT_LIMIT_DEEP", "4"))
+            ),
+            contextual_max_candidates_per_turn=max(
+                1, int(os.getenv("MEMORY_CONTEXTUAL_ASSOCIATION_MAX_CANDIDATES_PER_TURN", "8"))
+            ),
+            contextual_probation_limit=max(
+                0, int(os.getenv("MEMORY_CONTEXTUAL_ASSOCIATION_PROBATION_LIMIT", "10000"))
+            ),
+            contextual_probation_ttl=max(
+                0, int(os.getenv("MEMORY_CONTEXTUAL_ASSOCIATION_PROBATION_TTL", "2592000"))
+            ),
+            contextual_min_distinct_successes=max(
+                1, int(os.getenv("MEMORY_CONTEXTUAL_ASSOCIATION_MIN_DISTINCT_SUCCESSES", "2"))
+            ),
+            contextual_noop_decay=float(
+                os.getenv("MEMORY_CONTEXTUAL_ASSOCIATION_NOOP_DECAY", "0.98")
+            ),
+            contextual_harm_multiplier=float(
+                os.getenv("MEMORY_CONTEXTUAL_ASSOCIATION_HARM_MULTIPLIER", "0.5")
+            ),
+            contextual_association_allow_network=_env_bool(
+                "MEMORY_CONTEXTUAL_ASSOCIATION_ALLOW_NETWORK", False
+            ),
         )
 
     def domain_config(
@@ -628,6 +792,24 @@ class MemorySystemConfig:
                     ),
                 ),
             ),
+            contextual_association_enabled=self.contextual_association_enabled,
+            contextual_association_shadow=self.contextual_association_shadow,
+            contextual_context_top_k=self.contextual_context_top_k,
+            contextual_need_top_k=self.contextual_need_top_k,
+            contextual_edge_top_k=self.contextual_edge_top_k,
+            contextual_context_threshold=self.contextual_context_threshold,
+            contextual_need_threshold=self.contextual_need_threshold,
+            contextual_combine_mode=self.contextual_combine_mode,
+            contextual_endpoint_limit_light=self.contextual_endpoint_limit_light,
+            contextual_endpoint_limit_standard=self.contextual_endpoint_limit_standard,
+            contextual_endpoint_limit_deep=self.contextual_endpoint_limit_deep,
+            contextual_max_candidates_per_turn=self.contextual_max_candidates_per_turn,
+            contextual_probation_limit=self.contextual_probation_limit,
+            contextual_probation_ttl=self.contextual_probation_ttl,
+            contextual_min_distinct_successes=self.contextual_min_distinct_successes,
+            contextual_noop_decay=self.contextual_noop_decay,
+            contextual_harm_multiplier=self.contextual_harm_multiplier,
+            contextual_association_allow_network=self.contextual_association_allow_network,
             recall_cache_size=(0 if background else self.foreground_recall_cache_size),
             query_embedding_cache_size=(
                 0

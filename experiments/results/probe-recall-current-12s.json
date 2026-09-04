@@ -1,0 +1,1065 @@
+{
+  "experiment": "probe-recall-v1",
+  "summary": {
+    "recall_at_20": 0.0,
+    "mean_seconds": 6.672363545454545,
+    "max_seconds": 7.019888
+  },
+  "cases": [
+    {
+      "name": "shiroko_profile",
+      "question": "那你记得白子的哪些事情呢？",
+      "expected": [
+        26,
+        38,
+        63,
+        150,
+        381
+      ],
+      "seconds": 6.800301,
+      "episode_ids": [
+        7725,
+        12223,
+        108,
+        12247,
+        12249,
+        12263,
+        12194,
+        9277,
+        12204,
+        12250,
+        12254,
+        12252
+      ],
+      "hit_at_20": false,
+      "matched": [],
+      "quality": {
+        "entity_coverage": 1.0,
+        "claim_slot_coverage": 1.0,
+        "top_score": 0.99790609,
+        "score_margin": 0.04494924,
+        "source_diversity": 4,
+        "timeline_conflict": false,
+        "evidence_count": 12,
+        "entity_count": 0,
+        "claim_slot_count": 0,
+        "semantic_constraint_coverage": 1.0,
+        "semantic_constraint_count": 0,
+        "sufficient": true,
+        "reasons": []
+      },
+      "timings": {
+        "version": "query-stage-timing-v1",
+        "phases_seconds": {
+          "intent_parse": 3.1e-05,
+          "initial_embedding": 0.796847,
+          "initial_retrieval": 2.946356,
+          "initial_graph_expansion": 0.001533,
+          "followup_planning": 2e-06,
+          "followup_embedding": 0.0,
+          "followup_retrieval": 0.0,
+          "followup_graph_expansion": 0.0,
+          "source_cohort": 0.114941,
+          "evidence_preparation": 0.060403,
+          "evidence_rerank": 1e-05,
+          "association_growth": 7e-06,
+          "final_selection": 0.092607,
+          "growth_utility": 0.004661,
+          "answer_generation": 1e-06
+        },
+        "measured_seconds": 4.017399,
+        "unattributed_seconds": 2.765956,
+        "total_seconds": 6.783355,
+        "deadline_seconds": 12.0
+      },
+      "top_evidence": [
+        {
+          "id": 7725,
+          "source_key": "05_活动原作台词/01_常规活动/活动剧情_event_814.txt",
+          "text": "白子询问发生了什么。"
+        },
+        {
+          "id": 12223,
+          "source_key": "06_好感原作台词/01_常规角色/好感剧情_シロコ.txt",
+          "text": "老师可能觉得白子需要能量饮料和新毛巾，于是带来了这些。白子感谢了老师，并询问老师是否在担心自己。老师表示自己是白子的支持者。"
+        },
+        {
+          "id": 108,
+          "source_key": "02_角色百科/04_阿拜多斯_圣三一与百鬼夜行.txt",
+          "text": "常用称呼：砂狼白子,白子,砂狼シロコ,シロコ,Shiroko。 所属或相关阵营：阿拜多斯,对策委员会。 白子的表达通常简短而直接，面对问题时会先提出自己认为可执行的行动方案。运动、交通和银行是她在已收录剧情中的常见话题；她提出抢银行式方案是债务压力下的夸张角色表现，不能作为现实行为建议。"
+        },
+        {
+          "id": 12247,
+          "source_key": "06_好感原作台词/01_常规角色/好感剧情_シロコ.txt",
+          "text": "老师再次觉得白子可疑，继续跟踪。"
+        },
+        {
+          "id": 12249,
+          "source_key": "06_好感原作台词/01_常规角色/好感剧情_シロコ.txt",
+          "text": "老师出现并询问白子在做什么。"
+        },
+        {
+          "id": 12263,
+          "source_key": "06_好感原作台词/01_常规角色/好感剧情_シロコ.txt",
+          "text": "老师提到了之前自己倒下时的事情，并感谢白子救了他。白子表示那没什么大不了的，但很高兴。白子提到自己愿意为老师做任何事，但随后又说没什么。"
+        }
+      ]
+    },
+    {
+      "name": "shiroko_terror_difference",
+      "question": "你还记得白子Terror和现在的白子有什么不同吗？",
+      "expected": [
+        80
+      ],
+      "seconds": 6.875834,
+      "episode_ids": [
+        7725,
+        60,
+        272,
+        48,
+        12247,
+        14321,
+        12249,
+        271,
+        12222,
+        12250,
+        12232,
+        12252
+      ],
+      "hit_at_20": false,
+      "matched": [],
+      "quality": {
+        "entity_coverage": 1.0,
+        "claim_slot_coverage": 1.0,
+        "top_score": 0.99782171,
+        "score_margin": 0.03106318,
+        "source_diversity": 6,
+        "timeline_conflict": false,
+        "evidence_count": 12,
+        "entity_count": 0,
+        "claim_slot_count": 0,
+        "semantic_constraint_coverage": 1.0,
+        "semantic_constraint_count": 0,
+        "sufficient": true,
+        "reasons": []
+      },
+      "timings": {
+        "version": "query-stage-timing-v1",
+        "phases_seconds": {
+          "intent_parse": 0.000524,
+          "initial_embedding": 0.810774,
+          "initial_retrieval": 3.018336,
+          "initial_graph_expansion": 0.000115,
+          "followup_planning": 1e-06,
+          "followup_embedding": 0.0,
+          "followup_retrieval": 0.0,
+          "followup_graph_expansion": 0.0,
+          "source_cohort": 0.11933,
+          "evidence_preparation": 0.063559,
+          "evidence_rerank": 6e-06,
+          "association_growth": 3e-06,
+          "final_selection": 0.088253,
+          "growth_utility": 0.003972,
+          "answer_generation": 1e-06
+        },
+        "measured_seconds": 4.104874,
+        "unattributed_seconds": 2.758459,
+        "total_seconds": 6.863333,
+        "deadline_seconds": 12.0
+      },
+      "top_evidence": [
+        {
+          "id": 7725,
+          "source_key": "05_活动原作台词/01_常规活动/活动剧情_event_814.txt",
+          "text": "白子询问发生了什么。"
+        },
+        {
+          "id": 60,
+          "source_key": "02_角色百科/02_核心角色百科与别名.txt",
+          "text": "常用称呼：砂狼白子,白子,砂狼シロコ,シロコ,Shiroko,Shiroko Terror,白子Terror,黑子。 所属或相关阵营：阿拜多斯,对策委员会。 砂狼白子是阿拜多斯对策委员会成员，性格寡言、行动直接，喜爱运动，并会以抢银行等夸张方案表达解决债务的冲动。最终篇出现来自另一世界、经历神秘反转的白子Terror；白子与白子Terror不是同一经历和状态下的同一角色，回答时应区分当前世界白子与另一世界来客。"
+        },
+        {
+          "id": 272,
+          "source_key": "03_主线剧情事实/01_第一部/05_VolF_所有奇迹的起点.txt",
+          "text": "普雷纳帕特斯在最后把白子Terror托付给当前世界的老师。阿罗娜与普拉娜共同保护老师，老师和学生返回基沃托斯。白子Terror与普拉娜随后留在当前世界。"
+        },
+        {
+          "id": 48,
+          "source_key": "02_角色百科/01_核心角色事实.txt",
+          "text": "砂狼白子是阿拜多斯对策委员会成员，性格寡言而行动直接，喜欢运动，也经常提出抢银行等极端方案。最终篇出现了来自另一世界、经历神秘反转的白子Terror。"
+        },
+        {
+          "id": 12247,
+          "source_key": "06_好感原作台词/01_常规角色/好感剧情_シロコ.txt",
+          "text": "老师再次觉得白子可疑，继续跟踪。"
+        },
+        {
+          "id": 14321,
+          "source_key": "06_好感原作台词/01_常规角色/好感剧情_ミチル.txt",
+          "text": "Michiru被火或烟呛到，咳嗽起来。她哭喊着要重拍，但老师不同意。Michiru不解地问为什么不行。"
+        }
+      ]
+    },
+    {
+      "name": "hoshino_yume_guilt",
+      "question": "你还记得星野为什么一直对梦前辈的事情自责吗？",
+      "expected": [
+        25,
+        37,
+        154,
+        198
+      ],
+      "seconds": 6.782598,
+      "episode_ids": [
+        250,
+        112,
+        115,
+        106,
+        107,
+        108,
+        109,
+        110,
+        111,
+        113,
+        114,
+        116
+      ],
+      "hit_at_20": false,
+      "matched": [],
+      "quality": {
+        "entity_coverage": 1.0,
+        "claim_slot_coverage": 0.0,
+        "top_score": 0.99801615,
+        "score_margin": 0.00792416,
+        "source_diversity": 2,
+        "timeline_conflict": false,
+        "evidence_count": 12,
+        "entity_count": 0,
+        "claim_slot_count": 1,
+        "semantic_constraint_coverage": 1.0,
+        "semantic_constraint_count": 0,
+        "sufficient": false,
+        "reasons": [
+          "claim_slot_coverage_incomplete"
+        ]
+      },
+      "timings": {
+        "version": "query-stage-timing-v1",
+        "phases_seconds": {
+          "intent_parse": 5e-05,
+          "initial_embedding": 0.775346,
+          "initial_retrieval": 3.050721,
+          "initial_graph_expansion": 0.000111,
+          "followup_planning": 1e-06,
+          "followup_embedding": 0.0,
+          "followup_retrieval": 0.0,
+          "followup_graph_expansion": 0.0,
+          "source_cohort": 0.052236,
+          "evidence_preparation": 0.039005,
+          "evidence_rerank": 6e-06,
+          "association_growth": 4e-06,
+          "final_selection": 0.064858,
+          "growth_utility": 0.004418,
+          "answer_generation": 0.0
+        },
+        "measured_seconds": 3.986756,
+        "unattributed_seconds": 2.786049,
+        "total_seconds": 6.772805,
+        "deadline_seconds": 12.0
+      },
+      "top_evidence": [
+        {
+          "id": 250,
+          "source_key": "03_主线剧情事实/01_第一部/01_Vol1_对策委员会篇.txt",
+          "text": "第三章进一步揭示星野与梦前辈的过去。星野因未能阻止梦独自进入沙漠并死亡而长期自责。地下生活者利用她的创伤和责任感推动星野走向恐怖反转。日奈、白子Terror、老师与对策委员会等人参与阻止事态恶化。"
+        },
+        {
+          "id": 112,
+          "source_key": "02_角色百科/04_阿拜多斯_圣三一与百鬼夜行.txt",
+          "text": "常用称呼：梦前辈,梦,ユメ先輩,ユメ,Yume。 所属或相关阵营：阿拜多斯,对策委员会相关。 梦前辈是星野过去的重要同伴。她独自进入沙漠后死亡，成为星野长期自责与执着的根源之一；Vol.1第三章围绕其留下的记录、阿拜多斯过去和星野的创伤展开。正式剧情通常只以梦前辈称呼她，不能擅自补充未经确认的姓氏。"
+        },
+        {
+          "id": 115,
+          "source_key": "02_角色百科/04_阿拜多斯_圣三一与百鬼夜行.txt",
+          "text": "常用称呼：地下生活者,地下人,アンダーグラウンド・ドウェラー,Underground Dweller。 所属或相关阵营：阿拜多斯相关异常势力。 地下生活者在Vol.1第三章试图将阿拜多斯相关冲突变成受其规则控制的游戏，并利用星野对梦前辈的创伤和责任感推动她走向恐怖反转。它不是阿拜多斯学生，也不能与黑服、凯撒集团或白子Terror混为同一实体。"
+        },
+        {
+          "id": 106,
+          "source_key": "02_角色百科/04_阿拜多斯_圣三一与百鬼夜行.txt",
+          "text": "常用称呼：阿拜多斯,阿拜多斯高中,アビドス,アビドス高等学校,Abydos,Abydos High School。 所属或相关阵营：阿拜多斯。 阿拜多斯高中坐落于不断沙漠化的地区，因学生流失和巨额债务而濒临废校。对策委员会的五名学生是学校现存共同体的核心，她们没有通过一次行动消除债务，而是选择持续守护学校并共同面对之后的问题。"
+        },
+        {
+          "id": 107,
+          "source_key": "02_角色百科/04_阿拜多斯_圣三一与百鬼夜行.txt",
+          "text": "常用称呼：小鸟游星野,星野,小鳥遊ホシノ,ホシノ,Hoshino。 所属或相关阵营：阿拜多斯,对策委员会。 星野对日常谈话常使用轻松、慵懒的前辈姿态，也会以玩笑缓和紧张。涉及阿拜多斯的过去、梦前辈或后辈安全时，她倾向于独自承担责任；这应理解为人物的压力与自责，而不是她不需要同伴帮助的证明。"
+        },
+        {
+          "id": 108,
+          "source_key": "02_角色百科/04_阿拜多斯_圣三一与百鬼夜行.txt",
+          "text": "常用称呼：砂狼白子,白子,砂狼シロコ,シロコ,Shiroko。 所属或相关阵营：阿拜多斯,对策委员会。 白子的表达通常简短而直接，面对问题时会先提出自己认为可执行的行动方案。运动、交通和银行是她在已收录剧情中的常见话题；她提出抢银行式方案是债务压力下的夸张角色表现，不能作为现实行为建议。"
+        }
+      ]
+    },
+    {
+      "name": "nagisa_makeup_club",
+      "question": "你记得渚为什么要组织补课部吗？",
+      "expected": [
+        101,
+        134,
+        163,
+        310
+      ],
+      "seconds": 6.871064,
+      "episode_ids": [
+        13070,
+        22,
+        121,
+        65,
+        13069,
+        11,
+        92,
+        67,
+        68,
+        257,
+        50,
+        125
+      ],
+      "hit_at_20": false,
+      "matched": [],
+      "quality": {
+        "entity_coverage": 1.0,
+        "claim_slot_coverage": 0.0,
+        "top_score": 0.99827695,
+        "score_margin": 0.03906626,
+        "source_diversity": 8,
+        "timeline_conflict": false,
+        "evidence_count": 12,
+        "entity_count": 0,
+        "claim_slot_count": 1,
+        "semantic_constraint_coverage": 1.0,
+        "semantic_constraint_count": 0,
+        "sufficient": false,
+        "reasons": [
+          "claim_slot_coverage_incomplete"
+        ]
+      },
+      "timings": {
+        "version": "query-stage-timing-v1",
+        "phases_seconds": {
+          "intent_parse": 3.1e-05,
+          "initial_embedding": 0.982766,
+          "initial_retrieval": 2.925988,
+          "initial_graph_expansion": 8.6e-05,
+          "followup_planning": 1e-06,
+          "followup_embedding": 0.0,
+          "followup_retrieval": 0.0,
+          "followup_graph_expansion": 0.0,
+          "source_cohort": 0.045231,
+          "evidence_preparation": 0.061895,
+          "evidence_rerank": 5e-06,
+          "association_growth": 6e-06,
+          "final_selection": 0.086041,
+          "growth_utility": 0.004116,
+          "answer_generation": 0.0
+        },
+        "measured_seconds": 4.106166,
+        "unattributed_seconds": 2.754484,
+        "total_seconds": 6.86065,
+        "deadline_seconds": 12.0
+      },
+      "top_evidence": [
+        {
+          "id": 13070,
+          "source_key": "06_好感原作台词/01_常规角色/好感剧情_ナギサ.txt",
+          "text": "渚对老师的回应感到惊讶。"
+        },
+        {
+          "id": 22,
+          "source_key": "01_世界观与组织/03_组织与人物关系百科.txt",
+          "text": "常用称呼：补课部,补习部,补课小组,补習授業部,Make-Up Work Club。 所属或相关阵营：圣三一综合学园。 补课部由阿慈谷日富美、白洲梓、浦和花子和下江小春组成。桐藤渚以特别考试为名组建该部，表面目标是避免成员退学，也与寻找潜在内鬼有关。四人在老师指导下建立信任，并在伊甸园条约危机中共同采取行动；梓曾来自阿里乌斯，但这一经历不使补课部成为阿里乌斯组织。"
+        },
+        {
+          "id": 121,
+          "source_key": "02_角色百科/04_阿拜多斯_圣三一与百鬼夜行.txt",
+          "text": "常用称呼：桐藤渚,渚,桐藤ナギサ,ナギサ,Nagisa。 所属或相关阵营：圣三一,茶会。 渚以特别考试为名组建补课部，既有避免成员退学的表面目标，也与寻找潜在内鬼有关。谈论她时，应将这种谨慎与条约危机中的政治压力相联系，不能只将她简化为补课部的考官。"
+        },
+        {
+          "id": 65,
+          "source_key": "02_角色百科/02_核心角色百科与别名.txt",
+          "text": "常用称呼：阿慈谷日富美,日富美,阿慈谷ヒフミ,ヒフミ,Hifumi。 所属或相关阵营：圣三一,补课部。 阿慈谷日富美是补课部成员。她在Vol.3中的关键作用来自对平凡青春、同伴关系与幸福结局的坚持；这使她能够反驳把牺牲和虚无当作唯一答案的观念。她与梓、花子、小春共同构成补课部，不能把补课部的行动只归功于单一角色。"
+        },
+        {
+          "id": 13069,
+          "source_key": "06_好感原作台词/01_常规角色/好感剧情_ナギサ.txt",
+          "text": "渚准备了食物，老师表示会享用。"
+        },
+        {
+          "id": 11,
+          "source_key": "01_世界观与组织/02_学院与势力事实.txt",
+          "text": "圣三一综合学园由多个派系联合形成，茶会是其最高学生会组织。正义实现委员会负责治安，修女会与救护骑士团承担宗教、情报和救护等职能。补课部是Vol.3的重要核心团体。"
+        }
+      ]
+    },
+    {
+      "name": "kaiser_abydos",
+      "question": "你还记得凯撒集团和阿拜多斯有什么纠葛吗？",
+      "expected": [
+        156,
+        195,
+        286
+      ],
+      "seconds": 6.890062,
+      "episode_ids": [
+        114,
+        247,
+        115,
+        110,
+        106,
+        107,
+        108,
+        109,
+        111,
+        112,
+        113,
+        116
+      ],
+      "hit_at_20": false,
+      "matched": [],
+      "quality": {
+        "entity_coverage": 1.0,
+        "claim_slot_coverage": 1.0,
+        "top_score": 0.99809424,
+        "score_margin": 0.02672326,
+        "source_diversity": 2,
+        "timeline_conflict": false,
+        "evidence_count": 12,
+        "entity_count": 0,
+        "claim_slot_count": 0,
+        "semantic_constraint_coverage": 1.0,
+        "semantic_constraint_count": 0,
+        "sufficient": true,
+        "reasons": []
+      },
+      "timings": {
+        "version": "query-stage-timing-v1",
+        "phases_seconds": {
+          "intent_parse": 5.1e-05,
+          "initial_embedding": 0.998721,
+          "initial_retrieval": 2.946564,
+          "initial_graph_expansion": 0.000106,
+          "followup_planning": 2e-06,
+          "followup_embedding": 0.0,
+          "followup_retrieval": 0.0,
+          "followup_graph_expansion": 0.0,
+          "source_cohort": 0.054764,
+          "evidence_preparation": 0.039838,
+          "evidence_rerank": 8e-06,
+          "association_growth": 7e-06,
+          "final_selection": 0.065206,
+          "growth_utility": 0.00402,
+          "answer_generation": 1e-06
+        },
+        "measured_seconds": 4.109288,
+        "unattributed_seconds": 2.774822,
+        "total_seconds": 6.88411,
+        "deadline_seconds": 12.0
+      },
+      "top_evidence": [
+        {
+          "id": 114,
+          "source_key": "02_角色百科/04_阿拜多斯_圣三一与百鬼夜行.txt",
+          "text": "常用称呼：凯撒集团,凯撒,カイザーコーポレーション,カイザー,Kaiser Corporation,Kaiser。 所属或相关阵营：企业势力,阿拜多斯相关。 凯撒集团与针对阿拜多斯的资金、土地和武装行动相关。对策委员会通过追查资金流向与地下银行资料确认其介入；黑服也借凯撒集团的力量推进对阿拜多斯和星野的研究。凯撒集团并不等同于数秘会。"
+        },
+        {
+          "id": 247,
+          "source_key": "03_主线剧情事实/01_第一部/01_Vol1_对策委员会篇.txt",
+          "text": "对策委员会追查资金流向并袭击地下银行，从资料中确认凯撒集团与针对阿拜多斯的行动有关。黑服通过凯撒集团的力量推进自己对阿拜多斯和星野的研究。"
+        },
+        {
+          "id": 115,
+          "source_key": "02_角色百科/04_阿拜多斯_圣三一与百鬼夜行.txt",
+          "text": "常用称呼：地下生活者,地下人,アンダーグラウンド・ドウェラー,Underground Dweller。 所属或相关阵营：阿拜多斯相关异常势力。 地下生活者在Vol.1第三章试图将阿拜多斯相关冲突变成受其规则控制的游戏，并利用星野对梦前辈的创伤和责任感推动她走向恐怖反转。它不是阿拜多斯学生，也不能与黑服、凯撒集团或白子Terror混为同一实体。"
+        },
+        {
+          "id": 110,
+          "source_key": "02_角色百科/04_阿拜多斯_圣三一与百鬼夜行.txt",
+          "text": "常用称呼：十六夜野宫,野宫,十六夜ノノミ,ノノミ,Nonomi。 所属或相关阵营：阿拜多斯,对策委员会。 野宫是对策委员会五人共同体的一员，在债务、土地和凯撒集团相关危机中与同伴行动。回答她与阿拜多斯的关系时，应强调五人共同维持学校，而不是把解决学校存续的问题归因于单一成员。"
+        },
+        {
+          "id": 106,
+          "source_key": "02_角色百科/04_阿拜多斯_圣三一与百鬼夜行.txt",
+          "text": "常用称呼：阿拜多斯,阿拜多斯高中,アビドス,アビドス高等学校,Abydos,Abydos High School。 所属或相关阵营：阿拜多斯。 阿拜多斯高中坐落于不断沙漠化的地区，因学生流失和巨额债务而濒临废校。对策委员会的五名学生是学校现存共同体的核心，她们没有通过一次行动消除债务，而是选择持续守护学校并共同面对之后的问题。"
+        },
+        {
+          "id": 107,
+          "source_key": "02_角色百科/04_阿拜多斯_圣三一与百鬼夜行.txt",
+          "text": "常用称呼：小鸟游星野,星野,小鳥遊ホシノ,ホシノ,Hoshino。 所属或相关阵营：阿拜多斯,对策委员会。 星野对日常谈话常使用轻松、慵懒的前辈姿态，也会以玩笑缓和紧张。涉及阿拜多斯的过去、梦前辈或后辈安全时，她倾向于独自承担责任；这应理解为人物的压力与自责，而不是她不需要同伴帮助的证明。"
+        }
+      ]
+    },
+    {
+      "name": "missing_shiroko_encounter",
+      "question": "你还记得为师当时怎么和白子相遇的吗？",
+      "expected": [],
+      "expected_missing": true,
+      "seconds": 7.019888,
+      "episode_ids": [
+        12238,
+        12960,
+        12262,
+        12194,
+        13466,
+        12249,
+        12115,
+        312,
+        12241,
+        12236,
+        12250,
+        12265
+      ],
+      "hit_at_20": null,
+      "matched": [],
+      "quality": {
+        "entity_coverage": 1.0,
+        "claim_slot_coverage": 1.0,
+        "top_score": 0.99808801,
+        "score_margin": 0.35962987,
+        "source_diversity": 5,
+        "timeline_conflict": false,
+        "evidence_count": 12,
+        "entity_count": 0,
+        "claim_slot_count": 0,
+        "semantic_constraint_coverage": 1.0,
+        "semantic_constraint_count": 0,
+        "sufficient": true,
+        "reasons": []
+      },
+      "timings": {
+        "version": "query-stage-timing-v1",
+        "phases_seconds": {
+          "intent_parse": 5.1e-05,
+          "initial_embedding": 1.103155,
+          "initial_retrieval": 2.975267,
+          "initial_graph_expansion": 7.9e-05,
+          "followup_planning": 1e-06,
+          "followup_embedding": 0.0,
+          "followup_retrieval": 0.0,
+          "followup_graph_expansion": 0.0,
+          "source_cohort": 0.084771,
+          "evidence_preparation": 0.072075,
+          "evidence_rerank": 9e-06,
+          "association_growth": 7e-06,
+          "final_selection": 0.085309,
+          "growth_utility": 0.004511,
+          "answer_generation": 1e-06
+        },
+        "measured_seconds": 4.325236,
+        "unattributed_seconds": 2.685859,
+        "total_seconds": 7.011095,
+        "deadline_seconds": 12.0
+      },
+      "top_evidence": [
+        {
+          "id": 12238,
+          "source_key": "06_好感原作台词/01_常规角色/好感剧情_シロコ.txt",
+          "text": "白子刚到，正好遇见老师。"
+        },
+        {
+          "id": 12960,
+          "source_key": "06_好感原作台词/01_常规角色/好感剧情_トキ.txt",
+          "text": "トキ感谢老师这么说，并向老师道早安。老师表示早就预料到会是这种展开。トキ感谢老师还记得，并说今天也会辅佐老师一天，提议一起出发。"
+        },
+        {
+          "id": 12262,
+          "source_key": "06_好感原作台词/01_常规角色/好感剧情_シロコ.txt",
+          "text": "白子遇到了老师，并询问老师是否要去阿比多斯。白子表示自己也正要去学校，并认为这次相遇是偶然。老师提议一起走去学校。"
+        },
+        {
+          "id": 12194,
+          "source_key": "06_好感原作台词/01_常规角色/好感剧情_シロコ.txt",
+          "text": "白子注意到老师。"
+        },
+        {
+          "id": 13466,
+          "source_key": "06_好感原作台词/01_常规角色/好感剧情_ハルカ.txt",
+          "text": "先生不确定自己是否来对了地方。春香有些紧张地解释，这里是之前她试图送给先生、但不确定先生是否还记得的杂草等植物生长的地方。"
+        },
+        {
+          "id": 12249,
+          "source_key": "06_好感原作台词/01_常规角色/好感剧情_シロコ.txt",
+          "text": "老师出现并询问白子在做什么。"
+        }
+      ]
+    },
+    {
+      "name": "private_password",
+      "question": "你还记得我们的暗号吗？",
+      "expected": [],
+      "non_knowledge": true,
+      "seconds": 6.716949,
+      "episode_ids": [
+        11309,
+        12960,
+        9215,
+        2695,
+        13466,
+        7209,
+        14433,
+        11965,
+        312,
+        2107,
+        77,
+        1919
+      ],
+      "hit_at_20": null,
+      "matched": [],
+      "quality": {
+        "entity_coverage": 1.0,
+        "claim_slot_coverage": 1.0,
+        "top_score": 0.99748431,
+        "score_margin": 0.08863565,
+        "source_diversity": 12,
+        "timeline_conflict": false,
+        "evidence_count": 12,
+        "entity_count": 0,
+        "claim_slot_count": 0,
+        "semantic_constraint_coverage": 1.0,
+        "semantic_constraint_count": 0,
+        "sufficient": true,
+        "reasons": []
+      },
+      "timings": {
+        "version": "query-stage-timing-v1",
+        "phases_seconds": {
+          "intent_parse": 5.1e-05,
+          "initial_embedding": 0.759296,
+          "initial_retrieval": 3.023248,
+          "initial_graph_expansion": 0.000195,
+          "followup_planning": 2e-06,
+          "followup_embedding": 0.0,
+          "followup_retrieval": 0.0,
+          "followup_graph_expansion": 0.0,
+          "source_cohort": 0.01911,
+          "evidence_preparation": 0.063078,
+          "evidence_rerank": 6e-06,
+          "association_growth": 6e-06,
+          "final_selection": 0.09016,
+          "growth_utility": 0.004246,
+          "answer_generation": 0.0
+        },
+        "measured_seconds": 3.959398,
+        "unattributed_seconds": 2.747232,
+        "total_seconds": 6.70663,
+        "deadline_seconds": 12.0
+      },
+      "top_evidence": [
+        {
+          "id": 11309,
+          "source_key": "06_好感原作台词/01_常规角色/好感剧情_カスミ.txt",
+          "text": "……哈哈。开玩笑的，开玩笑。这点我还是知道的。"
+        },
+        {
+          "id": 12960,
+          "source_key": "06_好感原作台词/01_常规角色/好感剧情_トキ.txt",
+          "text": "トキ感谢老师这么说，并向老师道早安。老师表示早就预料到会是这种展开。トキ感谢老师还记得，并说今天也会辅佐老师一天，提议一起出发。"
+        },
+        {
+          "id": 9215,
+          "source_key": "05_活动原作台词/01_常规活动/活动剧情_event_828.txt",
+          "text": "花子笑着表示期待后续，并提醒对方记得今天的约定。"
+        },
+        {
+          "id": 2695,
+          "source_key": "04_主线原作台词/01_本地主线章节/主线剧情_第2篇_時計じかけの花のパヴァーヌ_第2章.txt",
+          "text": "アスナ（明日奈 / Asuna / 아스나） 感谢并再次提醒保密。"
+        },
+        {
+          "id": 13466,
+          "source_key": "06_好感原作台词/01_常规角色/好感剧情_ハルカ.txt",
+          "text": "先生不确定自己是否来对了地方。春香有些紧张地解释，这里是之前她试图送给先生、但不确定先生是否还记得的杂草等植物生长的地方。"
+        },
+        {
+          "id": 7209,
+          "source_key": "05_活动原作台词/01_常规活动/活动剧情_event_803.txt",
+          "text": "ヒフミ宣布接下来进行“スイカ割り”，但她忘记带西瓜了，不过海之家的店主以便宜的价格卖给了她们很多。アズサ确认这是普通的西瓜而不是暗号。マシロ提到需要棒子，ヒフミ承认也忘了带。"
+        }
+      ]
+    },
+    {
+      "name": "private_preference",
+      "question": "我以前说过自己喜欢什么饮料？",
+      "expected": [],
+      "non_knowledge": true,
+      "seconds": 6.789812,
+      "episode_ids": [
+        12042,
+        14134,
+        11000,
+        12016,
+        12009,
+        14394,
+        11428,
+        13543,
+        11432,
+        13388,
+        14443,
+        11615
+      ],
+      "hit_at_20": null,
+      "matched": [],
+      "quality": {
+        "entity_coverage": 1.0,
+        "claim_slot_coverage": 1.0,
+        "top_score": 0.99816471,
+        "score_margin": 0.10197735,
+        "source_diversity": 10,
+        "timeline_conflict": false,
+        "evidence_count": 12,
+        "entity_count": 0,
+        "claim_slot_count": 0,
+        "semantic_constraint_coverage": 1.0,
+        "semantic_constraint_count": 0,
+        "sufficient": true,
+        "reasons": []
+      },
+      "timings": {
+        "version": "query-stage-timing-v1",
+        "phases_seconds": {
+          "intent_parse": 4.7e-05,
+          "initial_embedding": 0.735835,
+          "initial_retrieval": 3.058642,
+          "initial_graph_expansion": 0.00012,
+          "followup_planning": 2e-06,
+          "followup_embedding": 0.0,
+          "followup_retrieval": 0.0,
+          "followup_graph_expansion": 0.0,
+          "source_cohort": 0.064623,
+          "evidence_preparation": 0.063494,
+          "evidence_rerank": 5e-06,
+          "association_growth": 5e-06,
+          "final_selection": 0.093586,
+          "growth_utility": 0.00532,
+          "answer_generation": 1e-06
+        },
+        "measured_seconds": 4.02168,
+        "unattributed_seconds": 2.758548,
+        "total_seconds": 6.780228,
+        "deadline_seconds": 12.0
+      },
+      "top_evidence": [
+        {
+          "id": 12042,
+          "source_key": "06_好感原作台词/01_常规角色/好感剧情_シズコ.txt",
+          "text": "老师要求再来一杯。"
+        },
+        {
+          "id": 14134,
+          "source_key": "06_好感原作台词/01_常规角色/好感剧情_マリナ.txt",
+          "text": "老师指出真里奈之前说过自己掌握了地理。"
+        },
+        {
+          "id": 11000,
+          "source_key": "06_好感原作台词/01_常规角色/好感剧情_イズミ.txt",
+          "text": "泉慌张地否认，说自己没有放水，而是真心想品尝特制饮料。"
+        },
+        {
+          "id": 12016,
+          "source_key": "06_好感原作台词/01_常规角色/好感剧情_シグレ.txt",
+          "text": "时雨问老师喜欢一个人洗澡还是和别人一起洗。老师问她为什么突然这么问。时雨说没什么特别的理由，只是她自己喜欢和别人一起洗澡，因为泡澡时聊天很开心。"
+        },
+        {
+          "id": 12009,
+          "source_key": "06_好感原作台词/01_常规角色/好感剧情_シグレ.txt",
+          "text": "风纪委员询问是否有缓解疲劳的饮品。时雨提供了“妖怪MAX水果味”能量饮料，并表示对于想快速恢复疲劳的客人，能量饮料比水果牛奶更合适。风纪委员虽然感到意外，但认为这正是自己需要的。"
+        },
+        {
+          "id": 14394,
+          "source_key": "06_好感原作台词/01_常规角色/好感剧情_ミネ.txt",
+          "text": "第三段是水果和提拉米苏。饮料可以选择咖啡或红茶。"
+        }
+      ]
+    },
+    {
+      "name": "public_convention",
+      "question": "所有用户都通用的安全约定是什么？",
+      "expected": [],
+      "non_knowledge": true,
+      "seconds": 6.661852,
+      "episode_ids": [
+        8712,
+        7195,
+        4306,
+        2569,
+        13441,
+        11773,
+        12778,
+        14708,
+        12768,
+        15165,
+        227,
+        4897
+      ],
+      "hit_at_20": null,
+      "matched": [],
+      "quality": {
+        "entity_coverage": 1.0,
+        "claim_slot_coverage": 1.0,
+        "top_score": 0.99748556,
+        "score_margin": 0.08299837,
+        "source_diversity": 11,
+        "timeline_conflict": false,
+        "evidence_count": 12,
+        "entity_count": 0,
+        "claim_slot_count": 0,
+        "semantic_constraint_coverage": 1.0,
+        "semantic_constraint_count": 0,
+        "sufficient": true,
+        "reasons": []
+      },
+      "timings": {
+        "version": "query-stage-timing-v1",
+        "phases_seconds": {
+          "intent_parse": 5.2e-05,
+          "initial_embedding": 0.688965,
+          "initial_retrieval": 3.038112,
+          "initial_graph_expansion": 0.000295,
+          "followup_planning": 2e-06,
+          "followup_embedding": 0.0,
+          "followup_retrieval": 0.0,
+          "followup_graph_expansion": 0.0,
+          "source_cohort": 0.019024,
+          "evidence_preparation": 0.065204,
+          "evidence_rerank": 6e-06,
+          "association_growth": 6e-06,
+          "final_selection": 0.091893,
+          "growth_utility": 0.00482,
+          "answer_generation": 1e-06
+        },
+        "measured_seconds": 3.90838,
+        "unattributed_seconds": 2.744262,
+        "total_seconds": 6.652642,
+        "deadline_seconds": 12.0
+      },
+      "top_evidence": [
+        {
+          "id": 8712,
+          "source_key": "05_活动原作台词/01_常规活动/活动剧情_event_825.txt",
+          "text": "时表示理解，并承诺会保守秘密。"
+        },
+        {
+          "id": 7195,
+          "source_key": "05_活动原作台词/01_常规活动/活动剧情_event_803.txt",
+          "text": "梓问日富美下一个任务是什么。日富美建议去“海之家”，认为只需拍摄普通用餐的场景即可，并提到海边食物美味，是经典乐趣之一。她事先调查过，得知无为滨有一家著名店铺，并找到了地点，随后打了招呼。"
+        },
+        {
+          "id": 4306,
+          "source_key": "04_主线原作台词/01_本地主线章节/主线剧情_第4篇_カルバノの兎編_第1章.txt",
+          "text": "ミヤコ（宫子 / Miyako / 미야코） 确认了大家的安全。"
+        },
+        {
+          "id": 2569,
+          "source_key": "04_主线原作台词/01_本地主线章节/主线剧情_第2篇_時計じかけの花のパヴァーヌ_第1章.txt",
+          "text": "アリス（爱丽丝 / Aris / 아리스） 同意并承诺保护老师和大家。"
+        },
+        {
+          "id": 13441,
+          "source_key": "06_好感原作台词/01_常规角色/好感剧情_ハルカ.txt",
+          "text": "春香说这件衣服也有优点，多亏它才能和老师来到这里，但随即又慌乱地收回这句话，表示自己并非随口乱说。她支吾着，最终绝望地表示还是去死算了，并为自己引起的骚动道歉。老师提到一个约定，春香询问是什么约定，并表示无论内容是什么都会遵守。"
+        },
+        {
+          "id": 11773,
+          "source_key": "06_好感原作台词/01_常规角色/好感剧情_コユキ.txt",
+          "text": "小雪说没人能阻止她，并提到老师又引入了新的安全系统，每次她来都会更新，虽然认可这份努力，但这拖延不了时间。她操作了系统，说这样秘密就会……变得明显。"
+        }
+      ]
+    },
+    {
+      "name": "casual_greeting",
+      "question": "早上好。",
+      "expected": [],
+      "non_knowledge": true,
+      "seconds": 5.943395,
+      "episode_ids": [
+        12943,
+        10621,
+        1441,
+        7488,
+        3421,
+        10110,
+        4334,
+        12215,
+        10751,
+        14580,
+        13221,
+        3226
+      ],
+      "hit_at_20": null,
+      "matched": [],
+      "quality": {
+        "entity_coverage": 1.0,
+        "claim_slot_coverage": 1.0,
+        "top_score": 0.99820511,
+        "score_margin": 0.41287372,
+        "source_diversity": 12,
+        "timeline_conflict": false,
+        "evidence_count": 12,
+        "entity_count": 0,
+        "claim_slot_count": 0,
+        "semantic_constraint_coverage": 1.0,
+        "semantic_constraint_count": 0,
+        "sufficient": true,
+        "reasons": []
+      },
+      "timings": {
+        "version": "query-stage-timing-v1",
+        "phases_seconds": {
+          "intent_parse": 4.7e-05,
+          "initial_embedding": 0.921043,
+          "initial_retrieval": 2.486705,
+          "initial_graph_expansion": 4.5e-05,
+          "followup_planning": 1e-06,
+          "followup_embedding": 0.0,
+          "followup_retrieval": 0.0,
+          "followup_graph_expansion": 0.0,
+          "source_cohort": 0.015762,
+          "evidence_preparation": 0.05789,
+          "evidence_rerank": 6e-06,
+          "association_growth": 7e-06,
+          "final_selection": 0.085048,
+          "growth_utility": 0.004139,
+          "answer_generation": 1e-06
+        },
+        "measured_seconds": 3.570694,
+        "unattributed_seconds": 2.363426,
+        "total_seconds": 5.93412,
+        "deadline_seconds": 12.0
+      },
+      "top_evidence": [
+        {
+          "id": 12943,
+          "source_key": "06_好感原作台词/01_常规角色/好感剧情_トキ.txt",
+          "text": "时向老师问好。"
+        },
+        {
+          "id": 10621,
+          "source_key": "06_好感原作台词/01_常规角色/好感剧情_アツコ.txt",
+          "text": "老师向亚津子打招呼，可能是“早上好”或“虽然已经是晚上了，早上好”。亚津子说问候很重要。老师同意，并问这里是哪里。"
+        },
+        {
+          "id": 1441,
+          "source_key": "04_主线原作台词/01_本地主线章节/主线剧情_最終編_第3章.txt",
+          "text": "先生（老师 / Sensei / 선생님） 向大家问好。"
+        },
+        {
+          "id": 7488,
+          "source_key": "05_活动原作台词/01_常规活动/活动剧情_event_813.txt",
+          "text": "イズナ向老师打招呼并说早上好。老师问候大家准备情况。イズナ和ツクヨ表示已准备好，ミチル说她吃了肠胃药。"
+        },
+        {
+          "id": 3421,
+          "source_key": "04_主线原作台词/01_本地主线章节/主线剧情_第3篇_エデン条約編_第2章.txt",
+          "text": "先生（老师 / Sensei / 선생님） 向大家道晚安。"
+        },
+        {
+          "id": 10110,
+          "source_key": "05_活动原作台词/03_节日活动与角色短篇/活动剧情_event_810_角色巧克力短篇.txt",
+          "text": "绿询问老师第二天早上是否有安排，得知老师早上有空后，请求在早上7点左右见面，并说详情会面时再谈。"
+        }
+      ]
+    },
+    {
+      "name": "creative_messages",
+      "question": "有哪些学生刚刚给为师发消息了？",
+      "expected": [],
+      "creative": true,
+      "seconds": 6.044244,
+      "episode_ids": [
+        12998,
+        12746,
+        13650,
+        8124,
+        13860,
+        13736,
+        11277,
+        12884,
+        4435,
+        7291,
+        3076,
+        15376
+      ],
+      "hit_at_20": null,
+      "matched": [],
+      "quality": {
+        "entity_coverage": 1.0,
+        "claim_slot_coverage": 1.0,
+        "top_score": 0.99827849,
+        "score_margin": 0.20857268,
+        "source_diversity": 12,
+        "timeline_conflict": false,
+        "evidence_count": 12,
+        "entity_count": 0,
+        "claim_slot_count": 0,
+        "semantic_constraint_coverage": 1.0,
+        "semantic_constraint_count": 0,
+        "sufficient": true,
+        "reasons": []
+      },
+      "timings": {
+        "version": "query-stage-timing-v1",
+        "phases_seconds": {
+          "intent_parse": 4.1e-05,
+          "initial_embedding": 0.938482,
+          "initial_retrieval": 2.582597,
+          "initial_graph_expansion": 0.000283,
+          "followup_planning": 1e-06,
+          "followup_embedding": 0.0,
+          "followup_retrieval": 0.0,
+          "followup_graph_expansion": 0.0,
+          "source_cohort": 0.016358,
+          "evidence_preparation": 0.059071,
+          "evidence_rerank": 8e-06,
+          "association_growth": 8e-06,
+          "final_selection": 0.08842,
+          "growth_utility": 0.004097,
+          "answer_generation": 0.0
+        },
+        "measured_seconds": 3.689366,
+        "unattributed_seconds": 2.344876,
+        "total_seconds": 6.034242,
+        "deadline_seconds": 12.0
+      },
+      "top_evidence": [
+        {
+          "id": 12998,
+          "source_key": "06_好感原作台词/01_常规角色/好感剧情_トキ.txt",
+          "text": "时回应了老师的呼唤。"
+        },
+        {
+          "id": 12746,
+          "source_key": "06_好感原作台词/01_常规角色/好感剧情_チナツ.txt",
+          "text": "千夏在保健室发现老师，询问老师为何在此，并提到自己曾发消息给老师，发现老师时老师头上有个大包且失去意识。千夏询问老师发生了什么，是否被袭击，以及失去意识前记得什么。"
+        },
+        {
+          "id": 13650,
+          "source_key": "06_好感原作台词/01_常规角色/好感剧情_ヒナタ.txt",
+          "text": "日向向老师打招呼，询问老师今天为什么来这里，并担心是不是因为自己发送的消息导致的。"
+        },
+        {
+          "id": 8124,
+          "source_key": "05_活动原作台词/01_常规活动/活动剧情_event_816.txt",
+          "text": "老师表示今天由他请客。"
+        },
+        {
+          "id": 13860,
+          "source_key": "06_好感原作台词/01_常规角色/好感剧情_ヒヨリ.txt",
+          "text": "日和追问原因，认为只是从偷来的东西中分一点，并抱怨自己连给手机充电都不被允许，人生很痛苦，手机没电就像自己的人生一样黑暗。她提到自己经常遇到电池耗尽的情况，甚至为了给老师发消息而到处找免费Wi-Fi。老师得知后感到惊讶。"
+        },
+        {
+          "id": 13736,
+          "source_key": "06_好感原作台词/01_常规角色/好感剧情_ヒビキ.txt",
+          "text": "响在等老师回来。"
+        }
+      ]
+    }
+  ]
+}

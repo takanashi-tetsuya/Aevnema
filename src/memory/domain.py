@@ -166,6 +166,53 @@ class AssociativeMemoryService:
         app_config.retrieval.association_cue_fast_path_min_margin = (
             self.config.association_cue_fast_path_min_margin
         )
+        app_config.retrieval.contextual_association_enabled = (
+            self.config.contextual_association_enabled
+        )
+        app_config.retrieval.contextual_association_shadow = (
+            self.config.contextual_association_shadow
+        )
+        app_config.retrieval.contextual_context_top_k = (
+            self.config.contextual_context_top_k
+        )
+        app_config.retrieval.contextual_need_top_k = (
+            self.config.contextual_need_top_k
+        )
+        app_config.retrieval.contextual_edge_top_k = (
+            self.config.contextual_edge_top_k
+        )
+        app_config.retrieval.contextual_context_threshold = (
+            self.config.contextual_context_threshold
+        )
+        app_config.retrieval.contextual_need_threshold = (
+            self.config.contextual_need_threshold
+        )
+        app_config.retrieval.contextual_combine_mode = (
+            self.config.contextual_combine_mode
+        )
+        app_config.retrieval.contextual_endpoint_limit_light = (
+            self.config.contextual_endpoint_limit_light
+        )
+        app_config.retrieval.contextual_endpoint_limit_standard = (
+            self.config.contextual_endpoint_limit_standard
+        )
+        app_config.retrieval.contextual_endpoint_limit_deep = (
+            self.config.contextual_endpoint_limit_deep
+        )
+        app_config.retrieval.contextual_max_candidates_per_turn = (
+            self.config.contextual_max_candidates_per_turn
+        )
+        app_config.retrieval.contextual_probation_limit = (
+            self.config.contextual_probation_limit
+        )
+        app_config.retrieval.contextual_probation_ttl = (
+            self.config.contextual_probation_ttl
+        )
+        app_config.retrieval.contextual_min_distinct_successes = (
+            self.config.contextual_min_distinct_successes
+        )
+        app_config.retrieval.contextual_noop_decay = self.config.contextual_noop_decay
+        app_config.retrieval.contextual_harm_multiplier = self.config.contextual_harm_multiplier
         app_config.ensure_directories()
         application = MemoryApplication(app_config)
         application.rebuild_indexes()
@@ -209,6 +256,15 @@ class AssociativeMemoryService:
         if not callable(embed):
             raise RuntimeError("memory engine does not expose query embeddings")
         return await asyncio.to_thread(embed, text.strip())
+
+    async def embed_query_bundle(self, texts):
+        """Create one request-level vector bundle through the engine."""
+        await self.initialize()
+        engine, _route = self._request_query_engine(self.retrieval_plan("light"))
+        embed_bundle = getattr(engine, "embed_query_bundle", None)
+        if not callable(embed_bundle):
+            raise RuntimeError("memory engine does not expose query bundles")
+        return await asyncio.to_thread(embed_bundle, texts)
 
     async def match_association_cue(self, text: str) -> dict[str, Any] | None:
         """Check the local audited-edge cue index without any cloud request."""
@@ -348,6 +404,7 @@ class AssociativeMemoryService:
         growth_persist_only_used_override: bool | None = None,
         growth_max_rounds_override: int | None = None,
         query_embeddings_override: dict[str, Any] | None = None,
+        query_vector_bundle: Any | None = None,
     ) -> RetrievedMemory:
         if request is not None:
             question = request.query
@@ -414,6 +471,7 @@ class AssociativeMemoryService:
                             if hasattr(value.semantic_vector, "copy")
                             else value.semantic_vector
                         ),
+                        query_vector_bundle=value.query_vector_bundle,
                     )
                 self._recall_cache.pop(cache_key, None)
             failed = (
@@ -443,6 +501,7 @@ class AssociativeMemoryService:
                             if hasattr(value.semantic_vector, "copy")
                             else value.semantic_vector
                         ),
+                        query_vector_bundle=value.query_vector_bundle,
                     )
                 self._recall_failure_cache.pop(cache_key, None)
             self.cache_misses += 1
@@ -513,6 +572,24 @@ class AssociativeMemoryService:
                         "query_embeddings_override", {}
                     )
                     existing_overrides.update(query_embeddings_override)
+                if query_vector_bundle is not None and _accepts_keyword(
+                    request_engine.query, "query_vector_bundle"
+                ):
+                    query_options["query_vector_bundle"] = query_vector_bundle
+                if (
+                    query_vector_bundle is not None
+                    and _accepts_keyword(
+                        request_engine.query, "contextual_endpoint_limit"
+                    )
+                ):
+                    endpoint_limits = {
+                        "light": self.config.contextual_endpoint_limit_light,
+                        "standard": self.config.contextual_endpoint_limit_standard,
+                        "deep": self.config.contextual_endpoint_limit_deep,
+                    }
+                    query_options["contextual_endpoint_limit"] = endpoint_limits[
+                        plan.preset
+                    ]
                 if (
                     not self.config.growth_enabled
                     and _accepts_keyword(request_engine.query, "deadline_seconds")
@@ -792,6 +869,7 @@ class AssociativeMemoryService:
                 semantic_vector=getattr(
                     request_engine, "last_query_embeddings", {}
                 ).get(question.strip()),
+                query_vector_bundle=query_vector_bundle,
             )
             self._recall_failure_cache.pop(cache_key, None)
             if self.config.recall_cache_size > 0 and not diagnostic_override:
@@ -804,6 +882,7 @@ class AssociativeMemoryService:
                         if hasattr(recalled.semantic_vector, "copy")
                         else recalled.semantic_vector
                     ),
+                    query_vector_bundle=recalled.query_vector_bundle,
                 )
                 self._recall_cache[cache_key] = (
                     monotonic(),
@@ -828,6 +907,7 @@ class AssociativeMemoryService:
                     request=request,
                     retrieval_plan=self.retrieval_plan("deep"),
                     auto_escalate=False,
+                    query_vector_bundle=query_vector_bundle,
                 )
                 escalation = {
                     "triggered": True,
@@ -849,6 +929,7 @@ class AssociativeMemoryService:
                         raw_result=final_raw,
                         domains=deep_result.domains,
                         semantic_vector=deep_result.semantic_vector,
+                        query_vector_bundle=deep_result.query_vector_bundle,
                     )
                     if self.config.recall_cache_size > 0:
                         self._recall_cache[cache_key] = (
@@ -862,6 +943,7 @@ class AssociativeMemoryService:
                                     if hasattr(final.semantic_vector, "copy")
                                     else final.semantic_vector
                                 ),
+                                query_vector_bundle=final.query_vector_bundle,
                             ),
                         )
                     return final
@@ -887,6 +969,7 @@ class AssociativeMemoryService:
                 },
                 domains=(self.config.domain,),
             )
+
         async with self._operation_lock:
             try:
                 outcome = await asyncio.to_thread(
@@ -943,6 +1026,128 @@ class AssociativeMemoryService:
                 },
                 domains=(self.config.domain,),
             )
+
+    async def apply_contextual_plasticity(
+        self,
+        candidates: list[dict[str, Any]] | None,
+        query_vector_bundle: Any | None,
+    ) -> dict[str, Any]:
+        """Persist retrieval-only double-key edges from local trace metadata."""
+
+        if not self.config.contextual_association_enabled or not candidates:
+            return {"enabled": False, "created": [], "rejected": [], "external_calls": 0}
+        if query_vector_bundle is None:
+            return {
+                "enabled": True,
+                "created": [],
+                "rejected": [{"reason": "query_vector_bundle_unavailable"}],
+                "external_calls": 0,
+            }
+        await self.initialize()
+        from memory_demo.types import ContextualRecallCandidate
+
+        query_items = tuple(getattr(query_vector_bundle, "queries", ()))
+        queries = {str(item.query_id): item for item in query_items}
+        whole = next((item for item in query_items if item.role == "whole"), None)
+        if whole is None:
+            whole = type(
+                "WholeQuery",
+                (),
+                {
+                    "query_id": "",
+                    "text_hash": "",
+                    "text": "",
+                    "vector": getattr(query_vector_bundle, "whole", None),
+                },
+            )()
+        created: list[int] = []
+        rejected: list[dict[str, Any]] = []
+        async with self._operation_lock:
+            for raw in list(candidates)[: self.config.contextual_max_candidates_per_turn]:
+                if not isinstance(raw, dict):
+                    continue
+                try:
+                    candidate = ContextualRecallCandidate(
+                        anchor_type=str(raw.get("anchor_type", "episode")),
+                        anchor_id=int(raw["anchor_id"]),
+                        target_episode_id=int(raw["target_episode_id"]),
+                        context_query_id=str(raw["context_query_id"]),
+                        need_query_id=str(raw["need_query_id"]),
+                        slot_id=str(raw.get("slot_id", "")),
+                        source_request_hash=str(raw.get("source_request_hash", "")),
+                        reason=str(raw.get("reason", "recovered_missing_evidence")),
+                    )
+                    need = queries.get(candidate.need_query_id)
+                    context = queries.get(candidate.context_query_id, whole)
+                    if need is None or getattr(context, "vector", None) is None:
+                        raise ValueError("query vector reference is unavailable")
+                    association_id = self._application.create_contextual_association(
+                        candidate,
+                        domain=self.config.domain,
+                        model_id=str(getattr(query_vector_bundle, "model_id", "")),
+                        context_vector=context.vector,
+                        need_vector=need.vector,
+                        context_text_hash=str(getattr(context, "text_hash", "")),
+                        need_text_hash=str(getattr(need, "text_hash", "")),
+                        context_display_text=str(getattr(context, "text", "")),
+                        need_display_text=str(getattr(need, "text", "")),
+                    )
+                    created.append(int(association_id))
+                except (KeyError, TypeError, ValueError, RuntimeError) as exc:
+                    rejected.append(
+                        {
+                            "target_episode_id": raw.get("target_episode_id"),
+                            "reason": f"{type(exc).__name__}: {exc}",
+                        }
+                    )
+            if created:
+                self._recall_cache.clear()
+                self._recall_failure_cache.clear()
+        return {
+            "enabled": True,
+            "created": list(dict.fromkeys(created)),
+            "rejected": rejected,
+            "external_calls": 0,
+        }
+
+    async def record_contextual_utility(
+        self, observations: list[dict[str, Any]] | None
+    ) -> dict[str, Any]:
+        """Apply local Treatment/Masked observations in one short transaction."""
+
+        if not self.config.contextual_association_enabled or not observations:
+            return {"enabled": False, "updated": 0, "external_calls": 0}
+        await self.initialize()
+        from memory_demo.types import ContextualUtilityObservation
+
+        normalized = []
+        for raw in observations:
+            if not isinstance(raw, dict):
+                continue
+            try:
+                normalized.append(
+                    ContextualUtilityObservation(
+                        association_id=int(raw["association_id"]),
+                        query_hash=str(raw.get("query_hash", "")),
+                        outcome=str(raw.get("outcome", "no_op")),
+                        delta_slots=int(raw.get("delta_slots", 0)),
+                        treatment_episode_ids=tuple(
+                            int(value) for value in raw.get("treatment_episode_ids", [])
+                        ),
+                        masked_episode_ids=tuple(
+                            int(value) for value in raw.get("masked_episode_ids", [])
+                        ),
+                    )
+                )
+            except (KeyError, TypeError, ValueError):
+                continue
+        if not normalized:
+            return {"enabled": True, "updated": 0, "external_calls": 0}
+        async with self._operation_lock:
+            result = self._application.associations.record_utility(normalized)
+            self._recall_cache.clear()
+            self._recall_failure_cache.clear()
+        return {"enabled": True, **dict(result), "external_calls": 0}
 
     async def import_file(self, path: str | Path, source_root: str | Path) -> dict:
         await self.initialize()

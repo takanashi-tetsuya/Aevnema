@@ -1,0 +1,18 @@
+sources 4017
+paragraphs 7019
+episodes 13764
+concepts 10675
+associations 42689
+claim_levels [{'claim_level': 'direct_fact', 'n': 42689}]
+generations [{'generation': 0, 'n': 42625}, {'generation': 1, 'n': 64}]
+audit_status [{'audit_status': 'not_required', 'n': 42689}]
+relation_types [{'relation_type': 'semantic', 'n': 42689}]
+polarity [{'polarity': 1, 'n': 42689}]
+empty_text 0
+empty_paragraph 0
+bad_lengths [('episode', 0), ('paragraph', 0), ('concept', 0)]
+orphan_episode_source 0
+orphan_paragraph_source 0
+source_min_max_avg <sqlite3.Row object at 0x7ebd2a979270>
+episode_min_max_avg <sqlite3.Row object at 0x7ebd2a9792a0>
+paragraph_min_max_avg <sqlite3.Row object at 0x7ebd2a9792d0>

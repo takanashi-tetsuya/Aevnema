@@ -1,0 +1,6 @@
+episode_schema ['id', 'source_id', 'source_key', 'segment_index', 'text', 'participants_json', 'event_type', 'location_text', 'story_time_text', 'story_order', 'timeline_scope', 'confidence', 'evidence_origin', 'epistemic_status', 'generation', 'epistemic_note', 'evidence_quotes_json', 'evidence_spans_json', 'evidence_basis', 'embedding', 'extraction_run_id', 'created_at', 'updated_at']
+new_rows 3044 new_leaks 0 new_empty_participants 0
+new_empty_participants 137
+new_short_lt8 36
+new_runs [<sqlite3.Row object at 0x7ae231357c70>, <sqlite3.Row object at 0x7ae231357ca0>, <sqlite3.Row object at 0x7ae231357cd0>, <sqlite3.Row object at 0x7ae231357d00>, <sqlite3.Row object at 0x7ae231357d30>, <sqlite3.Row object at 0x7ae231357d60>, <sqlite3.Row object at 0x7ae231357d90>, <sqlite3.Row object at 0x7ae231357dc0>, <sqlite3.Row object at 0x7ae231357df0>, <sqlite3.Row object at 0x7ae231357e20>]
+by_root {'01_世界观与组织': [45, 45, 0], '02_角色百科': [194, 194, 0], '03_主线剧情事实': [120, 120, 0], '04_主线原作台词': [4401, 14, 3], '05_活动原作台词': [3905, 195, 34], '06_好感原作台词': [4973, 274, 52], '07_社团原作台词': [126, 1, 0]}
