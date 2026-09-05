@@ -191,6 +191,7 @@ class MemoryServiceConfig:
     association_cue_fast_path_min_margin: float = 0.08
     contextual_association_enabled: bool = False
     contextual_association_shadow: bool = True
+    contextual_promotion_enabled: bool = False
     contextual_context_top_k: int = 8
     contextual_need_top_k: int = 8
     contextual_edge_top_k: int = 16
@@ -321,6 +322,9 @@ class MemoryServiceConfig:
             ),
             contextual_association_shadow=_env_bool(
                 "MEMORY_CONTEXTUAL_ASSOCIATION_SHADOW", True
+            ),
+            contextual_promotion_enabled=_env_bool(
+                "MEMORY_CONTEXTUAL_ASSOCIATION_PROMOTION_ENABLED", False
             ),
             contextual_context_top_k=max(
                 1, int(os.getenv("MEMORY_CONTEXTUAL_ASSOCIATION_CONTEXT_TOP_K", "8"))
@@ -474,6 +478,7 @@ class MemorySystemConfig:
     user_growth_enabled: bool = True
     contextual_association_enabled: bool = False
     contextual_association_shadow: bool = True
+    contextual_promotion_enabled: bool = False
     contextual_context_top_k: int = 8
     contextual_need_top_k: int = 8
     contextual_edge_top_k: int = 16
@@ -609,6 +614,9 @@ class MemorySystemConfig:
             ),
             contextual_association_shadow=_env_bool(
                 "MEMORY_CONTEXTUAL_ASSOCIATION_SHADOW", True
+            ),
+            contextual_promotion_enabled=_env_bool(
+                "MEMORY_CONTEXTUAL_ASSOCIATION_PROMOTION_ENABLED", False
             ),
             contextual_context_top_k=max(
                 1, int(os.getenv("MEMORY_CONTEXTUAL_ASSOCIATION_CONTEXT_TOP_K", "8"))
@@ -794,6 +802,7 @@ class MemorySystemConfig:
             ),
             contextual_association_enabled=self.contextual_association_enabled,
             contextual_association_shadow=self.contextual_association_shadow,
+            contextual_promotion_enabled=self.contextual_promotion_enabled,
             contextual_context_top_k=self.contextual_context_top_k,
             contextual_need_top_k=self.contextual_need_top_k,
             contextual_edge_top_k=self.contextual_edge_top_k,

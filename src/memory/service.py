@@ -15,6 +15,7 @@ Importing from this module remains the supported integration boundary.
 from .config import MemoryServiceConfig, MemorySystemConfig
 from .contracts import (
     DomainRecallRequest,
+    DeadlineBudget,
     RetrievedMemory,
     RetrievalPlan,
     RetrievalQuality,
@@ -30,6 +31,7 @@ from .system import MemorySystem
 __all__ = [
     "AssociativeMemoryService",
     "DomainRecallRequest",
+    "DeadlineBudget",
     "MemoryRoute",
     "MemoryIntentPlan",
     "MemoryIntentPlanner",

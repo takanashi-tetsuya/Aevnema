@@ -2,9 +2,75 @@ from __future__ import annotations
 
 from dataclasses import asdict, dataclass, field
 import json
+from time import perf_counter
 from typing import Any
 
 from config.prompt_config import render_memory_context
+
+
+@dataclass(frozen=True, slots=True)
+class DeadlineBudget:
+    """One monotonic deadline shared by planning, retrieval, and generation.
+
+    A provider retry may only spend time left in this request; it never gets a
+    fresh per-model timeout.  This object is request-local and deliberately
+    has no persistence or prompt representation.
+    """
+
+    total_deadline: float = 40.0
+    planning_deadline: float = 4.0
+    retrieval_deadline: float = 22.0
+    answer_deadline: float = 12.0
+    fallback_reserve: float = 2.0
+    started_at: float = field(default_factory=perf_counter, repr=False)
+
+    def __post_init__(self) -> None:
+        for name in (
+            "total_deadline",
+            "planning_deadline",
+            "retrieval_deadline",
+            "answer_deadline",
+            "fallback_reserve",
+        ):
+            if float(getattr(self, name)) < 0:
+                raise ValueError(f"{name} must be non-negative")
+        if self.total_deadline <= 0:
+            raise ValueError("total_deadline must be positive")
+
+    def remaining(self, now: float | None = None) -> float:
+        current = perf_counter() if now is None else float(now)
+        return max(0.0, self.total_deadline - (current - self.started_at))
+
+    def planning_timeout(self, now: float | None = None) -> float:
+        return min(self.planning_deadline, self.remaining(now))
+
+    def retrieval_timeout(self, now: float | None = None) -> float:
+        return max(
+            0.0,
+            min(
+                self.retrieval_deadline,
+                self.remaining(now) - self.answer_deadline - self.fallback_reserve,
+            ),
+        )
+
+    def answer_timeout(self, now: float | None = None) -> float:
+        return max(
+            0.0,
+            min(self.answer_deadline, self.remaining(now) - self.fallback_reserve),
+        )
+
+    def fallback_timeout(self, now: float | None = None) -> float:
+        return min(self.fallback_reserve, self.remaining(now))
+
+    def as_dict(self, now: float | None = None) -> dict[str, float]:
+        return {
+            "total_deadline": self.total_deadline,
+            "planning_deadline": self.planning_deadline,
+            "retrieval_deadline": self.retrieval_deadline,
+            "answer_deadline": self.answer_deadline,
+            "fallback_reserve": self.fallback_reserve,
+            "remaining": round(self.remaining(now), 6),
+        }
 
 
 @dataclass(slots=True)

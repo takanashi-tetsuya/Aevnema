@@ -379,83 +379,93 @@ def derive_contextual_recall_candidates(
     *,
     max_candidates: int = 8,
 ) -> list[dict[str, Any]]:
-    """Derive local double-key candidates from a finished evidence trace.
+    """Create probation edges only from an explicit direct recovery event.
 
-    The function deliberately consumes only serializable retrieval metadata:
-    an independently retrieved base Episode, a newly selected direct Episode,
-    and a query/slot mapping.  It never reads the answer prose and never asks
-    a model to invent a relation.
+    Mere co-selection is intentionally insufficient: the initial pass must
+    name a missing slot, a later deep repair must select a generation-0 direct
+    Episode for that slot, and an independently retrieved initial Episode
+    must be available as the anchor.  This function never consumes answer
+    prose or contextual targets from the same request.
     """
 
     knowledge = _knowledge_trace(raw_result)
-    contextual = knowledge.get("contextual_association") or {}
-    if not isinstance(contextual, dict) or not contextual.get("enabled"):
+    escalation = knowledge.get("retrieval_escalation") or {}
+    if not isinstance(escalation, dict) or not escalation.get("triggered"):
         return []
-    base_ids = _int_set(contextual.get("base_episode_ids", []))
-    contextual_ids = _int_set(contextual.get("contextual_episode_ids", []))
+    initial_trace = escalation.get("initial_evidence_slot_trace") or {}
+    initial_contextual = escalation.get("initial_contextual_association") or {}
+    if not isinstance(initial_trace, dict) or not isinstance(initial_contextual, dict):
+        return []
+    if initial_contextual.get("shadow") or not initial_contextual.get("enabled"):
+        return []
+    initial_slots = _trace_slot_rows({"evidence_slot_trace": initial_trace})
+    missing_slots = {
+        " ".join(str(slot.get("query", "")).casefold().split())
+        for slot in initial_slots
+        if not slot.get("satisfied", True) and str(slot.get("query", "")).strip()
+    }
+    if not missing_slots:
+        return []
+    base_ids = _int_set(escalation.get("initial_episode_ids", []))
     if not base_ids:
         return []
-    rows = [row for row in knowledge.get("evidence_episodes", []) if isinstance(row, dict)]
-    direct_ids: set[int] = set()
-    for row in rows:
-        try:
-            row_id = int(row["id"])
-            generation = int(row.get("generation", 0) or 0)
-        except (KeyError, TypeError, ValueError):
-            continue
-        if (
-            generation == 0
-            and str(row.get("evidence_origin", "")).casefold()
-            in {"source", "direct", "imported"}
-        ):
-            direct_ids.add(row_id)
-    target_ids = [value for value in direct_ids if value not in base_ids | contextual_ids]
-    if not target_ids:
-        return []
-    metadata = [item for item in contextual.get("query_vectors", []) if isinstance(item, dict)]
+    metadata = [
+        item
+        for item in initial_contextual.get("query_vectors", [])
+        if isinstance(item, dict)
+    ]
     query_by_text = {
         " ".join(str(item.get("text", "")).casefold().split()): item
         for item in metadata
         if str(item.get("text", "")).strip()
     }
-    whole_id = str(contextual.get("context_query_id", ""))
+    whole_id = str(initial_contextual.get("context_query_id", "")).strip()
     if not whole_id:
         return []
-    fallback_need = next(
-        (item for item in metadata if str(item.get("role", "")) != "whole"),
-        None,
-    )
+    direct_ids: set[int] = set()
+    for row in knowledge.get("evidence_episodes", []):
+        if not isinstance(row, dict):
+            continue
+        try:
+            row_id = int(row["id"])
+            generation = int(row.get("generation", 0) or 0)
+        except (KeyError, TypeError, ValueError):
+            continue
+        if generation == 0 and str(row.get("evidence_origin", "")).casefold() in {
+            "source", "direct", "imported"
+        }:
+            direct_ids.add(row_id)
     candidates: list[ContextualRecallCandidate] = []
-    for target_id in target_ids:
-        matching_slot: dict[str, Any] | None = None
-        for slot in _trace_slot_rows(knowledge):
-            episode_ids = _slot_episode_ids(slot)
-            if target_id in episode_ids:
-                matching_slot = slot
-                break
-        slot_text = " ".join(str((matching_slot or {}).get("query", "")).split())
-        need = query_by_text.get(slot_text.casefold()) if slot_text else None
-        need = need or fallback_need
-        if not need or not str(need.get("query_id", "")).strip():
+    seen: set[tuple[int, int, str]] = set()
+    for slot in _trace_slot_rows(knowledge):
+        slot_text = " ".join(str(slot.get("query", "")).split())
+        if not slot_text or slot_text.casefold() not in missing_slots:
             continue
-        anchor_id = next((value for value in sorted(base_ids) if value != target_id), None)
-        if anchor_id is None:
+        need = query_by_text.get(slot_text.casefold())
+        if need is None or not str(need.get("query_id", "")).strip():
             continue
-        candidates.append(
-            ContextualRecallCandidate(
-                anchor_type="episode",
-                anchor_id=anchor_id,
-                target_episode_id=target_id,
-                context_query_id=whole_id,
-                need_query_id=str(need["query_id"]),
-                slot_id=slot_text[:180],
-                source_request_hash=hashlib.sha256(
-                    " ".join(str(question).split()).encode("utf-8")
-                ).hexdigest(),
+        for target_id in sorted(_slot_episode_ids(slot).intersection(direct_ids)):
+            anchor_id = next(
+                (value for value in sorted(base_ids) if value != target_id), None
             )
-        )
-        if len(candidates) >= max(0, int(max_candidates)):
-            break
+            if anchor_id is None or (anchor_id, target_id, slot_text) in seen:
+                continue
+            seen.add((anchor_id, target_id, slot_text))
+            candidates.append(
+                ContextualRecallCandidate(
+                    anchor_type="episode",
+                    anchor_id=anchor_id,
+                    target_episode_id=target_id,
+                    context_query_id=whole_id,
+                    need_query_id=str(need["query_id"]),
+                    slot_id=slot_text[:180],
+                    source_request_hash=hashlib.sha256(
+                        " ".join(str(question).split()).encode("utf-8")
+                    ).hexdigest(),
+                )
+            )
+            if len(candidates) >= max(0, int(max_candidates)):
+                return [item.as_dict() for item in candidates]
     return [item.as_dict() for item in candidates]
 
 
@@ -470,37 +480,73 @@ def derive_contextual_utility_observations(
     contextual = knowledge.get("contextual_association") or {}
     if not isinstance(contextual, dict) or not contextual.get("enabled"):
         return []
-    edges = _int_list(contextual.get("attached_edges", []))
-    targets = _int_list(contextual.get("attached_episode_ids", []))
-    selected = _int_set(knowledge.get("episode_ids", []))
-    base = _int_set(contextual.get("base_episode_ids", []))
-    slots = _trace_slot_rows(knowledge)
+    if contextual.get("shadow"):
+        return []
+    strict = contextual.get("strict_attribution")
+    if not isinstance(strict, list):
+        # A batch-level final answer cannot establish which cue produced a
+        # gain.  Old traces therefore remain observational only.
+        return []
+    treatment = _int_list(contextual.get("treatment_episode_ids", []))
+    masked = _int_list(contextual.get("masked_episode_ids", []))
     observations: list[dict[str, Any]] = []
-    for edge_id, target_id in zip(edges, targets):
-        treatment_slots = [
-            str(slot.get("query", ""))[:180]
-            for slot in slots
-            if target_id in _slot_episode_ids(slot)
-        ]
-        # A target not selected cannot have provided an answer-slot gain.  A
-        # selected target that introduces a slot is sufficient; otherwise the
-        # conservative outcome is redundant/no-op, never a success.
-        base_slot_count = sum(
-            1
-            for slot in slots
-            if base.intersection(_slot_episode_ids(slot))
+    observed_edges: set[int] = set()
+    for receipt in strict:
+        if not isinstance(receipt, dict) or not receipt.get("selected"):
+            continue
+        try:
+            edge_id = int(receipt["association_id"])
+        except (KeyError, TypeError, ValueError):
+            continue
+        observed_edges.add(edge_id)
+        single_raw = receipt.get("single_edge_new_slots", [])
+        leave_one_out_raw = receipt.get("leave_one_out_new_slots", [])
+        single_count = len(single_raw) if isinstance(single_raw, list) else 0
+        leave_one_out_count = (
+            len(leave_one_out_raw) if isinstance(leave_one_out_raw, list) else 0
         )
-        outcome = "no_op"
-        if target_id in selected and treatment_slots:
-            outcome = "sufficient" if len(treatment_slots) > base_slot_count else "redundant"
+        if receipt.get("harm"):
+            outcome, attribution, delta_slots = "harmful", "leave_one_out", 0
+        elif receipt.get("necessary"):
+            outcome, attribution, delta_slots = (
+                "necessary",
+                "leave_one_out",
+                leave_one_out_count,
+            )
+        elif receipt.get("sufficient"):
+            outcome, attribution, delta_slots = (
+                "sufficient",
+                "single_edge",
+                single_count,
+            )
+        else:
+            outcome, attribution, delta_slots = "redundant", "batch", 0
         observations.append(
             {
                 "association_id": edge_id,
                 "query_hash": str(query_hash),
                 "outcome": outcome,
-                "delta_slots": len(treatment_slots),
-                "treatment_episode_ids": [target_id],
-                "masked_episode_ids": sorted(base),
+                "delta_slots": delta_slots,
+                "treatment_episode_ids": treatment,
+                "masked_episode_ids": masked,
+                "attribution": attribution,
+            }
+        )
+    # A returned candidate that did not reach Treatment final selection has
+    # no demonstrated gain.  Preserve that no-op outcome instead of letting a
+    # matcher hit silently inflate its apparent future utility.
+    for edge_id in dict.fromkeys(_int_list(contextual.get("attached_edges", []))):
+        if edge_id in observed_edges:
+            continue
+        observations.append(
+            {
+                "association_id": edge_id,
+                "query_hash": str(query_hash),
+                "outcome": "no_op",
+                "delta_slots": 0,
+                "treatment_episode_ids": treatment,
+                "masked_episode_ids": masked,
+                "attribution": "batch",
             }
         )
     return observations

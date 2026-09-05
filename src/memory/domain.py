@@ -4,7 +4,7 @@ import asyncio
 from collections import OrderedDict
 from contextlib import asynccontextmanager
 from copy import deepcopy
-from dataclasses import asdict
+from dataclasses import asdict, replace
 from functools import partial
 from pathlib import Path
 import inspect
@@ -171,6 +171,9 @@ class AssociativeMemoryService:
         )
         app_config.retrieval.contextual_association_shadow = (
             self.config.contextual_association_shadow
+        )
+        app_config.retrieval.contextual_promotion_enabled = (
+            self.config.contextual_promotion_enabled
         )
         app_config.retrieval.contextual_context_top_k = (
             self.config.contextual_context_top_k
@@ -405,6 +408,7 @@ class AssociativeMemoryService:
         growth_max_rounds_override: int | None = None,
         query_embeddings_override: dict[str, Any] | None = None,
         query_vector_bundle: Any | None = None,
+        deadline_seconds: float | None = None,
     ) -> RetrievedMemory:
         if request is not None:
             question = request.query
@@ -421,6 +425,16 @@ class AssociativeMemoryService:
                 domains=(self.config.domain,),
             )
         plan = retrieval_plan or self.retrieval_plan(retrieval_intensity)
+        if deadline_seconds is not None:
+            # A caller-owned request deadline is an upper bound, never an
+            # opportunity to grant a deep retry a fresh full budget.
+            plan = replace(
+                plan,
+                deadline_seconds=max(
+                    0.1,
+                    min(float(plan.deadline_seconds), float(deadline_seconds)),
+                ),
+            )
         operation_scope = (
             self._operation_lock
             if self.config.growth_enabled
@@ -1117,6 +1131,13 @@ class AssociativeMemoryService:
 
         if not self.config.contextual_association_enabled or not observations:
             return {"enabled": False, "updated": 0, "external_calls": 0}
+        if self.config.contextual_association_shadow:
+            return {
+                "enabled": True,
+                "updated": 0,
+                "skipped": "shadow_mode",
+                "external_calls": 0,
+            }
         await self.initialize()
         from memory_demo.types import ContextualUtilityObservation
 
@@ -1137,6 +1158,7 @@ class AssociativeMemoryService:
                         masked_episode_ids=tuple(
                             int(value) for value in raw.get("masked_episode_ids", [])
                         ),
+                        attribution=str(raw.get("attribution", "batch")),
                     )
                 )
             except (KeyError, TypeError, ValueError):

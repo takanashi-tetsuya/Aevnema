@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import asyncio
 from dataclasses import dataclass, field
 import hashlib
 import inspect
@@ -30,10 +31,16 @@ from src.memory.answer_consolidator import (
     inline_memory_prompt,
     split_inline_memory_response,
 )
-from src.memory.service import MemoryRoute, RetrievedMemory, route_memory_query
+from src.memory.service import (
+    DeadlineBudget,
+    MemoryRoute,
+    RetrievedMemory,
+    route_memory_query,
+)
 from src.bot.memory_guard import PrivateMemoryResponseGuard
 from src.bot.request_planning import (
     ChatRequestPlanner,
+    PlannedChatRequest,
     fallback_retrieval_question,
     needs_retrieval_history,
 )
@@ -332,6 +339,15 @@ class ConversationCoordinator:
         )
 
     @staticmethod
+    def _deadline_limit_reply(memory: RetrievedMemory) -> str:
+        """A deterministic last resort when no model time remains."""
+
+        direct = ConversationCoordinator._direct_evidence_reply(memory)
+        if direct:
+            return direct
+        return "老师，本轮检索或回答未能在时限内完成；我不会把未验证的内容当作结论。"
+
+    @staticmethod
     def _evidence_bridge_boundary_violation(
         reply: str,
         memory: RetrievedMemory,
@@ -374,14 +390,53 @@ class ConversationCoordinator:
         defer_commit: bool = False,
     ) -> ChatReply:
         started = perf_counter()
+        deadline_budget = DeadlineBudget()
+
+        async def await_with_timeout(
+            operation: Awaitable[Any],
+            timeout: float,
+        ) -> Any:
+            """Stop waiting at the budget even if a provider ignores cancel."""
+
+            task = asyncio.ensure_future(operation)
+            done, _pending = await asyncio.wait(
+                {task}, timeout=max(0.0, timeout)
+            )
+            if done:
+                return task.result()
+            task.cancel()
+
+            def consume_late_result(late_task: asyncio.Future[Any]) -> None:
+                try:
+                    late_task.result()
+                except (asyncio.CancelledError, Exception):
+                    pass
+
+            task.add_done_callback(consume_late_result)
+            raise TimeoutError("request phase deadline exhausted")
+
         clean_text = text.strip()
         session_key = conversation_key or identity.key
         planning_started = perf_counter()
-        planned_request = await self.request_planner.plan(
-            identity=identity,
-            current_message=clean_text,
-            conversation_key=session_key,
-        )
+        try:
+            planned_request = await await_with_timeout(
+                self.request_planner.plan(
+                    identity=identity,
+                    current_message=clean_text,
+                    conversation_key=session_key,
+                ),
+                max(0.1, deadline_budget.planning_timeout()),
+            )
+        except TimeoutError:
+            fallback_route = self.route(clean_text)
+            planned_request = PlannedChatRequest(
+                route=fallback_route,
+                retrieval_question=fallback_retrieval_question(
+                    self.sessions.get(session_key), clean_text, fallback_route
+                ),
+                planner="deadline_fallback",
+                error="planning deadline exhausted",
+            )
         planning_finished = perf_counter()
         route = planned_request.route
         query = planned_request.retrieval_question
@@ -390,6 +445,8 @@ class ConversationCoordinator:
         retrieval_started = perf_counter()
         recall = self.memory_system.recall
         recall_kwargs: dict[str, Any] = {"route": route}
+        if self._accepts_keyword(recall, "deadline_budget"):
+            recall_kwargs["deadline_budget"] = deadline_budget
         if self._accepts_keyword(recall, "domain_requests"):
             recall_kwargs["domain_requests"] = planned_request.domain_requests
         if (
@@ -418,6 +475,7 @@ class ConversationCoordinator:
         memory.raw_result.setdefault(
             "intent_planning", planned_request.trace()
         )
+        memory.raw_result["request_deadline_budget"] = deadline_budget.as_dict()
         retrieval_finished = perf_counter()
         prompt_context = (
             self._creative_memory_context(memory, query)
@@ -511,19 +569,40 @@ class ConversationCoordinator:
                 float(compact_options.get("temperature", temperature_limit)),
             )
             generation_kwargs["request_options"] = compact_options
+
+        async def generate_with_budget(
+            call: Any,
+            kwargs: dict[str, Any],
+            timeout: float,
+        ) -> str:
+            if timeout <= 0:
+                raise TimeoutError("answer deadline exhausted")
+            bounded_kwargs = dict(kwargs)
+            if self._accepts_keyword(call, "deadline_seconds"):
+                bounded_kwargs["deadline_seconds"] = max(0.1, timeout)
+            return await await_with_timeout(call(**bounded_kwargs), timeout)
+
         try:
-            raw_reply = await generate(**generation_kwargs)
+            raw_reply = await generate_with_budget(
+                generate,
+                generation_kwargs,
+                deadline_budget.answer_timeout(),
+            )
         except Exception as exc:
             if active_chat_engine is not self.fast_chat_engine:
-                raise
+                logger.warning(
+                    "main chat generation failed; returning local bounded reply: %s",
+                    exc,
+                )
+                raw_reply = self._deadline_limit_reply(memory)
             capsule_reply = self._association_capsule_reply(memory)
-            if capsule_reply:
+            if active_chat_engine is self.fast_chat_engine and capsule_reply:
                 logger.warning(
                     "fast chat generation failed; returning audited association capsule: %s",
                     exc,
                 )
                 raw_reply = capsule_reply
-            else:
+            elif active_chat_engine is self.fast_chat_engine:
                 direct_reply = self._direct_evidence_reply(memory)
                 if direct_reply:
                     logger.warning(
@@ -543,11 +622,18 @@ class ConversationCoordinator:
                         fallback_kwargs["task_context"] = (
                             f"{identity.key}:chat-fallback"
                         )
-                    if self._accepts_keyword(
-                        fallback_generate, "deadline_seconds"
-                    ):
-                        fallback_kwargs["deadline_seconds"] = 10.0
-                    raw_reply = await fallback_generate(**fallback_kwargs)
+                    try:
+                        raw_reply = await generate_with_budget(
+                            fallback_generate,
+                            fallback_kwargs,
+                            deadline_budget.fallback_timeout(),
+                        )
+                    except Exception as fallback_exc:
+                        logger.warning(
+                            "fallback chat generation failed; returning local bounded reply: %s",
+                            fallback_exc,
+                        )
+                        raw_reply = self._deadline_limit_reply(memory)
         reply, consolidation = split_inline_memory_response(
             raw_reply, memory.raw_result
         )
@@ -717,6 +803,9 @@ class ConversationCoordinator:
                 ),
                 "memory_guard_seconds": round(
                     guard_finished - guard_started, 6
+                ),
+                "deadline_remaining_seconds": round(
+                    deadline_budget.remaining(), 6
                 ),
                 "postprocess_seconds": 0.0,
                 "total_seconds": round(generated_at - started, 6),

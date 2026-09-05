@@ -24,6 +24,8 @@ from src.memory.identity import PlatformIdentity
 from src.memory.growth import BackgroundGrowthWorker
 from src.memory.answer_consolidator import (
     derive_evidence_bridge_candidate,
+    derive_contextual_recall_candidates,
+    derive_contextual_utility_observations,
     split_inline_memory_response,
 )
 from src.memory.service import (
@@ -344,13 +346,65 @@ class EvidenceEscalationRoutingTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(
             [
                 ("standard", False, knowledge_request),
-                ("deep", False, knowledge_request),
             ],
             system.knowledge.calls,
         )
         knowledge = result.raw_result["domains"]["knowledge"]
-        self.assertEqual("deep", knowledge["retrieval_intensity"])
-        self.assertTrue(knowledge["retrieval_escalation"]["triggered"])
+        self.assertEqual("standard", knowledge["retrieval_intensity"])
+        self.assertFalse(knowledge["retrieval_escalation"]["triggered"])
+        self.assertEqual(
+            "no_explicit_missing_evidence_slot",
+            knowledge["retrieval_escalation"]["reason"],
+        )
+
+    async def test_deep_escalation_repairs_only_the_explicit_missing_slot(self):
+        class FakeService:
+            def __init__(self):
+                self.calls = []
+
+            @staticmethod
+            def retrieval_plan(preset):
+                return AssociativeMemoryService.retrieval_plan(preset)
+
+            async def recall(self, question, *, request=None, retrieval_plan=None, **_kwargs):
+                preset = retrieval_plan.preset if retrieval_plan else "standard"
+                self.calls.append((preset, question, request))
+                return RetrievedMemory(
+                    context=preset,
+                    raw_result={
+                        "retrieval_intensity": preset,
+                        "retrieval_quality": {"sufficient": preset == "deep"},
+                        "evidence_slot_trace": {
+                            "coverage_slots": [
+                                {"query": "缺失的时间线事实", "satisfied": preset == "deep"}
+                            ]
+                        },
+                    },
+                    domains=("knowledge",),
+                )
+
+        system = MemorySystem.__new__(MemorySystem)
+        system.knowledge = FakeService()
+        request = DomainRecallRequest(
+            query="完整问题",
+            intent_override={"temporal_constraint": "发生顺序"},
+        )
+        result = await system.recall(
+            PlatformIdentity("synthetic", "teacher"),
+            "完整问题",
+            MemoryRoute(False, False, True, "model", "standard"),
+            domain_requests={"knowledge": request},
+        )
+
+        self.assertEqual(2, len(system.knowledge.calls))
+        preset, question, repair = system.knowledge.calls[1]
+        self.assertEqual("deep", preset)
+        self.assertEqual("缺失的时间线事实", question)
+        self.assertEqual(("缺失的时间线事实",), repair.followup_queries)
+        self.assertEqual(request.intent_override, repair.intent_override)
+        escalation = result.raw_result["domains"]["knowledge"]["retrieval_escalation"]
+        self.assertTrue(escalation["triggered"])
+        self.assertEqual("缺失的时间线事实", escalation["repair_query"])
 
     def test_memory_guard_distinguishes_teaching_from_recall(self):
         route = MemoryRoute(True, True, False, "personal")
@@ -598,6 +652,100 @@ class ConfigTests(unittest.TestCase):
 
 
 class InlineMemoryTests(unittest.TestCase):
+    def test_contextual_candidate_requires_a_direct_missing_slot_recovery(self):
+        raw = {
+            "domains": {
+                "knowledge": {
+                    "retrieval_escalation": {
+                        "triggered": True,
+                        "initial_episode_ids": [1],
+                        "initial_evidence_slot_trace": {
+                            "coverage_slots": [
+                                {"query": "缺失事实", "satisfied": False}
+                            ]
+                        },
+                        "initial_contextual_association": {
+                            "enabled": True,
+                            "shadow": False,
+                            "context_query_id": "q-whole",
+                            "query_vectors": [
+                                {
+                                    "query_id": "q-need",
+                                    "role": "atomic",
+                                    "text": "缺失事实",
+                                }
+                            ],
+                        },
+                    },
+                    "evidence_slot_trace": {
+                        "coverage_slots": [
+                            {"query": "缺失事实", "episode_ids": [2], "satisfied": True}
+                        ]
+                    },
+                    "evidence_episodes": [
+                        {"id": 2, "generation": 0, "evidence_origin": "source"}
+                    ],
+                }
+            }
+        }
+        candidates = derive_contextual_recall_candidates("完整问题", raw)
+        self.assertEqual(1, len(candidates))
+        self.assertEqual(1, candidates[0]["anchor_id"])
+        self.assertEqual(2, candidates[0]["target_episode_id"])
+        self.assertEqual("q-need", candidates[0]["need_query_id"])
+        self.assertEqual(
+            [], derive_contextual_recall_candidates("完整问题", {"domains": {"knowledge": {}}})
+        )
+
+    def test_contextual_utility_requires_strict_edge_receipts(self):
+        raw = {
+            "domains": {
+                "knowledge": {
+                    "contextual_association": {
+                        "enabled": True,
+                        "masked_episode_ids": [1],
+                        "treatment_episode_ids": [1, 2],
+                        "strict_attribution": [
+                            {
+                                "association_id": 7,
+                                "selected": True,
+                                "single_edge_new_slots": ["slot-a"],
+                                "leave_one_out_new_slots": ["slot-a"],
+                                "sufficient": True,
+                                "necessary": True,
+                                "harm": False,
+                            },
+                            {
+                                "association_id": 8,
+                                "selected": False,
+                                "single_edge_new_slots": ["slot-b"],
+                                "leave_one_out_new_slots": ["slot-b"],
+                                "sufficient": True,
+                                "necessary": True,
+                                "harm": False,
+                            },
+                        ],
+                    }
+                }
+            }
+        }
+        observations = derive_contextual_utility_observations(raw, query_hash="q")
+        self.assertEqual(1, len(observations))
+        self.assertEqual("necessary", observations[0]["outcome"])
+        self.assertEqual("leave_one_out", observations[0]["attribution"])
+        self.assertEqual([1, 2], observations[0]["treatment_episode_ids"])
+        raw["domains"]["knowledge"]["contextual_association"]["shadow"] = True
+        self.assertEqual(
+            [], derive_contextual_utility_observations(raw, query_hash="q")
+        )
+        self.assertEqual(
+            [],
+            derive_contextual_utility_observations(
+                {"domains": {"knowledge": {"contextual_association": {"enabled": True}}}},
+                query_hash="q",
+            ),
+        )
+
     def test_coverage_proof_derives_retrieval_only_bridge_without_model_footer(self):
         raw_result = {
             "domains": {
@@ -2535,6 +2683,7 @@ class CoordinatorTests(unittest.IsolatedAsyncioTestCase):
                 "memory_intent_seconds",
                 "chat_generation_seconds",
                 "memory_guard_seconds",
+                "deadline_remaining_seconds",
                 "postprocess_seconds",
                 "total_seconds",
             },

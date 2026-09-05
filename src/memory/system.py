@@ -2,13 +2,14 @@ from __future__ import annotations
 
 import asyncio
 from copy import deepcopy
+import inspect
 from pathlib import Path
 from typing import Any
 
 from config.prompt_config import render_domain_memory_section
 
 from .config import MemorySystemConfig
-from .contracts import DomainRecallRequest, RetrievedMemory
+from .contracts import DeadlineBudget, DomainRecallRequest, RetrievedMemory
 from .domain import AssociativeMemoryService
 from .identity import PlatformIdentity
 from .routing import MemoryRoute, route_memory_query
@@ -111,6 +112,7 @@ class MemorySystem:
         domain_requests: dict[str, DomainRecallRequest] | None = None,
         query_embeddings_override: dict[str, Any] | None = None,
         query_vector_bundle: Any | None = None,
+        deadline_budget: DeadlineBudget | None = None,
     ) -> RetrievedMemory:
         selected = route or route_memory_query(question)
         requests = domain_requests or {}
@@ -120,18 +122,122 @@ class MemorySystem:
         private_question = private_request.query if private_request else question
         public_question = public_request.query if public_request else question
         knowledge_question = knowledge_request.query if knowledge_request else question
+
+        def accepts_keyword(call: Any, name: str) -> bool:
+            try:
+                parameters = inspect.signature(call).parameters.values()
+            except (TypeError, ValueError):
+                return False
+            return any(
+                item.kind is inspect.Parameter.VAR_KEYWORD or item.name == name
+                for item in parameters
+            )
+
+        async def recall_domain(service: Any, prompt: str, **kwargs: Any):
+            if deadline_budget is not None:
+                remaining = deadline_budget.retrieval_timeout()
+                if remaining < 0.1:
+                    return RetrievedMemory(
+                        context="",
+                        raw_result={"deadline_budget_exhausted": True},
+                        error="request retrieval budget exhausted",
+                    )
+                if accepts_keyword(service.recall, "deadline_seconds"):
+                    kwargs["deadline_seconds"] = remaining
+            return await service.recall(prompt, **kwargs)
+
+        def missing_slot_request(
+            value: RetrievedMemory,
+            original_request: DomainRecallRequest | None,
+            fallback_question: str,
+        ) -> DomainRecallRequest | None:
+            """Make a deep repair request from auditable unsatisfied slots.
+
+            A generic ``insufficient`` flag is deliberately not enough to
+            restart the whole query.  The repair retains the first pass's
+            intent and vector bundle, and names only slots that the first
+            pass's coverage proof could not satisfy.
+            """
+            raw = value.raw_result if isinstance(value.raw_result, dict) else {}
+            slot_trace = raw.get("evidence_slot_trace") or {}
+            selector = (
+                slot_trace.get("slot_selector_v2")
+                if isinstance(slot_trace, dict)
+                else None
+            )
+            queries: list[str] = []
+            if isinstance(selector, dict):
+                missing = {
+                    str(item).strip()
+                    for item in selector.get("masked_missing_slots", [])
+                    if str(item).strip()
+                }
+                for slot in selector.get("slots", []):
+                    if not isinstance(slot, dict):
+                        continue
+                    if str(slot.get("slot_id", "")).strip() not in missing:
+                        continue
+                    question = " ".join(str(slot.get("question", "")).split())
+                    if question:
+                        queries.append(question)
+            if not queries and isinstance(slot_trace, dict):
+                for slot in slot_trace.get("coverage_slots", []):
+                    if not isinstance(slot, dict) or slot.get("satisfied", True):
+                        continue
+                    question = " ".join(str(slot.get("query", "")).split())
+                    if question:
+                        queries.append(question)
+            queries = list(dict.fromkeys(queries))[:4]
+            if not queries:
+                return None
+            prior_intent = raw.get("intent")
+            intent = (
+                deepcopy(prior_intent)
+                if isinstance(prior_intent, dict)
+                else deepcopy(original_request.intent_override)
+                if original_request is not None
+                else {}
+            )
+            return DomainRecallRequest(
+                query="；".join(queries) or fallback_question,
+                intent_override=intent,
+                followup_queries=tuple(queries),
+                evidence_goal=(
+                    original_request.evidence_goal
+                    if original_request is not None
+                    else "lookup"
+                ),
+                absence_answerable=(
+                    original_request.absence_answerable
+                    if original_request is not None
+                    else False
+                ),
+            )
+
         if (
             query_vector_bundle is None
             and getattr(getattr(self, "config", None), "contextual_association_enabled", False)
         ):
             try:
-                query_vector_bundle = await self.knowledge.embed_query_bundle(
+                bundle_timeout = (
+                    deadline_budget.retrieval_timeout()
+                    if deadline_budget is not None
+                    else None
+                )
+                if bundle_timeout is not None and bundle_timeout < 0.1:
+                    raise TimeoutError("request retrieval budget exhausted")
+                bundle_call = self.knowledge.embed_query_bundle(
                     [
                         ("whole", question),
                         ("atomic", private_question),
                         ("atomic", public_question),
                         ("atomic", knowledge_question),
                     ]
+                )
+                query_vector_bundle = (
+                    await asyncio.wait_for(bundle_call, timeout=bundle_timeout)
+                    if bundle_timeout is not None
+                    else await bundle_call
                 )
             except Exception:
                 # Contextual association is an optional local lane.  A failed
@@ -143,7 +249,8 @@ class MemorySystem:
             calls.append(
                 (
                     "user",
-                    (await self._user_service(identity)).recall(
+                    recall_domain(
+                        await self._user_service(identity),
                         private_question,
                         request=private_request,
                         retrieval_intensity=selected.intensity,
@@ -157,7 +264,8 @@ class MemorySystem:
             calls.append(
                 (
                     "public",
-                    self.public.recall(
+                    recall_domain(
+                        self.public,
                         public_question,
                         request=public_request,
                         retrieval_intensity=selected.intensity,
@@ -171,7 +279,8 @@ class MemorySystem:
             calls.append(
                 (
                     "knowledge",
-                    self.knowledge.recall(
+                    recall_domain(
+                        self.knowledge,
                         knowledge_question,
                         request=knowledge_request,
                         retrieval_intensity=selected.intensity,
@@ -206,7 +315,8 @@ class MemorySystem:
             }
             if not primary_domains and selected.public:
                 primary_domains.add("public")
-            escalation_jobs: list[tuple[int, str, RetrievedMemory, Any]] = []
+            escalation_jobs: list[tuple[int, str, RetrievedMemory, Any, str]] = []
+            escalation_skips: list[tuple[int, RetrievedMemory, str]] = []
             for index, ((domain, _call), value) in enumerate(
                 zip(calls, values, strict=True)
             ):
@@ -224,38 +334,87 @@ class MemorySystem:
                     if domain == "knowledge"
                     else self.public
                 )
+                original_request = (
+                    knowledge_request
+                    if domain == "knowledge"
+                    else private_request
+                    if domain == "user"
+                    else public_request
+                )
+                original_question = (
+                    knowledge_question
+                    if domain == "knowledge"
+                    else private_question
+                    if domain == "user"
+                    else public_question
+                )
+                repair_request = missing_slot_request(
+                    value,
+                    original_request,
+                    original_question,
+                )
+                if repair_request is None:
+                    escalation_skips.append(
+                        (index, value, "no_explicit_missing_evidence_slot")
+                    )
+                    continue
+                if (
+                    deadline_budget is not None
+                    and deadline_budget.retrieval_timeout() < 0.1
+                ):
+                    escalation_skips.append(
+                        (index, value, "deadline_budget_exhausted")
+                    )
+                    continue
                 escalation_jobs.append(
                     (
                         index,
                         domain,
                         value,
-                        target_service.recall(
-                            knowledge_question
-                            if domain == "knowledge"
-                            else private_question
-                            if domain == "user"
-                            else public_question,
-                            request=(
-                                knowledge_request
-                                if domain == "knowledge"
-                                else private_request
-                                if domain == "user"
-                                else public_request
-                            ),
+                        recall_domain(
+                            target_service,
+                            repair_request.query,
+                            request=repair_request,
                             retrieval_plan=target_service.retrieval_plan("deep"),
                             auto_escalate=False,
+                            query_embeddings_override=query_embeddings_override,
+                            query_vector_bundle=(
+                                value.query_vector_bundle or query_vector_bundle
+                            ),
                         ),
+                        repair_request.query,
                     )
+                )
+            for index, initial_value, reason in escalation_skips:
+                skipped_raw = deepcopy(initial_value.raw_result)
+                skipped_raw["retrieval_escalation"] = {
+                    "triggered": False,
+                    "from": "standard",
+                    "to": "deep",
+                    "reason": reason,
+                }
+                values[index] = RetrievedMemory(
+                    context=initial_value.context,
+                    raw_result=skipped_raw,
+                    error=initial_value.error,
+                    domains=initial_value.domains,
+                    semantic_vector=initial_value.semantic_vector,
+                    query_vector_bundle=initial_value.query_vector_bundle,
                 )
             if escalation_jobs:
                 deep_values = await asyncio.gather(
-                    *(job for _index, _domain, _value, job in escalation_jobs)
+                    *(
+                        job
+                        for _index, _domain, _value, job, _repair_query
+                        in escalation_jobs
+                    )
                 )
                 for (
                     index,
                     _domain,
                     initial_value,
                     _job,
+                    repair_query,
                 ), deep_value in zip(escalation_jobs, deep_values, strict=True):
                     initial_raw = initial_value.raw_result
                     initial_quality = initial_raw.get("retrieval_quality") or {}
@@ -268,9 +427,16 @@ class MemorySystem:
                         "initial_episode_ids": list(
                             initial_raw.get("episode_ids") or []
                         ),
+                        "initial_evidence_slot_trace": deepcopy(
+                            initial_raw.get("evidence_slot_trace") or {}
+                        ),
+                        "initial_contextual_association": deepcopy(
+                            initial_raw.get("contextual_association") or {}
+                        ),
                         "initial_timings": deepcopy(
                             initial_raw.get("timings") or {}
                         ),
+                        "repair_query": repair_query,
                         "deep_error": deep_value.error,
                     }
                     if deep_value.raw_result and not deep_value.error:
@@ -341,6 +507,9 @@ class MemorySystem:
                     "knowledge": knowledge_question if selected.knowledge else "",
                 },
                 "domains": raw_domains,
+                "deadline_budget": (
+                    deadline_budget.as_dict() if deadline_budget is not None else None
+                ),
             },
             error="; ".join(errors),
             domains=tuple(used_domains),
